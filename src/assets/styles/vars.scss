@@ -1,0 +1,22 @@
+$base-color: #288ab9;
+$alternate-color: #000000;
+$golden-color-transparent: #efd170e6;
+$golden-color: #efd270;
+$white-color: #ffffff;
+$brown-color: #959393;
+$light-brown-color: #c4c4c4;
+
+$base-resolution: 1440px;
+$base-narrow-resolution: 1170px;
+
+:root {
+   --resolution-calc: 1px;
+
+   @media (min-width: 1920px) {
+      --resolution-calc: calc(100vw / 1920);
+   }
+
+   @media (max-width: 1440px) {
+      --resolution-calc: calc(100vw / 1440);
+   }
+}

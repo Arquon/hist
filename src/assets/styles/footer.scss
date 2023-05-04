@@ -1,0 +1,84 @@
+footer {
+   background-color: $alternate-color;
+}
+
+.footer {
+   &__container {
+   }
+
+   &__content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 35px 0;
+
+      @media (max-width: 1024px) {
+         padding: calc(100vw * (35 - 8) / (1024 - 320) + (8 * 1024px - 35 * 320px) / (1024 - 320)) 0;
+      }
+   }
+
+   &__logo,
+   &__coin {
+      height: 90px;
+      img {
+         height: 100%;
+         object-fit: contain;
+      }
+
+      @media (max-width: 1024px) {
+         height: calc(100vw * (90 - 50) / (1024 - 320) + (50 * 1024px - 90 * 320px) / (1024 - 320));
+      }
+   }
+
+   &__list {
+      margin-bottom: 30px;
+   }
+
+   &__credentials {
+      text-align: center;
+
+      &::before {
+         font-weight: 600;
+         color: $light-brown-color;
+         font-size: calc(14 * var(--resolution-calc));
+         content: "© Достопочтенная Ложа “Москва” №6018, Великий Восток Франции";
+
+         @media (max-width: 1024px) {
+            color: $light-brown-color;
+            font-size: calc(100vw * (16 - 12) / (1024 - 600) + (12 * 1024px - 16 * 600px) / (1024 - 600));
+            content: "© Достопочтенная Ложа “Москва” №6018, Великий Восток Франции";
+         }
+
+         @media (max-width: 600px) {
+            font-size: calc(100vw * (16 - 11) / (600 - 320) + (11 * 600px - 16 * 320px) / (600 - 320));
+            content: "© Д:.Л:. Москва №6018  ВВФ";
+         }
+      }
+   }
+}
+
+.list-footer {
+   display: flex;
+
+   @media (max-width: 1024px) {
+      display: none;
+   }
+
+   li {
+      margin-right: calc(50 * var(--resolution-calc));
+
+      &:last-child {
+         margin-right: 0;
+      }
+   }
+
+   &__link {
+      color: $white-color;
+      font-size: calc(16 * var(--resolution-calc));
+      transition: all 0.2s ease;
+
+      &:hover {
+         text-decoration: underline;
+      }
+   }
+}
