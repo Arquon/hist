@@ -16,7 +16,7 @@ export const Pagination: FC<PaginationProps> = ({
    currentPage,
    onPageChange,
 }) => {
-   const length = Math.floor(allCount / perPageCount) + 1;
+   const length = Math.floor((allCount - 1) / perPageCount) + 1;
    const tempArray = Array(length).fill(0);
 
    const pageChangeHandler = (page: number): void => {

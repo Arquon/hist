@@ -4,18 +4,15 @@ import { AreaField } from "../UI/form/AreaField";
 import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/functions/validator";
 import { useForm } from "@/hooks/useForm";
+import { type INewsFormState } from "@/types/INews";
 
 interface NewsFormProps {
    onSubmit: (data: INewsFormState) => void;
+   submitLabel: string;
+   initialData?: INewsFormState;
 }
 
-export interface INewsFormState {
-   title: string;
-   description: string;
-   content: string;
-}
-
-const initialData: INewsFormState = {
+const defaultData: INewsFormState = {
    title: "",
    description: "",
    content: "",
@@ -33,8 +30,11 @@ const validatorConfig: TValidator<INewsFormState> = {
    },
 };
 
-export const NewsForm: FC<NewsFormProps> = ({ onSubmit }) => {
-   const { data, changeHandler, errors, validate } = useForm({ initialData, validatorConfig });
+export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData }) => {
+   const { data, changeHandler, errors, validate } = useForm({
+      initialData: initialData ?? defaultData,
+      validatorConfig,
+   });
 
    const submitHandler = (): void => {
       const isError = validate();
@@ -48,7 +48,6 @@ export const NewsForm: FC<NewsFormProps> = ({ onSubmit }) => {
 
    return (
       <form>
-         <h3>Добавить новость</h3>
          <TextField
             label="Название новости"
             value={data.title}
@@ -67,7 +66,7 @@ export const NewsForm: FC<NewsFormProps> = ({ onSubmit }) => {
             error={errors.content}
             onChange={(content) => changeHandler({ content })}
          />
-         <CustomButton onClick={submitHandler}>Добавить новость</CustomButton>
+         <CustomButton onClick={submitHandler}>{submitLabel}</CustomButton>
       </form>
    );
 };

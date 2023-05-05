@@ -22,3 +22,7 @@ export async function delay(ms: number): Promise<void> {
       setTimeout(() => resolve(), ms);
    });
 }
+
+export function getStringDateFromTimestamp(timestamp: number): string {
+   return new Date(timestamp).toLocaleString("ru").slice(0, 10);
+}

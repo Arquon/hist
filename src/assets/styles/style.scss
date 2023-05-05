@@ -49,7 +49,7 @@ h3 {
 
    &_narrow {
       max-width: $base-narrow-resolution;
-      padding: 0;
+      padding: 0 15px;
       @media (min-width: 1920px) {
          max-width: calc($base-narrow-resolution/1920px * 100vw);
       }
@@ -157,4 +157,9 @@ h3 {
          margin: 0px 0px 0px 0px;
       }
    }
+}
+
+.loader {
+   display: flex;
+   justify-content: center;
 }

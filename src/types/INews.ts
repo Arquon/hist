@@ -7,3 +7,4 @@ export interface INews {
 }
 
 export type INewsWithoutId = Omit<INews, "id">;
+export type INewsFormState = Omit<INews, "id" | "createdAt">;

@@ -21,6 +21,12 @@
    &__pagination {
       margin: 0px 0px px 0px;
    }
+
+   &__admin {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0px 0px calc(15 * var(--resolution-calc)) 0px;
+   }
 }
 
 .item-news-page {

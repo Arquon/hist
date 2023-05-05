@@ -9,14 +9,17 @@ import { Introduce } from "@/pages/Introduce";
 import { Contacts } from "@/pages/Contacts";
 import { Article } from "@/pages/Article";
 import { NewsAdd } from "@/pages/NewsAdd";
+import { NewsEdit } from "@/pages/NewsEdit";
 
 export enum ERoutes {
    landing = "/",
    initialize = "/initialize",
+
    news = "/news",
    newsAdd = "/news/add",
-   newsEdit = "/news/edit/:newsId",
+   newsEdit = "/news/:newsId/edit",
    article = "/news/:newsId",
+
    freemasonry = "/freemasonry",
    france = "/france",
    moscow = "/moscow",
@@ -34,14 +37,18 @@ interface IRoute {
 export const routes: IRoute[] = [
    { name: "landing", path: ERoutes.landing, Element: Landing },
    { name: "initialize", path: ERoutes.initialize, Element: Initialize },
-   { name: "news", path: ERoutes.news, Element: News },
-   { name: "newsAdd", path: ERoutes.newsAdd, Element: NewsAdd },
-   { name: "newsEdit", path: ERoutes.newsEdit, Element: () => null },
-   { name: "article", path: ERoutes.article, Element: Article },
+
    { name: "freemasonry", path: ERoutes.freemasonry, Element: Freemasonry },
    { name: "france", path: ERoutes.france, Element: France },
    { name: "moscow", path: ERoutes.moscow, Element: Moscow },
    { name: "fAQ", path: ERoutes.faq, Element: FAQ },
    { name: "introduce", path: ERoutes.introduce, Element: Introduce },
    { name: "contacts", path: ERoutes.contacts, Element: Contacts },
+];
+
+export const newsRoutes: IRoute[] = [
+   { name: "newsEdit", path: ERoutes.newsEdit, Element: NewsEdit },
+   { name: "news", path: ERoutes.news, Element: News },
+   { name: "newsAdd", path: ERoutes.newsAdd, Element: NewsAdd },
+   { name: "article", path: ERoutes.article, Element: Article },
 ];
