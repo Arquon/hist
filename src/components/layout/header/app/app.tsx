@@ -90,7 +90,7 @@ export const HeaderMenu: FC<IHeaderMenuProps> = ({ isActive, toggleActive }) => 
 };
 
 export const HeaderCoin: FC = () => (
-   <Link className="header__coin" to="/">
+   <Link className="header__coin" to="/login">
       <img src={coin} alt="" />
    </Link>
 );

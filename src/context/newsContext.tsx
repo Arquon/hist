@@ -4,6 +4,7 @@ import { type INewsFormState, type INews, type INewsWithoutId } from "@/types/IN
 import { type Nullable } from "@/types/default";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 type TArticleRouteParams = Record<"newsId", string>;
 
@@ -37,8 +38,8 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
    const { newsId } = useParams<TArticleRouteParams>();
 
    const errorCatcher = (error: unknown): void => {
-      if (typeof error === "object" && error !== null && "message" in error) {
-         setError(error.message as string);
+      if (axios.isAxiosError(error)) {
+         setError(error.message);
          return;
       }
       setError("unhandled error");
@@ -46,7 +47,7 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
 
    async function addArticle(newsState: INewsFormState): Promise<INews> {
       try {
-         const article: INewsWithoutId = { ...newsState, createdAt: new Date().getTime() };
+         const article: INewsWithoutId = { ...newsState, createdAt: Date.now() };
          const data = await newsService.createNews(article);
          setNews((prevNews) => [data, ...prevNews]);
          return data;
@@ -59,10 +60,12 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
    async function updateArticle(article: INews): Promise<INews> {
       try {
          const data = await newsService.updateNews(article);
-         setNews((prevNews)=> prevNews.map((prevArticle)=>{
-            if (prevArticle.id !== article.id) return prevArticle
-            else return data
-         }))
+         setNews((prevNews) =>
+            prevNews.map((prevArticle) => {
+               if (prevArticle.id !== article.id) return prevArticle;
+               else return data;
+            })
+         );
          return data;
       } catch (error) {
          errorCatcher(error);
@@ -100,9 +103,7 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
    }, [error]);
 
    return (
-      <NewsContext.Provider
-         value={{ news, isLoadingNews: isLoading, currentArticle, addArticle, updateArticle }}
-      >
+      <NewsContext.Provider value={{ news, isLoadingNews: isLoading, currentArticle, addArticle, updateArticle }}>
          {children}
       </NewsContext.Provider>
    );

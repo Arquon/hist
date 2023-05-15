@@ -1,4 +1,4 @@
-import { getStringDateFromTimestamp } from "@/functions/utils";
+import { getStringDateFromTimestamp } from "@/utils/functions";
 import { type INews } from "@/types/INews";
 import React, { type FC } from "react";
 

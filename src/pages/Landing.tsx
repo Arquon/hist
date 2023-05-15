@@ -6,7 +6,7 @@ import { FreemasonrySection } from "@/components/landing/FreemasonrySection";
 import { FranceSection } from "@/components/landing/FranceSection";
 import { FAQSection } from "@/components/landing/FAQSection";
 
-export const Landing: React.FC = () => {
+export const LandingPage: React.FC = () => {
    return (
       <>
          <StartScreenSection />

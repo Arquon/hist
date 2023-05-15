@@ -2,7 +2,7 @@ import React, { type FC, useEffect } from "react";
 import { TextField } from "../UI/form/TextField";
 import { AreaField } from "../UI/form/AreaField";
 import { CustomButton } from "../UI/CustomButton";
-import { type TValidator } from "@/functions/validator";
+import { type TValidator } from "@/utils/validator";
 import { useForm } from "@/hooks/useForm";
 import { type INewsFormState } from "@/types/INews";
 
@@ -47,26 +47,16 @@ export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData
    }, [data]);
 
    return (
-      <form>
-         <TextField
-            label="Название новости"
-            value={data.title}
-            error={errors.title}
-            onChange={(title) => changeHandler({ title })}
-         />
+      <form onSubmit={submitHandler}>
+         <TextField label="Название новости" value={data.title} error={errors.title} onChange={(title) => changeHandler({ title })} />
          <TextField
             label="Описание новости"
             value={data.description}
             error={errors.description}
             onChange={(description) => changeHandler({ description })}
          />
-         <AreaField
-            label="Содержание новости"
-            value={data.content}
-            error={errors.content}
-            onChange={(content) => changeHandler({ content })}
-         />
-         <CustomButton onClick={submitHandler}>{submitLabel}</CustomButton>
+         <AreaField label="Содержание новости" value={data.content} error={errors.content} onChange={(content) => changeHandler({ content })} />
+         <CustomButton type="submit">{submitLabel}</CustomButton>
       </form>
    );
 };

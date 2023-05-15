@@ -70,8 +70,7 @@ h3 {
    @media (max-width: 1024px) {
       font-size: calc(100vw * (15 - 14) / (1024 - 320) + (14 * 1024px - 15 * 320px) / (1024 - 320));
       min-width: 165px;
-      padding: calc(100vw * (15 - 9) / (1024 - 320) + (9 * 1024px - 15 * 320px) / (1024 - 320)) 0
-         10px;
+      padding: calc(100vw * (15 - 9) / (1024 - 320) + (9 * 1024px - 15 * 320px) / (1024 - 320)) 0 10px;
    }
 }
 
@@ -162,4 +161,13 @@ h3 {
 .loader {
    display: flex;
    justify-content: center;
+   align-items: center;
+
+   &_b {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+   }
 }

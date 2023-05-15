@@ -5,20 +5,30 @@ interface TextFieldProps {
    value: string;
    onChange: (str: string) => void;
    error?: string;
-   type?: React.HTMLInputTypeAttribute;
+   type?: "text" | "password";
+   autoComplete?: string;
 }
 
-export const TextField: FC<TextFieldProps> = ({ label, value, onChange, error, type = "text" }) => {
+export const TextField: FC<TextFieldProps> = ({
+   label,
+   value,
+   onChange,
+   error,
+   type = "text",
+   autoComplete = "off",
+}) => {
    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
       const { target } = e;
       onChange(target.value);
    };
 
    return (
-      <label>
-         <p>{label}</p>
-         <input value={value} onChange={changeHandler} type={type} />
-         {error && <p>{error}</p>}
-      </label>
+      <div>
+         <label>
+            <p>{label}</p>
+            <input value={value} onChange={changeHandler} type={type} autoComplete={autoComplete} />
+            {error && <p>{error}</p>}
+         </label>
+      </div>
    );
 };

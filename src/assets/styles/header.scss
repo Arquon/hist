@@ -23,12 +23,14 @@ header {
 
       @media (max-width: 1024px) {
          justify-content: flex-start;
-         height: calc(100vw * (160 - 66) / (1024 - 320) + (66 * 1024px - 160 * 320px) / (1024 - 320));
+         height: calc(
+            100vw * (160 - 66) / (1024 - 320) + (66 * 1024px - 160 * 320px) / (1024 - 320)
+         );
       }
    }
 
    &__logo,
-   &__coin {
+   &__last {
       height: 140px;
       img {
          height: 100%;
@@ -40,7 +42,9 @@ header {
       }
 
       @media (max-width: 1024px) {
-         height: calc(100vw * (110 - 50) / (1024 - 320) + (50 * 1024px - 110 * 320px) / (1024 - 320));
+         height: calc(
+            100vw * (110 - 50) / (1024 - 320) + (50 * 1024px - 110 * 320px) / (1024 - 320)
+         );
       }
    }
 
@@ -76,7 +80,7 @@ header {
       }
    }
 
-   &__coin {
+   &__last {
       order: 2;
 
       @media (max-width: 1024px) {
@@ -160,7 +164,8 @@ header {
       }
 
       @media (max-width: 1024px) {
-         margin: 0 0 calc(100vw * (30 - 20) / (1024 - 320) + (20 * 1024px - 30 * 320px) / (1024 - 320)); // 30px - 1024; 20px - 320px
+         margin: 0 0
+            calc(100vw * (30 - 20) / (1024 - 320) + (20 * 1024px - 30 * 320px) / (1024 - 320)); // 30px - 1024; 20px - 320px
          text-align: center;
       }
    }
@@ -174,7 +179,9 @@ header {
       }
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (30 - 20) / (1024 - 320) + (20 * 1024px - 30 * 320px) / (1024 - 320)); // 30px - 1024; 20px - 320px
+         font-size: calc(
+            100vw * (30 - 20) / (1024 - 320) + (20 * 1024px - 30 * 320px) / (1024 - 320)
+         ); // 30px - 1024; 20px - 320px
       }
 
       transition: all 0.2s ease;

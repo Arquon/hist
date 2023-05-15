@@ -1,4 +1,4 @@
-import { getClassName } from "@/functions/utils";
+import { getClassName } from "@/utils/functions";
 import React, { type FC } from "react";
 
 interface PaginationProps {
@@ -9,13 +9,7 @@ interface PaginationProps {
    onPageChange: (page: number) => void;
 }
 
-export const Pagination: FC<PaginationProps> = ({
-   allCount,
-   perPageCount,
-   className,
-   currentPage,
-   onPageChange,
-}) => {
+export const Pagination: FC<PaginationProps> = ({ allCount, perPageCount, className, currentPage, onPageChange }) => {
    const length = Math.floor((allCount - 1) / perPageCount) + 1;
    const tempArray = Array(length).fill(0);
 
@@ -36,11 +30,7 @@ export const Pagination: FC<PaginationProps> = ({
       <nav className={computedClassName}>
          <ul className="pagination__list">
             {tempArray.map((_, i) => (
-               <li
-                  className={getPaginationItemClassName(i + 1)}
-                  onClick={() => pageChangeHandler(i + 1)}
-                  key={i}
-               >
+               <li className={getPaginationItemClassName(i + 1)} onClick={() => pageChangeHandler(i + 1)} key={i}>
                   {i + 1}
                </li>
             ))}

@@ -1,24 +1,22 @@
 import { useState } from "react";
-import validator, { type TErrors, type TValidator } from "@/functions/validator";
+import validator, { type TValidator } from "@/utils/validator";
+import { type ValidationErrors } from "@/types/errorsTypes";
 
 interface UseFormParams<T> {
    initialData: T;
-   validatorConfig: TValidator<T>;
+   validatorConfig: Partial<TValidator<T>>;
 }
 
 interface UseFormReturnType<T> {
    data: T;
    changeHandler: (partialData: Partial<T>) => void;
-   errors: Partial<TErrors<T>>;
+   errors: ValidationErrors<T>;
    validate: () => boolean;
 }
 
-export function useForm<T extends object>({
-   initialData,
-   validatorConfig,
-}: UseFormParams<T>): UseFormReturnType<T> {
+export function useForm<T extends object>({ initialData, validatorConfig }: UseFormParams<T>): UseFormReturnType<T> {
    const [data, setData] = useState(initialData);
-   const [errors, setErrors] = useState<Partial<TErrors<T>>>({});
+   const [errors, setErrors] = useState<ValidationErrors<T>>({});
 
    const changeHandler = (partialData: Partial<T>): void => {
       setData((prevData) => ({

@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import { type ICommonProps } from "@/types/ICommonProps";
-import { getClassName } from "@/functions/utils";
+import { getClassName } from "@/utils/functions";
 
 export const Heading: FC<ICommonProps> = ({ className, children }) => {
    const computedClassName = getClassName({ className });

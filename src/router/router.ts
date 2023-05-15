@@ -1,6 +1,6 @@
-import { Landing } from "@/pages/Landing";
+import { LandingPage } from "@/pages/Landing";
 import { Initialize } from "@/pages/Initialize";
-import { News } from "@/pages/News";
+import { NewsPage } from "@/pages/News";
 import { Freemasonry } from "@/pages/Freemasonry";
 import { France } from "@/pages/France";
 import { Moscow } from "@/pages/Moscow";
@@ -8,8 +8,12 @@ import { FAQ } from "@/pages/FAQ";
 import { Introduce } from "@/pages/Introduce";
 import { Contacts } from "@/pages/Contacts";
 import { Article } from "@/pages/Article";
-import { NewsAdd } from "@/pages/NewsAdd";
+import { NewsAddPage } from "@/pages/NewsAdd";
 import { NewsEdit } from "@/pages/NewsEdit";
+import { LoginPage } from "@/pages/Login";
+import { withAuth } from "@/hoc/withAuth";
+import { withAdmin } from "@/hoc/withAdmin";
+import { withoutAuth } from "@/hoc/withoutAuth";
 
 export enum ERoutes {
    landing = "/",
@@ -26,6 +30,8 @@ export enum ERoutes {
    faq = "/faq",
    introduce = "/introduce",
    contacts = "/contacts",
+
+   login = "/login",
 }
 
 interface IRoute {
@@ -35,8 +41,8 @@ interface IRoute {
 }
 
 export const routes: IRoute[] = [
-   { name: "landing", path: ERoutes.landing, Element: Landing },
-   { name: "initialize", path: ERoutes.initialize, Element: Initialize },
+   { name: "landing", path: ERoutes.landing, Element: LandingPage },
+   { name: "initialize", path: ERoutes.initialize, Element: withAdmin(Initialize) },
 
    { name: "freemasonry", path: ERoutes.freemasonry, Element: Freemasonry },
    { name: "france", path: ERoutes.france, Element: France },
@@ -47,8 +53,10 @@ export const routes: IRoute[] = [
 ];
 
 export const newsRoutes: IRoute[] = [
-   { name: "newsEdit", path: ERoutes.newsEdit, Element: NewsEdit },
-   { name: "news", path: ERoutes.news, Element: News },
-   { name: "newsAdd", path: ERoutes.newsAdd, Element: NewsAdd },
-   { name: "article", path: ERoutes.article, Element: Article },
+   { name: "newsEdit", path: ERoutes.newsEdit, Element: withAdmin(NewsEdit, "/news") },
+   { name: "news", path: ERoutes.news, Element: NewsPage },
+   { name: "newsAdd", path: ERoutes.newsAdd, Element: withAdmin(NewsAddPage, "/news") },
+   { name: "article", path: ERoutes.article, Element: withAuth(Article) },
 ];
+
+export const authRoutes: IRoute[] = [{ name: "login", path: ERoutes.login, Element: withoutAuth(LoginPage) }];

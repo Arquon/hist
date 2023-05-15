@@ -25,6 +25,9 @@
             "checksVoidReturn": false
          }
       ],
-      "@typescript-eslint/no-floating-promises": "off"
+      "@typescript-eslint/no-floating-promises": "off",
+      "no-prototype-builtins": "off",
+      "max-len": "off",
+      "@typescript-eslint/no-throw-literal": "off"
    }
 }

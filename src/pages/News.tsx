@@ -4,16 +4,18 @@ import { ButtonLink } from "@/components/UI/CustomLink";
 import { Loader } from "@/components/UI/Loader";
 import { Pagination } from "@/components/UI/Pagination";
 import { NewsItem } from "@/components/news/NewsItem";
-import { useNews } from "@/hooks/useNews";
+import { useNews } from "@/context/newsContext";
 import React, { type FC, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useAuth } from "@/context/authContext";
 
 const newsPerPage = 5;
 
-export const News: FC = () => {
+export const NewsPage: FC = () => {
    const [searchParams, setSearchParams] = useSearchParams();
    const currentPage = searchParams.get("page") !== null ? Number(searchParams.get("page")) : 1;
 
+   const { isAdmin } = useAuth();
    const { news, isLoadingNews } = useNews();
 
    const changePageHandler = (page: number): void => {
@@ -30,9 +32,7 @@ export const News: FC = () => {
       <section className="news-page">
          <NarrowContainer className="news-page__container">
             <Heading className="news-page__heading">Новости</Heading>
-            <div className="news-page__admin">
-               <ButtonLink to="add">Добавить новость</ButtonLink>
-            </div>
+            <div className="news-page__admin">{isAdmin && <ButtonLink to="add">Добавить новость</ButtonLink>}</div>
 
             {isLoadingNews ? (
                <Loader />

@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
-import { classesFromArray } from "@/functions/utils";
+import { classesFromArray } from "@/utils/functions";
 
 export const Layout: FC = () => {
    const location = useLocation();

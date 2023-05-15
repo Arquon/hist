@@ -7,7 +7,7 @@ module.exports = {
    tabWidth: 3,
    useTabs: false,
    endOfLine: "auto",
-   printWidth: 100,
+   printWidth: 120,
    semi: true,
    trailingComma: "es5",
 };

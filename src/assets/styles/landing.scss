@@ -7,7 +7,8 @@
    justify-content: space-around;
 
    @media (max-width: 1024px) {
-      padding: calc(100vw * (160 - 66) / (1024 - 320) + (66 * 1024px - 160 * 320px) / (1024 - 320)) 0 calc(100vw * (60 - 20) / (1024 - 320) + (20 * 1024px - 60 * 320px) / (1024 - 320));
+      padding: calc(100vw * (160 - 66) / (1024 - 320) + (66 * 1024px - 160 * 320px) / (1024 - 320))
+         0 calc(100vw * (60 - 20) / (1024 - 320) + (20 * 1024px - 60 * 320px) / (1024 - 320));
       display: block;
       min-height: auto;
    }
@@ -25,7 +26,8 @@
    margin-bottom: calc(20 * var(--resolution-calc));
 
    @media (max-width: 1024px) {
-      padding: calc(100vw * (50 - 30) / (1024 - 320) + (30 * 1024px - 50 * 320px) / (1024 - 320)) 0 0;
+      padding: calc(100vw * (50 - 30) / (1024 - 320) + (30 * 1024px - 50 * 320px) / (1024 - 320)) 0
+         0;
       margin-bottom: 0px;
    }
 
@@ -58,7 +60,9 @@
       text-transform: uppercase;
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (30 - 16) / (1024 - 320) + (16 * 1024px - 30 * 320px) / (1024 - 320));
+         font-size: calc(
+            100vw * (30 - 16) / (1024 - 320) + (16 * 1024px - 30 * 320px) / (1024 - 320)
+         );
       }
    }
 
@@ -69,7 +73,9 @@
       text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (22 - 16) / (1024 - 320) + (16 * 1024px - 22 * 320px) / (1024 - 320));
+         font-size: calc(
+            100vw * (22 - 16) / (1024 - 320) + (16 * 1024px - 22 * 320px) / (1024 - 320)
+         );
       }
    }
 
@@ -105,10 +111,14 @@
          top: 0;
          bottom: 0;
          display: block;
-         background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60.83%, #288ab9 100%), linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 80%), rgba(255, 255, 255, 0.3);
+         background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60.83%, #288ab9 100%),
+            linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 80%),
+            rgba(255, 255, 255, 0.3);
 
          @media (max-width: 1024px) {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60.83%, #288ab9 100%), linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 80%), rgba(255, 255, 255, 0.3);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60.83%, #288ab9 100%),
+               linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 80%),
+               rgba(255, 255, 255, 0.3);
          }
       }
    }
@@ -151,7 +161,9 @@
       color: $white-color;
 
       @media (max-width: 1440px) {
-         font-size: calc(100vw * (22 - 18) / (1440 - 1024) + (18 * 1440px - 22 * 1024px) / (1440 - 1024));
+         font-size: calc(
+            100vw * (22 - 18) / (1440 - 1024) + (18 * 1440px - 22 * 1024px) / (1440 - 1024)
+         );
       }
    }
 
@@ -176,7 +188,11 @@
       left: calc(80 * var(--resolution-calc));
       right: calc(50 * var(--resolution-calc));
       bottom: 15%;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 40.33%, rgba(255, 255, 255, 0) 106.24%);
+      background: linear-gradient(
+         90deg,
+         rgba(0, 0, 0, 0.05) 40.33%,
+         rgba(255, 255, 255, 0) 106.24%
+      );
       z-index: -1;
 
       @media (max-width: 1024px) {
@@ -228,7 +244,8 @@
 .appeal {
    padding: 0px calc(120 * var(--resolution-calc)) 0px 0px;
    border-right: $golden-color 1px solid;
-   background: url("../images/blick.png") no-repeat right bottom / calc(350 * var(--resolution-calc));
+   background: url("../images/blick.png") no-repeat right bottom /
+      calc(350 * var(--resolution-calc));
 
    @media (max-width: 1024px) {
       padding: 0;
@@ -246,8 +263,12 @@
       margin-bottom: 30px;
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320));
-         max-height: calc(100vw * (250 - 120) / (1024 - 320) + (120 * 1024px - 250 * 320px) / (1024 - 320));
+         font-size: calc(
+            100vw * (18 - 12) / (1024 - 320) + (12 * 1024px - 18 * 320px) / (1024 - 320)
+         );
+         max-height: calc(
+            100vw * (250 - 120) / (1024 - 320) + (120 * 1024px - 250 * 320px) / (1024 - 320)
+         );
          text-overflow: ellipsis;
          overflow: hidden;
          margin: 0 0 15px;
@@ -306,7 +327,9 @@
       color: $white-color;
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320));
+         font-size: calc(
+            100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320)
+         );
       }
    }
 
@@ -333,7 +356,9 @@
       margin-bottom: 15px;
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320));
+         font-size: calc(
+            100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320)
+         );
       }
    }
 
@@ -394,8 +419,12 @@
       margin-bottom: calc(35 * var(--resolution-calc));
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320));
-         max-width: calc(100vw * (450 - 300) / (1024 - 320) + (300 * 1024px - 450 * 320px) / (1024 - 320));
+         font-size: calc(
+            100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320)
+         );
+         max-width: calc(
+            100vw * (450 - 300) / (1024 - 320) + (300 * 1024px - 450 * 320px) / (1024 - 320)
+         );
       }
 
       @media (max-width: 600px) {
@@ -427,12 +456,16 @@
          bottom: 0;
          z-index: 1;
 
-         background: linear-gradient(270deg, #288ab9 34.63%, rgba(40, 138, 185, 0) 74.1%), linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
-            linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%), rgba(255, 255, 255, 0.3);
+         background: linear-gradient(270deg, #288ab9 34.63%, rgba(40, 138, 185, 0) 74.1%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
+            linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%),
+            rgba(255, 255, 255, 0.3);
 
          @media (max-width: 600px) {
-            background: linear-gradient(270deg, #288ab9 4.63%, rgba(40, 138, 185, 0) 74.1%), linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
-               linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%), rgba(255, 255, 255, 0.3);
+            background: linear-gradient(270deg, #288ab9 4.63%, rgba(40, 138, 185, 0) 74.1%),
+               linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
+               linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%),
+               rgba(255, 255, 255, 0.3);
          }
       }
 
@@ -472,7 +505,8 @@
 
       @media (max-width: 600px) {
          flex-wrap: wrap;
-         margin: 0 calc(-100vw * (20 - 15) / (1024 - 320) - (15 * 1024px - 20 * 320px) / (1024 - 320));
+         margin: 0
+            calc(-100vw * (20 - 15) / (1024 - 320) - (15 * 1024px - 20 * 320px) / (1024 - 320));
       }
    }
 
@@ -536,8 +570,12 @@
       margin-bottom: calc(30 * var(--resolution-calc));
 
       @media (max-width: 1024px) {
-         font-size: calc(100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320));
-         max-width: calc(100vw * (450 - 360) / (1024 - 600) + (360 * 1024px - 450 * 600px) / (1024 - 600));
+         font-size: calc(
+            100vw * (14 - 12) / (1024 - 320) + (12 * 1024px - 14 * 320px) / (1024 - 320)
+         );
+         max-width: calc(
+            100vw * (450 - 360) / (1024 - 600) + (360 * 1024px - 450 * 600px) / (1024 - 600)
+         );
       }
 
       @media (max-width: 600px) {
@@ -563,12 +601,16 @@
          bottom: 0;
          z-index: 1;
 
-         background: linear-gradient(90deg, #288ab9 34.63%, rgba(40, 138, 185, 0) 74.1%), linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
-            linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%), rgba(255, 255, 255, 0.3);
+         background: linear-gradient(90deg, #288ab9 34.63%, rgba(40, 138, 185, 0) 74.1%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
+            linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%),
+            rgba(255, 255, 255, 0.3);
 
          @media (max-width: 600px) {
-            background: linear-gradient(90deg, #288ab9 0.63%, rgba(40, 138, 185, 0) 34.1%), linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
-               linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%), rgba(255, 255, 255, 0.3);
+            background: linear-gradient(90deg, #288ab9 0.63%, rgba(40, 138, 185, 0) 34.1%),
+               linear-gradient(180deg, rgba(255, 255, 255, 0) 70.83%, #288ab9 100%),
+               linear-gradient(180deg, #288ab9 0%, rgba(255, 255, 255, 0) 60%),
+               rgba(255, 255, 255, 0.3);
          }
       }
 

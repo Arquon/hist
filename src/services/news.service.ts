@@ -17,19 +17,19 @@ export const newsService = {
       return data;
    },
    getArticle: async (id: string) => {
-      const { data } = await httpService.get<INews>(newsEndPoint + `${id}/`);
+      const { data } = await httpService.get<INews>(newsEndPoint + id + "/");
       return data;
    },
    createNews: async (payload: INewsWithoutId) => {
       const id = nanoid();
-      const { data } = await httpService.put<INews>(newsEndPoint + `${id}/`, {
+      const { data } = await httpService.put<INews>(newsEndPoint + id + "/", {
          ...payload,
          id,
       });
       return data;
    },
    updateNews: async (payload: INews) => {
-      const { data } = await httpService.put<INews>(newsEndPoint + `${payload.id}/`, payload);
+      const { data } = await httpService.put<INews>(newsEndPoint + payload.id + "/", payload);
       return data;
    },
 };

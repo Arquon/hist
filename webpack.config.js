@@ -3,7 +3,7 @@ const postcssPresetEnv = require("postcss-preset-env");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-
+const Dotenv = require("dotenv-webpack");
 const isServe = process.env.NODE_ENV === "serve";
 const isDev = process.env.NODE_ENV === "development" || isServe;
 const isProd = process.env.NODE_ENV === "production";
@@ -11,6 +11,8 @@ const isProd = process.env.NODE_ENV === "production";
 const imagesFileName = "img/[name][ext]";
 const fontsFileName = "fonts/[name][ext]";
 const cssFileName = "css/[name].css";
+const dotenvPath = isDev ? "./.env.development" : "./.env.production";
+console.log({ dotenvPath });
 
 const plugins = [
    new HtmlWebpackPlugin({
@@ -18,6 +20,9 @@ const plugins = [
       template: "src/templates/index.html",
    }),
    new MiniCssExtractPlugin({ filename: cssFileName }),
+   new Dotenv({
+      path: dotenvPath,
+   }),
 ];
 
 if (isServe) {
