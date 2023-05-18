@@ -38,10 +38,12 @@ interface IRoute {
    path: ERoutes;
    Element: React.FC;
    name: string;
+   title?: string;
+   index?: true;
 }
 
 export const routes: IRoute[] = [
-   { name: "landing", path: ERoutes.landing, Element: LandingPage },
+   { name: "landing", path: ERoutes.landing, Element: LandingPage, index: true },
    { name: "initialize", path: ERoutes.initialize, Element: withAdmin(Initialize) },
 
    { name: "freemasonry", path: ERoutes.freemasonry, Element: Freemasonry },

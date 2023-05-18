@@ -3,10 +3,10 @@ import React, { type FC } from "react";
 import { Container } from "../UI/Common";
 import bannerImg from "@/assets/images/banner.png";
 import { GalleryContainer } from "./Gallery";
-import { useCurrentWidth } from "@/context/currentWidthContext";
+import { useMatchMedia } from "@/hooks/useMatchMedia";
 
 export const StartScreenSection: FC = ({}) => {
-   const { currentWidth } = useCurrentWidth();
+   const { isMobile } = useMatchMedia();
 
    return (
       <section className="start">
@@ -21,7 +21,7 @@ export const StartScreenSection: FC = ({}) => {
                <img src={bannerImg} alt="" />
             </div>
          </div>
-         {currentWidth > 1024 && <GalleryContainer className="start__gallery" />}
+         {!isMobile && <GalleryContainer className="start__gallery" />}
       </section>
    );
 };

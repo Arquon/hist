@@ -1,0 +1,44 @@
+.news-form-page {
+   padding: calc(100 * var(--resolution-calc)) 0px calc(45 * var(--resolution-calc)) 0px;
+
+   &__heading {
+      text-align: center;
+      margin: 0px 0px calc(20 * var(--resolution-calc)) 0px;
+   }
+}
+
+.news-form {
+   padding: 20px;
+   border-radius: 5px;
+   background-color: $dark-brown-color;
+
+   h3 {
+      @media (min-width: ($w-res+px)) {
+         font-size: 30px;
+      }
+   }
+
+   &__fields {
+      margin-bottom: 20px;
+   }
+
+   &__label {
+   }
+
+   &__area {
+   }
+
+   &__input-group {
+      margin: 0px 0px 10px 0px;
+
+      &:last-child {
+         margin: 0;
+      }
+   }
+
+   &__btn {
+      min-width: 250px;
+      font-size: 20px;
+      padding: 15px 10px;
+   }
+}

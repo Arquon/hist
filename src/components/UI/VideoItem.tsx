@@ -20,7 +20,7 @@ export const VideoItem: FC<IVideoItemProps> = ({ preview, source, className }) =
    const onVideoClickHandler = (): void => {
       setIsActive(true);
       setTimeout(() => {
-         if (previewRef.current != null) previewRef.current.hidden = true;
+         // if (previewRef.current !== null) previewRef.current.hidden = true;
          if (iframeRef.current !== null) iframeRef.current.hidden = false;
       }, 500);
    };
@@ -30,7 +30,6 @@ export const VideoItem: FC<IVideoItemProps> = ({ preview, source, className }) =
          {isActive && (
             <iframe
                src={source + "?autoplay=1"}
-               title="Би-2 — Полковнику никто не пишет (2000)"
                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                allowFullScreen
                ref={iframeRef}

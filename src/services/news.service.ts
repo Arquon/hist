@@ -32,4 +32,7 @@ export const newsService = {
       const { data } = await httpService.put<INews>(newsEndPoint + payload.id + "/", payload);
       return data;
    },
+   deleteNews: async (id: string) => {
+      await httpService.delete(newsEndPoint + id + "/");
+   },
 };

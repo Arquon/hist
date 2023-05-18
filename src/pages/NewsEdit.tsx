@@ -24,12 +24,9 @@ export const NewsEdit: FC<NewsEditProps> = ({}) => {
    return (
       <section className="news-form-page">
          <NarrowContainer className="news-form-page__container">
-            <Heading className="news-form-page__heading">Изменить новость</Heading>
-            <NewsForm
-               onSubmit={handleSubmit}
-               submitLabel="Изменить новость"
-               initialData={currentArticle}
-            />
+            <NewsForm onSubmit={handleSubmit} submitLabel="Изменить новость" initialData={currentArticle}>
+               <Heading className="news-form-page__heading">Изменить новость</Heading>
+            </NewsForm>
          </NarrowContainer>
       </section>
    );

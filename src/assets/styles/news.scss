@@ -33,6 +33,10 @@
    padding: 0px 0px calc(90 * var(--resolution-calc)) 0px;
    position: relative;
 
+   @media (max-width: ($t-res+px)) {
+      padding: 0px 0px customCalc($t-res, $m-res, 64, 40) 0px;
+   }
+
    &::after {
       content: "";
       display: block;
@@ -42,7 +46,12 @@
       transform: translateX(-50%);
       width: calc(37 * var(--resolution-calc));
       height: calc(44 * var(--resolution-calc));
-      background: url(../images/sign.svg) 100% / contain;
+      background: url(../images/sign.svg) no-repeat 100% / contain;
+
+      @media (max-width: ($t-res+px)) {
+         height: customCalc($t-res, $m-res, 64, 40);
+         width: customCalc($t-res, $m-res, 35, 25);
+      }
    }
 
    &:last-child {
@@ -56,6 +65,14 @@
       font-size: calc(18 * var(--resolution-calc));
       color: $white-color;
       font-weight: 600;
+
+      &:hover {
+         color: $white-color;
+      }
+
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 20, 14);
+      }
    }
 
    &__date {
@@ -78,5 +95,10 @@
       font-size: calc(18 * var(--resolution-calc));
       color: $white-color;
       letter-spacing: 1px;
+
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 20, 14);
+         letter-spacing: var(--resolution-calc);
+      }
    }
 }

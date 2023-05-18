@@ -3,10 +3,10 @@ import React, { type FC } from "react";
 import { type ICommonProps } from "@/types/ICommonProps";
 import { ButtonLink } from "../UI/CustomLink";
 import { LandingNewsItem } from "./LandingNewsItem";
-import { useCurrentWidth } from "@/context/currentWidthContext";
+import { useMatchMedia } from "@/hooks/useMatchMedia";
 
 export const NewsSection: FC<ICommonProps> = ({ className }) => {
-   const { currentWidth } = useCurrentWidth();
+   const { isMobile } = useMatchMedia();
 
    const classes = ["news"];
    if (className !== undefined) classes.push(className);
@@ -14,7 +14,7 @@ export const NewsSection: FC<ICommonProps> = ({ className }) => {
    return (
       <div className={classes.join(" ")}>
          <h3 className="news__heading">
-            {currentWidth > 1024 && <br />}
+            {!isMobile && <br />}
             последние Новости
          </h3>
          <div className="news__row">
@@ -23,7 +23,7 @@ export const NewsSection: FC<ICommonProps> = ({ className }) => {
                title="Посещение работ Великого Востока"
                content="Вчера, 21 июня, состоялось торжественное посещение работ Великого Востока Бельгии в составе делегации Братьев Достопочтенных Лож “Москва” и “Астрея."
             />
-            {currentWidth > 1024 && (
+            {!isMobile && (
                <LandingNewsItem
                   createdAt={new Date(2021, 5, 21).getTime()}
                   title="Посещение работ Великого Востока"

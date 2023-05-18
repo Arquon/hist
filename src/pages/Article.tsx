@@ -4,12 +4,25 @@ import { Loader } from "@/components/UI/Loader";
 import { getStringDateFromTimestamp } from "@/utils/functions";
 import { useNews } from "@/context/newsContext";
 import React, { type FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/authContext";
 
 interface Props {}
 
 export const Article: FC<Props> = () => {
-   const { currentArticle, isLoadingNews } = useNews();
+   const { currentArticle, isLoadingNews, deleteArticle } = useNews();
+   const navigate = useNavigate();
+   const { isAdmin } = useAuth();
+
+   const deleteHandler = async (): Promise<void> => {
+      if (!currentArticle) return;
+      try {
+         await deleteArticle(currentArticle.id);
+         navigate("/news");
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    return (
       <section className="article-page">
@@ -21,9 +34,16 @@ export const Article: FC<Props> = () => {
                   <Heading className="article-content__title">{currentArticle.title}</Heading>
                   <p className="article-content__date">
                      {getStringDateFromTimestamp(currentArticle.createdAt)}
-                     <Link className="article-content__link" to="edit">
-                        Редактировать
-                     </Link>
+                     {isAdmin && (
+                        <>
+                           <Link className="article-content__link" to="edit">
+                              Редактировать
+                           </Link>
+                           <span className="article-content__link" onClick={deleteHandler}>
+                              Удалить
+                           </span>
+                        </>
+                     )}
                   </p>
                   <p className="article-content__text">{currentArticle.content}</p>
                </article>

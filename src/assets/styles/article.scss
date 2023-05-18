@@ -18,6 +18,7 @@
       position: relative;
       padding: 0px 0px 0px calc(20 * var(--resolution-calc));
       color: white;
+      cursor: pointer;
 
       &::before {
          content: "";

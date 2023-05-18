@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $base-color: #288ab9;
 $alternate-color: #000000;
 $golden-color-transparent: #efd170e6;
@@ -5,18 +7,33 @@ $golden-color: #efd270;
 $white-color: #ffffff;
 $brown-color: #959393;
 $light-brown-color: #c4c4c4;
+$dark-brown-color: #222222;
 
-$base-resolution: 1440px;
-$base-narrow-resolution: 1200px;
+$d-res: 1440; //desktop resolution
+$d-n-res: 1200; //desktop narrow resolution
+$w-res: 1920; //widescreen resolution
+$t-res: 1024; //tablet resolution
+$m-res: 320; //mobile resolution
+$e-res: 550; //empty-layout breakpoint
 
 :root {
    --resolution-calc: 1px;
 
-   @media (min-width: 1920px) {
-      --resolution-calc: calc(100vw / 1920);
+   @media (min-width: ($w-res+px)) {
+      --resolution-calc: calc(100vw / #{$w-res});
    }
 
-   @media (max-width: 1440px) {
-      --resolution-calc: calc(100vw / 1440);
+   @media (max-width: ($d-res+px)) {
+      --resolution-calc: calc(100vw / #{$d-res});
    }
+}
+
+@function customCalc($firstBreakPoint, $secondBreakPoint, $valueAtFirstBreakpoint, $valueAtSecondBreakpoint) {
+   $k: math.div($valueAtFirstBreakpoint - $valueAtSecondBreakpoint, $firstBreakPoint - $secondBreakPoint);
+   $b: math.div(
+      $valueAtSecondBreakpoint * $firstBreakPoint - $valueAtFirstBreakpoint * $secondBreakPoint,
+      $firstBreakPoint - $secondBreakPoint
+   );
+
+   @return calc(100vw * $k + $b * 1px);
 }

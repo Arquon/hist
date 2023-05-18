@@ -5,13 +5,16 @@ import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { useAuth } from "@/context/authContext";
-import { useNavigate } from "react-router-dom";
+import { type Location, useLocation, useNavigate } from "react-router-dom";
 import { useErrors } from "@/hooks/useErrors";
 
 interface LoginFormProps {
    setLoginPage: (page: ELoginPage) => void;
 }
 
+interface LocationState {
+   from?: Location;
+}
 interface LoginFormState {
    email: string;
    password: string;
@@ -38,6 +41,8 @@ const validatorConfig: TValidator<LoginFormState> = {
 export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
    const { signIn } = useAuth();
    const navigate = useNavigate();
+   const location = useLocation();
+
    const { data, changeHandler, validate, errors } = useForm({ initialData, validatorConfig });
    const { networkErrors, networkErrorHandler } = useErrors(data);
 
@@ -55,7 +60,8 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
       if (isError) return;
       try {
          await signIn(data);
-         navigate(-1);
+         const { from } = location.state as LocationState;
+         navigate({ pathname: from ? from.pathname : "/" });
       } catch (error: unknown) {
          networkErrorHandler(error);
       }
@@ -66,26 +72,34 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
    return (
       <form onSubmit={submitHandler}>
          <h1>Авторизация</h1>
-         <TextField
-            label="Email"
-            value={data.email}
-            onChange={(login) => changeHandler({ email: login })}
-            error={errors.email ?? networkErrors.email}
-         />
-         <TextField
-            label="пароль"
-            value={data.password}
-            onChange={(password) => changeHandler({ password })}
-            error={errors.password ?? networkErrors.password}
-            type={"password"}
-         />
-         <CustomButton type="submit" disabled={isError}>
-            Войти
-         </CustomButton>
-         {networkErrors.global && <p>{networkErrors.global}</p>}
-         <CustomButton onClick={goToRegistration} type="button">
-            Перейти к регистрации
-         </CustomButton>
+
+         <div className="empty-form__fields">
+            <TextField
+               label="Email"
+               value={data.email}
+               onChange={(login) => changeHandler({ email: login })}
+               error={errors.email ?? networkErrors.email}
+               prefix="empty-form"
+            />
+            <TextField
+               label="Пароль"
+               value={data.password}
+               onChange={(password) => changeHandler({ password })}
+               error={errors.password ?? networkErrors.password}
+               type={"password"}
+               prefix="empty-form"
+            />
+         </div>
+
+         <div className="empty-form__buttons-wrap">
+            <CustomButton type="submit" disabled={isError} className="empty-form__btn">
+               Войти
+            </CustomButton>
+            {networkErrors.global && <p>{networkErrors.global}</p>}
+            <CustomButton onClick={goToRegistration} type="button" className="empty-form__btn">
+               Регистрация
+            </CustomButton>
+         </div>
       </form>
    );
 };

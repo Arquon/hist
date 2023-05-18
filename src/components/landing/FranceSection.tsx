@@ -12,8 +12,16 @@ export const FranceSection: FC<Props> = ({}) => (
          <div className="france__content">
             <h3 className="france__heading">видео о великом востоке франции</h3>
             <div className="france__row">
-               <VideoItem source="https://www.youtube.com/embed/1u7WN2zBEDc" preview={firstVideoPreview} className="france__video" />
-               <VideoItem source="https://www.youtube.com/embed/1u7WN2zBEDc" preview={secondVideoPreview} className="france__video" />
+               <VideoItem
+                  source="https://www.youtube.com/embed/123"
+                  preview={firstVideoPreview}
+                  className="france__video"
+               />
+               <VideoItem
+                  source="https://www.youtube.com/embed/123"
+                  preview={secondVideoPreview}
+                  className="france__video"
+               />
             </div>
          </div>
       </Container>

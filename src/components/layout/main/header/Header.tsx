@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Container } from "@/components/UI/Common";
 import { HeaderLogo, HeaderNav, HeaderMenu, HeaderCoin } from "./app/app";
 import { useAuth } from "@/context/authContext";
-import { CustomButton } from "@/components/UI/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { useMatchMedia } from "@/hooks/useMatchMedia";
 
 const Header: React.FC = ({}) => {
+   const { isMobile } = useMatchMedia();
    const { isAuth, signOut } = useAuth();
    const navigate = useNavigate();
    const [isActive, setIsActive] = useState(false);
@@ -25,9 +26,15 @@ const Header: React.FC = ({}) => {
             <div className="header__content">
                <HeaderLogo />
                <HeaderNav isActive={isActive} closeMenu={closeMenu} />
-               <HeaderMenu isActive={isActive} toggleActive={toggleActive} />
+               {isMobile && <HeaderMenu isActive={isActive} toggleActive={toggleActive} />}
                <div className="header__last">
-                  {isAuth ? <CustomButton onClick={handleSignOut}>Выйти</CustomButton> : <HeaderCoin />}
+                  {isAuth ? (
+                     <a onClick={handleSignOut} role="button" className="header__logout">
+                        Выйти
+                     </a>
+                  ) : (
+                     <HeaderCoin />
+                  )}
                </div>
             </div>
          </Container>

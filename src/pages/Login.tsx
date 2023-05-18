@@ -1,6 +1,6 @@
+import React, { type FC, useState } from "react";
 import { LoginForm } from "@/components/login/LoginForm";
 import { RegistrationForm } from "@/components/login/RegistrationForm";
-import React, { type FC, useState } from "react";
 
 interface LoginProps {}
 
@@ -23,5 +23,5 @@ export const LoginPage: FC<LoginProps> = ({}) => {
          break;
    }
 
-   return <div className="empty">{Component}</div>;
+   return <div className="empty__form empty-form">{Component}</div>;
 };

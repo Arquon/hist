@@ -5,6 +5,8 @@ import { type Nullable } from "@/types/default";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+// import { type NetworkErrors } from "@/hooks/useErrors";
 
 type TArticleRouteParams = Record<"newsId", string>;
 
@@ -14,6 +16,7 @@ interface INewsContext {
    currentArticle: Nullable<INews>;
    addArticle: (data: INewsFormState) => Promise<INews>;
    updateArticle: (data: INews) => Promise<INews>;
+   deleteArticle: (id: string) => Promise<void>;
 }
 
 const initialValue: INewsContext = {
@@ -26,6 +29,9 @@ const initialValue: INewsContext = {
    updateArticle: async () => {
       throw new Error("Nan");
    },
+   deleteArticle: async function (id: string): Promise<void> {
+      throw new Error("Function not implemented.");
+   },
 };
 
 const NewsContext = React.createContext<INewsContext>(initialValue);
@@ -37,12 +43,10 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
 
    const { newsId } = useParams<TArticleRouteParams>();
 
-   const errorCatcher = (error: unknown): void => {
-      if (axios.isAxiosError(error)) {
-         setError(error.message);
-         return;
-      }
-      setError("unhandled error");
+   const errorCatcher = (error: unknown): string => {
+      const errorMessage = axios.isAxiosError(error) ? error.message : "Unhandled error";
+      setError(errorMessage);
+      return errorMessage;
    };
 
    async function addArticle(newsState: INewsFormState): Promise<INews> {
@@ -52,8 +56,21 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
          setNews((prevNews) => [data, ...prevNews]);
          return data;
       } catch (error) {
-         errorCatcher(error);
-         throw error;
+         if (axios.isAxiosError(error)) {
+            if (!error.response) throw new Error("Axios Error");
+            const { statusText, status: code } = error.response;
+            if (code === 401) {
+               switch (statusText) {
+                  case "Unauthorized":
+                     throw new Error("Для добавления новости нужны парава администратора");
+                  default:
+                     throw new Error("Непредвиденная ошибка");
+               }
+            }
+            throw new Error("Unhandled Axios Error");
+         }
+
+         throw new Error("Unhandled Error");
       }
    }
 
@@ -68,8 +85,31 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
          );
          return data;
       } catch (error) {
-         errorCatcher(error);
-         throw error;
+         if (axios.isAxiosError(error)) {
+            if (!error.response) throw new Error("Axios Error");
+            const { statusText, status: code } = error.response;
+            if (code === 401) {
+               switch (statusText) {
+                  case "Unauthorized":
+                     throw new Error("Для редактирования новости нужны парава администратора");
+                  default:
+                     throw new Error("Непредвиденная ошибка");
+               }
+            }
+            throw new Error("Unhandled Axios Error");
+         }
+
+         throw new Error("Unhandled Error");
+      }
+   }
+
+   async function deleteArticle(id: string): Promise<void> {
+      try {
+         await newsService.deleteNews(id);
+         setNews((prevNews) => prevNews.filter((article) => article.id !== id));
+      } catch (error) {
+         const errorMessage = errorCatcher(error);
+         throw errorMessage;
       }
    }
 
@@ -97,13 +137,15 @@ export const NewsContextProvider: React.FC<ICommonProps> = ({ children }) => {
 
    useEffect(() => {
       if (error !== null) {
-         console.log(error);
+         toast(error);
          setError(null);
       }
    }, [error]);
 
    return (
-      <NewsContext.Provider value={{ news, isLoadingNews: isLoading, currentArticle, addArticle, updateArticle }}>
+      <NewsContext.Provider
+         value={{ news, isLoadingNews: isLoading, currentArticle, addArticle, updateArticle, deleteArticle }}
+      >
          {children}
       </NewsContext.Provider>
    );

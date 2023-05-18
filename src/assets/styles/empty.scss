@@ -7,4 +7,109 @@
    display: flex;
    align-items: center;
    justify-content: center;
+
+   &__form {
+      padding: 40px;
+      background-color: $dark-brown-color;
+      border-radius: 10px;
+
+      @media (max-width: ($e-res + px)) {
+         padding: customCalc(600, $m-res, 40, 15);
+      }
+   }
+
+   h1 {
+      font-weight: 600;
+      color: $white-color;
+      margin: 0px 0px 20px 0px;
+
+      @media (max-width: ($e-res + px)) {
+         margin: 0px 0px customCalc(550, $m-res, 20, 10) 0px;
+      }
+   }
+
+   &__logo {
+      display: flex;
+      justify-content: center;
+      height: 150px;
+      margin: 0px 0px 15px 0px;
+
+      @media (max-width: ($e-res + px)) {
+         height: customCalc($e-res, $m-res, 150, 100);
+      }
+
+      img {
+         height: 100%;
+         width: 100%;
+         object-fit: contain;
+      }
+   }
+}
+
+.empty-form {
+   width: $e-res + px;
+
+   @media (max-width: ($e-res + px)) {
+      width: 100vw;
+   }
+
+   &__fields {
+      margin-bottom: 20px;
+   }
+
+   &__input-group {
+      margin-bottom: 10px;
+
+      &:last-child {
+         margin: 0;
+      }
+   }
+
+   &__buttons-wrap {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+   }
+
+   &__btn {
+      margin-right: 20px;
+      min-width: auto;
+      flex: 1 1 auto;
+      font-size: 20px;
+      padding: 15px 10px;
+
+      &:last-child {
+         margin-right: 0;
+      }
+
+      @media (max-width: ($e-res + px)) {
+         padding: customCalc(550, $m-res, 15, 10) customCalc(550, $m-res, 10, 7);
+         font-size: customCalc(550, $m-res, 20, 14);
+         margin: 0px customCalc(550, $m-res, 20, 10) 0px 0px;
+      }
+   }
+
+   &__label {
+      @media (max-width: ($e-res + px)) {
+         font-size: customCalc(550, $m-res, 16, 14);
+      }
+   }
+
+   &__input {
+      @media (max-width: ($e-res + px)) {
+         font-size: customCalc(550, $m-res, 16, 14);
+      }
+   }
+
+   &__error {
+      @media (max-width: ($e-res + px)) {
+         font-size: customCalc(550, $m-res, 16, 14);
+      }
+   }
+
+   &__checkbox {
+      label {
+         color: $white-color;
+      }
+   }
 }

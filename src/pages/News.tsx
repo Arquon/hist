@@ -32,7 +32,11 @@ export const NewsPage: FC = () => {
       <section className="news-page">
          <NarrowContainer className="news-page__container">
             <Heading className="news-page__heading">Новости</Heading>
-            <div className="news-page__admin">{isAdmin && <ButtonLink to="add">Добавить новость</ButtonLink>}</div>
+            {isAdmin && (
+               <div className="news-page__admin">
+                  <ButtonLink to="add">Добавить новость</ButtonLink>
+               </div>
+            )}
 
             {isLoadingNews ? (
                <Loader />

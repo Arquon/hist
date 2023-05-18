@@ -89,28 +89,39 @@ export const RegistrationForm: FC<RegistrationProps> = ({ setLoginPage }) => {
    return (
       <form onSubmit={handleSubmit}>
          <h1>Регистрация</h1>
-         <TextField
-            label={"Email"}
-            value={data.email}
-            onChange={(login) => changeHandler({ email: login })}
-            error={errors.email ?? networkErrors.email}
-         />
-         <TextField
-            label={"Пароль"}
-            value={data.password}
-            onChange={(password) => changeHandler({ password })}
-            error={errors.password ?? networkErrors.password}
-            type={"password"}
-         />
-         <CheckBox
-            id="registration-admin"
-            label="Администратор"
-            onClick={() => changeHandler({ isAdmin: !data.isAdmin })}
-         />
-         <CustomButton disabled={isError} type="submit">
-            Зарегистрироваться
-         </CustomButton>
-         <CustomButton onClick={goToLogin}> Перейти к авторизации</CustomButton>
+
+         <div className="empty-form__fields">
+            <TextField
+               label={"Email"}
+               value={data.email}
+               onChange={(login) => changeHandler({ email: login })}
+               error={errors.email ?? networkErrors.email}
+               prefix="empty-form"
+            />
+            <TextField
+               label={"Пароль"}
+               value={data.password}
+               onChange={(password) => changeHandler({ password })}
+               error={errors.password ?? networkErrors.password}
+               type={"password"}
+               prefix="empty-form"
+            />
+            <CheckBox
+               id="registration-admin"
+               label="Администратор"
+               onClick={() => changeHandler({ isAdmin: !data.isAdmin })}
+               className="empty-form__checkbox"
+            />
+         </div>
+
+         <div className="empty-form__buttons-wrap">
+            <CustomButton disabled={isError} type="submit" className="empty-form__btn">
+               Зарегистрироваться
+            </CustomButton>
+            <CustomButton onClick={goToLogin} className="empty-form__btn">
+               Авторизация
+            </CustomButton>
+         </div>
       </form>
    );
 };

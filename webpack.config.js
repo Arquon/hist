@@ -12,7 +12,6 @@ const imagesFileName = "img/[name][ext]";
 const fontsFileName = "fonts/[name][ext]";
 const cssFileName = "css/[name].css";
 const dotenvPath = isDev ? "./.env.development" : "./.env.production";
-console.log({ dotenvPath });
 
 const plugins = [
    new HtmlWebpackPlugin({

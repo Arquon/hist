@@ -6,8 +6,8 @@ header {
    transition: background-color 0.3s ease;
    z-index: 100;
 
-   @media (max-width: 1024px) {
-      background-color: #222222;
+   @media (max-width: ($t-res+px)) {
+      background-color: $dark-brown-color;
    }
 }
 
@@ -21,30 +21,27 @@ header {
       justify-content: space-between;
       height: 190px;
 
-      @media (max-width: 1024px) {
+      @media (max-width: ($t-res+px)) {
          justify-content: flex-start;
-         height: calc(
-            100vw * (160 - 66) / (1024 - 320) + (66 * 1024px - 160 * 320px) / (1024 - 320)
-         );
+         height: customCalc($t-res, $m-res, 160, 66);
       }
    }
 
    &__logo,
-   &__last {
+   &__wrap {
       height: 140px;
+
       img {
          height: 100%;
          object-fit: contain;
       }
 
-      @media (max-width: 1440px) {
+      @media (max-width: ($d-res+px)) {
          height: calc(140 * var(--resolution-calc));
       }
 
-      @media (max-width: 1024px) {
-         height: calc(
-            100vw * (110 - 50) / (1024 - 320) + (50 * 1024px - 110 * 320px) / (1024 - 320)
-         );
+      @media (max-width: ($t-res+px)) {
+         height: customCalc($t-res, $m-res, 110, 50);
       }
    }
 
@@ -55,7 +52,7 @@ header {
    &__nav {
       order: 1;
 
-      @media (max-width: 1024px) {
+      @media (max-width: ($t-res+px)) {
          visibility: hidden;
          opacity: 0;
          transition: all 0.2s ease;
@@ -66,14 +63,14 @@ header {
          top: 0;
          position: fixed;
          order: 2;
-         padding: calc(90 * 100vw / 1024) 0 calc(20 * 100vw / 1024);
+         padding: calc(90 * 100vw / $t-res) 0 calc(20 * 100vw / $t-res);
       }
 
       @media (max-width: 600px) {
       }
 
       &_active {
-         @media (max-width: 1024px) {
+         @media (max-width: ($t-res+px)) {
             visibility: visible;
             opacity: 1;
          }
@@ -82,9 +79,27 @@ header {
 
    &__last {
       order: 2;
+      height: auto;
 
-      @media (max-width: 1024px) {
+      @media (max-width: ($t-res+px)) {
          order: 1;
+         margin-left: customCalc($t-res, $m-res, 30, 10);
+      }
+   }
+
+   &__logout {
+      font-size: calc(20 * var(--resolution-calc));
+      text-decoration: underline;
+      color: $white-color;
+      cursor: pointer;
+
+      &:hover {
+         text-decoration: none;
+         color: $white-color;
+      }
+
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 20, 14);
       }
    }
 
@@ -99,7 +114,7 @@ header {
       width: 32px;
       height: 25px;
 
-      @media (max-width: 1024px) {
+      @media (max-width: ($t-res+px)) {
          display: block;
          position: absolute;
          right: 20px;
@@ -148,7 +163,7 @@ header {
 .list-header {
    display: flex;
 
-   @media (max-width: 1024px) {
+   @media (max-width: ($t-res+px)) {
       flex-direction: column;
    }
 
@@ -158,14 +173,13 @@ header {
       &:last-child {
          margin-right: 0;
 
-         @media (max-width: 1024px) {
+         @media (max-width: ($t-res+px)) {
             margin: 0;
          }
       }
 
-      @media (max-width: 1024px) {
-         margin: 0 0
-            calc(100vw * (30 - 20) / (1024 - 320) + (20 * 1024px - 30 * 320px) / (1024 - 320)); // 30px - 1024; 20px - 320px
+      @media (max-width: ($t-res+px)) {
+         margin: customCalc($t-res, $m-res, 30, 20);
          text-align: center;
       }
    }
@@ -174,14 +188,12 @@ header {
       color: $golden-color;
       font-size: calc(16 * var(--resolution-calc));
 
-      @media (max-width: 1440px) {
-         font-size: calc(0.0072 * 100vw + 5.6154px);
+      @media (max-width: ($d-res+px)) {
+         font-size: customCalc($d-res, $t-res, 16, 13);
       }
 
-      @media (max-width: 1024px) {
-         font-size: calc(
-            100vw * (30 - 20) / (1024 - 320) + (20 * 1024px - 30 * 320px) / (1024 - 320)
-         ); // 30px - 1024; 20px - 320px
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 30, 20);
       }
 
       transition: all 0.2s ease;

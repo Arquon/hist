@@ -1,0 +1,33 @@
+.input-group {
+   display: flex;
+   flex-direction: column;
+
+   &__label {
+      color: $white-color;
+      margin: 0px 0px 3px 0px;
+   }
+
+   &__input,
+   &__area {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 2px solid transparent;
+
+      &:focus {
+         outline: none;
+      }
+
+      &_error {
+         border: 2px solid red;
+      }
+   }
+
+   &__area {
+      min-height: 200px;
+      resize: none;
+   }
+
+   &__error {
+      color: red;
+   }
+}

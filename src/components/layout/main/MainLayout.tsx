@@ -5,7 +5,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import { classesFromArray } from "@/utils/functions";
 
-export const Layout: FC = () => {
+export const MainLayout: FC = () => {
    const location = useLocation();
    const classes: string[] = [];
 

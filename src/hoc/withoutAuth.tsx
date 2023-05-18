@@ -13,6 +13,7 @@ export const TestRoute: FC<ICommonProps> = ({ children }) => {
 export function withoutAuth(Element: FC): (props: any) => JSX.Element {
    return function (props: any) {
       const { isAuth } = useAuth();
+      console.log("withoutAuth");
       if (!isAuth) return <Element {...props} />;
       return <Navigate to={"/"} />;
    };

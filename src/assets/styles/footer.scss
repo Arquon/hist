@@ -12,8 +12,8 @@ footer {
       justify-content: space-between;
       padding: 35px 0;
 
-      @media (max-width: 1024px) {
-         padding: calc(100vw * (35 - 8) / (1024 - 320) + (8 * 1024px - 35 * 320px) / (1024 - 320)) 0;
+      @media (max-width: ($t-res+px)) {
+         padding: customCalc($t-res, $m-res, 35, 8) 0;
       }
    }
 
@@ -25,8 +25,8 @@ footer {
          object-fit: contain;
       }
 
-      @media (max-width: 1024px) {
-         height: calc(100vw * (90 - 50) / (1024 - 320) + (50 * 1024px - 90 * 320px) / (1024 - 320));
+      @media (max-width: ($t-res+px)) {
+         height: customCalc($t-res, $m-res, 90, 50);
       }
    }
 
@@ -43,14 +43,14 @@ footer {
          font-size: calc(14 * var(--resolution-calc));
          content: "© Достопочтенная Ложа “Москва” №6018, Великий Восток Франции";
 
-         @media (max-width: 1024px) {
+         @media (max-width: ($t-res+px)) {
             color: $light-brown-color;
-            font-size: calc(100vw * (16 - 12) / (1024 - 600) + (12 * 1024px - 16 * 600px) / (1024 - 600));
+            font-size: customCalc($t-res, 600, 16, 12);
             content: "© Достопочтенная Ложа “Москва” №6018, Великий Восток Франции";
          }
 
          @media (max-width: 600px) {
-            font-size: calc(100vw * (16 - 11) / (600 - 320) + (11 * 600px - 16 * 320px) / (600 - 320));
+            font-size: customCalc(600, $m-res, 16, 11);
             content: "© Д:.Л:. Москва №6018  ВВФ";
          }
       }
@@ -60,7 +60,7 @@ footer {
 .list-footer {
    display: flex;
 
-   @media (max-width: 1024px) {
+   @media (max-width: ($t-res+px)) {
       display: none;
    }
 

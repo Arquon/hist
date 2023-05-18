@@ -10,6 +10,7 @@ interface SampleButtonProps extends ICommonProps {
 
 interface SubmitButton extends SampleButtonProps {
    type: "submit";
+   onClick?: never;
 }
 
 interface SampleButton extends SampleButtonProps {

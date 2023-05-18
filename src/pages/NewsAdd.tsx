@@ -20,8 +20,9 @@ export const NewsAddPage: FC<NewsAddProps> = ({}) => {
    return (
       <section className="news-form-page">
          <NarrowContainer className="news-form-page__container">
-            <Heading className="news-form-page__heading">Добавление новостей</Heading>
-            <NewsForm onSubmit={handleSubmit} submitLabel="Добавить новость" />
+            <NewsForm onSubmit={handleSubmit} submitLabel="Добавить новость">
+               <Heading className="news-form-page__heading">Добавление новостей</Heading>
+            </NewsForm>
          </NarrowContainer>
       </section>
    );
