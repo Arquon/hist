@@ -537,7 +537,7 @@
    &__text {
       font-size: calc(18 * var(--resolution-calc));
       color: $white-color;
-      max-width: 450px;
+      max-width: calc(450 * var(--resolution-calc));
       margin-bottom: calc(30 * var(--resolution-calc));
 
       @media (max-width: ($t-res+px)) {

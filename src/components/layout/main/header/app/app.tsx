@@ -29,6 +29,7 @@ export const HeaderLink: FC<IHeaderLinkProps> = ({ children, className, to, clos
 export const HeaderLogo: FC = () => (
    <Link className="header__logo" to="/">
       <img src={logo} alt="" />
+      Главная
    </Link>
 );
 
@@ -93,6 +94,7 @@ export const HeaderCoin: FC = () => (
    <div className="header__wrap">
       <Link className="header__coin" to="/login">
          <img src={coin} alt="" />
+         Выйти
       </Link>
    </div>
 );

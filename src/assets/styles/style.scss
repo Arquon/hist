@@ -50,7 +50,7 @@ h3 {
       padding: 0 15px;
 
       @media (min-width: ($w-res+px)) {
-         max-width: calc($d-n-res/($w-res + px) * 100vw);
+         max-width: calc($d-n-res/($w-res) * 100vw);
       }
 
       @media (max-width: ($t-res+px)) {
@@ -142,9 +142,11 @@ h3 {
 
 .additional {
    padding: 190px 0px 0px 0px;
+   display: flex;
+   flex-direction: column;
 
    @media (max-width: ($t-res+px)) {
-      padding: customCalc($t-res, $m-res, 160, 66) 0;
+      padding: customCalc($t-res, $m-res, 160, 66) 0 0;
    }
 
    & > section:first-child {
@@ -153,6 +155,16 @@ h3 {
       @media (max-width: ($t-res+px)) {
          border-top: none;
       }
+   }
+
+   &__heading {
+      text-align: center;
+   }
+
+   &__page {
+      flex: 1 1 auto;
+      padding: calc(100 * var(--resolution-calc)) 0px calc(45 * var(--resolution-calc)) 0px;
+      background: url(../images/blick.png) no-repeat right bottom/calc(500 * var(--resolution-calc));
    }
 }
 
@@ -228,6 +240,242 @@ h3 {
    input:checked + label {
       &::before {
          background-color: $golden-color;
+      }
+   }
+}
+
+.content-block {
+   position: relative;
+   padding: 0px 0px calc(70 * var(--resolution-calc)) 0px;
+
+   @media (max-width: ($t-res+px)) {
+      padding: 0px 0px customCalc($t-res, $m-res, 64, 46) 0px;
+   }
+
+   &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(37 * var(--resolution-calc));
+      height: calc(44 * var(--resolution-calc));
+      background: url(../images/sign.svg) no-repeat 100% / contain;
+
+      @media (max-width: ($t-res+px)) {
+         height: customCalc($t-res, $m-res, 64, 40);
+         width: customCalc($t-res, $m-res, 35, 25);
+      }
+   }
+
+   &__heading {
+      text-align: center;
+      margin: 0px 0px calc(30 * var(--resolution-calc)) 0px;
+   }
+
+   &__text {
+      color: $white-color;
+      margin: 0px 0px calc(30 * var(--resolution-calc)) 0px;
+      font-size: calc(18 * var(--resolution-calc));
+
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 16, 12);
+      }
+
+      &_b {
+         font-weight: 700;
+      }
+
+      &:last-child {
+         margin: 0px 0px 0px 0px;
+      }
+   }
+
+   &__item {
+      display: flex;
+   }
+
+   &__content {
+      margin: 0px calc(30 * var(--resolution-calc)) 0px 0px;
+   }
+
+   &__img {
+      flex: 0 0 calc(330 * var(--resolution-calc));
+      align-self: flex-start;
+
+      @media (max-width: ($t-res+px)) {
+         display: none;
+      }
+
+      img {
+         width: 100%;
+         object-fit: cover;
+      }
+
+      p {
+         text-align: right;
+         color: $golden-color;
+         font-weight: 600;
+         font-style: italic;
+         font-size: calc(18 * var(--resolution-calc));
+      }
+   }
+
+   &__link {
+      color: $golden-color;
+      text-decoration: underline;
+
+      &_e {
+         text-decoration: none;
+      }
+   }
+
+   &__list {
+      list-style: none;
+
+      li {
+         font-size: calc(18 * var(--resolution-calc));
+         color: $white-color;
+
+         @media (max-width: ($t-res+px)) {
+            font-size: customCalc($t-res, $m-res, 16, 12);
+         }
+      }
+   }
+
+   &__order-list {
+      li {
+         position: relative;
+         padding: 0px 0 0px calc(70 * var(--resolution-calc));
+         margin: 0px 0px calc(20 * var(--resolution-calc)) 0px;
+         counter-increment: count 1;
+
+         &:last-child {
+            margin: 0px 0px 0px 0px;
+         }
+
+         @media (max-width: ($t-res+px)) {
+            padding: 0px 0 0px customCalc($t-res, $m-res, 50, 30);
+            margin: 0px 0px customCalc($t-res, $m-res, 16, 10) 0px;
+         }
+
+         h5 {
+            color: $golden-color;
+            padding: 0px 0px 0px 0px;
+            margin: 0px 0px calc(5 * var(--resolution-calc)) 0px;
+            font-size: calc(18 * var(--resolution-calc));
+
+            @media (max-width: ($t-res+px)) {
+               font-size: customCalc($t-res, $m-res, 16, 12);
+            }
+         }
+
+         p {
+            color: $white-color;
+            font-size: calc(18 * var(--resolution-calc));
+
+            @media (max-width: ($t-res+px)) {
+               font-size: customCalc($t-res, $m-res, 16, 12);
+            }
+         }
+
+         &::before {
+            content: counter(count, decimal);
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: calc(60 * var(--resolution-calc));
+            line-height: 100%;
+            font-family: "Montserrat";
+            font-weight: 600;
+            color: $golden-color;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+            @media (max-width: ($t-res+px)) {
+               font-size: customCalc($t-res, $m-res, 43, 26);
+            }
+         }
+
+         &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: calc(50 * var(--resolution-calc));
+            height: calc(60 * var(--resolution-calc));
+            width: calc(1 * var(--resolution-calc));
+            background-color: $golden-color;
+
+            @media (max-width: ($t-res+px)) {
+               height: customCalc($t-res, $m-res, 43, 26);
+               left: customCalc($t-res, $m-res, 36, 23);
+               width: 1px;
+            }
+         }
+      }
+   }
+}
+
+.drop-down {
+}
+
+.drop-down-item {
+   border-top: calc(1 * var(--resolution-calc)) solid $golden-color;
+   padding: calc(20 * var(--resolution-calc)) calc(20 * var(--resolution-calc)) calc(20 * var(--resolution-calc)) 0;
+
+   @media (max-width: ($t-res+px)) {
+      padding: customCalc($t-res, $m-res, 20, 12) customCalc($t-res, $m-res, 20, 15) customCalc($t-res, $m-res, 20, 15)
+         0;
+      border-top: 1px solid $golden-color;
+   }
+
+   &:last-child {
+      border-bottom: calc(1 * var(--resolution-calc)) solid $golden-color;
+   }
+
+   &_open {
+      .drop-down-item__question {
+         &::before,
+         &::after {
+            transform: translateY(-50%) rotate(45deg);
+         }
+      }
+   }
+
+   &__question {
+      font-size: calc(18 * var(--resolution-calc));
+      color: $white-color;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 18, 14);
+      }
+
+      &::after {
+         content: "";
+         position: absolute;
+         right: 0;
+         top: 50%;
+         transition: all 0.1s ease;
+         transform: translateY(-50%);
+         width: calc(18 * var(--resolution-calc));
+         height: calc(18 * var(--resolution-calc));
+         background: url(../images/plus.svg) no-repeat center/contain;
+
+         @media (max-width: ($t-res+px)) {
+            width: customCalc($t-res, $m-res, 18, 14);
+            height: customCalc($t-res, $m-res, 18, 14);
+         }
+      }
+   }
+
+   &__answer {
+      color: $white-color;
+      font-size: calc(18 * var(--resolution-calc));
+
+      @media (max-width: ($t-res+px)) {
+         font-size: customCalc($t-res, $m-res, 18, 14);
       }
    }
 }

@@ -4,14 +4,33 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { GenerateSW } = require("workbox-webpack-plugin");
+
 const isServe = process.env.NODE_ENV === "serve";
 const isDev = process.env.NODE_ENV === "development" || isServe;
 const isProd = process.env.NODE_ENV === "production";
-
-const imagesFileName = "img/[name][ext]";
 const fontsFileName = "fonts/[name][ext]";
-const cssFileName = "css/[name].css";
+const imagesFileName = isDev ? "img/[name][ext]" : "img/[name]-[contenthash][ext]";
+const cssFileName = isDev ? "css/[name].css" : "css/[name]-[contenthash].css";
+const jsFileName = isDev ? "js/[name].js" : "js/[name]-[contenthash].js";
 const dotenvPath = isDev ? "./.env.development" : "./.env.production";
+
+const optimization = () => {
+   const config = {
+      splitChunks: {
+         chunks: "all",
+      },
+   };
+
+   if (isProd) {
+      config.minimizer = [new TerserPlugin(), new CssMinimizerPlugin()];
+   }
+
+   return config;
+};
 
 const plugins = [
    new HtmlWebpackPlugin({
@@ -22,6 +41,23 @@ const plugins = [
    new Dotenv({
       path: dotenvPath,
    }),
+   new CopyWebpackPlugin({
+      patterns: [
+         { from: "src/templates/manifest.json", to: "[name][ext]" },
+         { from: "src/assets/icons/*.png", to: "icons/[name][ext]" },
+      ],
+   }),
+   new GenerateSW({
+      maximumFileSizeToCacheInBytes: 1024 * 1024 * 5,
+      swDest: "/serviceWorker.js",
+      clientsClaim: true,
+      skipWaiting: true,
+   }),
+   // new InjectManifest({
+   //    swSrc: "./src/sw/serviceWorker.js",
+   //    include: Object.values(filesRegex),
+   //    maximumFileSizeToCacheInBytes: 1024 * 1024 * 5,
+   // }),
 ];
 
 if (isServe) {
@@ -70,8 +106,10 @@ module.exports = {
       index: "./src/index.tsx",
    },
    output: {
-      filename: "js/[name].js",
+      filename: jsFileName,
+      chunkFilename: "[name].chunk.js",
       path: path.resolve(__dirname, "dist"),
+      assetModuleFilename: !isProd ? "[name][ext]" : "[name]-[contenthash][ext]",
       clean: true,
       publicPath: "/",
    },
@@ -86,6 +124,7 @@ module.exports = {
       historyApiFallback: true,
    },
    plugins,
+   optimization: optimization(),
    module: {
       rules: [
          {

@@ -30,6 +30,7 @@ header {
    &__logo,
    &__wrap {
       height: 140px;
+      overflow: hidden;
 
       img {
          height: 100%;

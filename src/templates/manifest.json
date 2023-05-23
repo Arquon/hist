@@ -1,0 +1,33 @@
+{
+   "theme_color": "#efd270",
+   "background_color": "#288ab9",
+   "display": "standalone",
+   "scope": "",
+   "start_url": ".",
+   "name": "History Project",
+   "short_name": "HP",
+   "description": "History Project description",
+   "icons": [
+      {
+         "src": "/icons/96.png",
+         "sizes": "96x96",
+         "type": "image/png"
+      },
+      {
+         "src": "/icons/144.png",
+         "sizes": "144x144",
+         "type": "image/png"
+      },
+
+      {
+         "src": "/icons/256.png",
+         "sizes": "256x256",
+         "type": "image/png"
+      },
+      {
+         "src": "/icons/512.png",
+         "sizes": "512x512",
+         "type": "image/png"
+      }
+   ]
+}

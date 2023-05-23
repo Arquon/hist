@@ -7,13 +7,18 @@ import { Moscow } from "@/pages/Moscow";
 import { FAQ } from "@/pages/FAQ";
 import { Introduce } from "@/pages/Introduce";
 import { Contacts } from "@/pages/Contacts";
-import { Article } from "@/pages/Article";
+import { ArticlePage } from "@/pages/Article";
 import { NewsAddPage } from "@/pages/NewsAdd";
-import { NewsEdit } from "@/pages/NewsEdit";
+import { NewsEditPage } from "@/pages/NewsEdit";
 import { LoginPage } from "@/pages/Login";
 import { withAuth } from "@/hoc/withAuth";
 import { withAdmin } from "@/hoc/withAdmin";
 import { withoutAuth } from "@/hoc/withoutAuth";
+
+// const NewsPage = lazy(async () => await import("@/pages/News"));
+// const Article = lazy(async () => await import("@/pages/Article"));
+// const NewsAddPage = lazy(async () => await import("@/pages/NewsAdd"));
+// const NewsEdit = lazy(async () => await import("@/pages/NewsEdit"));
 
 export enum ERoutes {
    landing = "/",
@@ -55,10 +60,10 @@ export const routes: IRoute[] = [
 ];
 
 export const newsRoutes: IRoute[] = [
-   { name: "newsEdit", path: ERoutes.newsEdit, Element: withAdmin(NewsEdit, "/news") },
+   { name: "newsEdit", path: ERoutes.newsEdit, Element: withAdmin(NewsEditPage, "/news") },
    { name: "news", path: ERoutes.news, Element: NewsPage },
    { name: "newsAdd", path: ERoutes.newsAdd, Element: withAdmin(NewsAddPage, "/news") },
-   { name: "article", path: ERoutes.article, Element: withAuth(Article) },
+   { name: "article", path: ERoutes.article, Element: withAuth(ArticlePage) },
 ];
 
 export const authRoutes: IRoute[] = [{ name: "login", path: ERoutes.login, Element: withoutAuth(LoginPage) }];

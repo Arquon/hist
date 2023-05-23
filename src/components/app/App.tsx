@@ -30,7 +30,7 @@ export const App: React.FC = () => {
                      ))}
                   </Route>
                   {authRoutes.map(({ path, Element, name }) => (
-                     <Route element={<EmptyLayout />}>
+                     <Route element={<EmptyLayout />} key={name}>
                         <Route path={path} element={<Element />} key={name} />
                      </Route>
                   ))}

@@ -1,4 +1,4 @@
-import { NarrowContainer } from "@/components/UI/Common";
+import { AdditionalContainer } from "@/components/UI/Common";
 import { Heading } from "@/components/UI/CommonHeadings";
 import { Loader } from "@/components/UI/Loader";
 import { NewsForm } from "@/components/news/NewsForm";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 interface NewsEditProps {}
 
-export const NewsEdit: FC<NewsEditProps> = ({}) => {
+export const NewsEditPage: FC<NewsEditProps> = ({}) => {
    const navigate = useNavigate();
    const { currentArticle, isLoadingNews, updateArticle } = useNews();
 
@@ -22,12 +22,14 @@ export const NewsEdit: FC<NewsEditProps> = ({}) => {
    if (!currentArticle || isLoadingNews) return <Loader />;
 
    return (
-      <section className="news-form-page">
-         <NarrowContainer className="news-form-page__container">
+      <section className="news-form-page additional__page">
+         <AdditionalContainer className="news-form-page__container">
             <NewsForm onSubmit={handleSubmit} submitLabel="Изменить новость" initialData={currentArticle}>
-               <Heading className="news-form-page__heading">Изменить новость</Heading>
+               <Heading className="news-form-page__heading additional__heading">Изменить новость</Heading>
             </NewsForm>
-         </NarrowContainer>
+         </AdditionalContainer>
       </section>
    );
 };
+
+export default NewsEditPage;

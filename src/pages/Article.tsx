@@ -9,7 +9,7 @@ import { useAuth } from "@/context/authContext";
 
 interface Props {}
 
-export const Article: FC<Props> = () => {
+export const ArticlePage: FC<Props> = () => {
    const { currentArticle, isLoadingNews, deleteArticle } = useNews();
    const navigate = useNavigate();
    const { isAdmin } = useAuth();
@@ -25,7 +25,7 @@ export const Article: FC<Props> = () => {
    };
 
    return (
-      <section className="article-page">
+      <section className="article-page additional__page">
          <NarrowContainer className="article-page__container">
             {isLoadingNews || !currentArticle ? (
                <Loader />
@@ -52,3 +52,5 @@ export const Article: FC<Props> = () => {
       </section>
    );
 };
+
+export default ArticlePage;

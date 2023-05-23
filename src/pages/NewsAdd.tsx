@@ -27,3 +27,5 @@ export const NewsAddPage: FC<NewsAddProps> = ({}) => {
       </section>
    );
 };
+
+export default NewsAddPage;

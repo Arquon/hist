@@ -1,0 +1,15 @@
+.freemasonry-page {
+   &__container {
+   }
+
+   &__heading {
+   }
+
+   &__content-block {
+      margin: 0px 0px calc(70 * var(--resolution-calc)) 0px;
+
+      &:last-child {
+         margin: 0;
+      }
+   }
+}
