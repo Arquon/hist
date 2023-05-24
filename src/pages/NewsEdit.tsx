@@ -2,7 +2,7 @@ import { AdditionalContainer } from "@/components/UI/Common";
 import { Heading } from "@/components/UI/CommonHeadings";
 import { Loader } from "@/components/UI/Loader";
 import { NewsForm } from "@/components/news/NewsForm";
-import { useNews } from "@/context/newsContext";
+import { useNews } from "@/hooks/useNews";
 import { type INewsFormState } from "@/types/INews";
 import React, { type FC } from "react";
 import { useNavigate } from "react-router-dom";

@@ -5,9 +5,9 @@ import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { CheckBox } from "../UI/form/CheckBox";
-import { useAuth } from "@/context/authContext";
 import { useErrors } from "@/hooks/useErrors";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 interface RegistrationProps {
    setLoginPage: (page: ELoginPage) => void;

@@ -1,4 +1,4 @@
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "@/hooks/useAuth";
 import { type ICommonProps } from "@/types/ICommonProps";
 import React, { type ReactElement, type FC } from "react";
 import { Navigate, useLocation } from "react-router-dom";

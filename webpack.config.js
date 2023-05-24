@@ -166,8 +166,5 @@ module.exports = {
          },
       ],
    },
-   optimization: {
-      runtimeChunk: "single",
-   },
    devtool: "source-map",
 };

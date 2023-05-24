@@ -1,7 +1,7 @@
 import { NarrowContainer } from "@/components/UI/Common";
 import { Heading } from "@/components/UI/CommonHeadings";
 import { NewsForm } from "@/components/news/NewsForm";
-import { useNews } from "@/context/newsContext";
+import { useNews } from "@/hooks/useNews";
 import { type INewsFormState } from "@/types/INews";
 import React, { type FC } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,10 +18,10 @@ export const NewsAddPage: FC<NewsAddProps> = ({}) => {
    };
 
    return (
-      <section className="news-form-page">
+      <section className="news-form-page additional__page">
          <NarrowContainer className="news-form-page__container">
             <NewsForm onSubmit={handleSubmit} submitLabel="Добавить новость">
-               <Heading className="news-form-page__heading">Добавление новостей</Heading>
+               <Heading className="news-form-page__heading">Добавление новости</Heading>
             </NewsForm>
          </NarrowContainer>
       </section>

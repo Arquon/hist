@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import { Container } from "@/components/UI/Common";
 import { HeaderLogo, HeaderNav, HeaderMenu, HeaderCoin } from "./app/app";
-import { useAuth } from "@/context/authContext";
 import { useNavigate } from "react-router-dom";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header: React.FC = ({}) => {
    const { isMobile } = useMatchMedia();

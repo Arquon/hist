@@ -4,9 +4,9 @@ import { CustomButton } from "../UI/CustomButton";
 import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
-import { useAuth } from "@/context/authContext";
 import { type Location, useLocation, useNavigate } from "react-router-dom";
 import { useErrors } from "@/hooks/useErrors";
+import { useAuth } from "@/hooks/useAuth";
 
 interface LoginFormProps {
    setLoginPage: (page: ELoginPage) => void;

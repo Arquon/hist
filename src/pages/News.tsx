@@ -4,10 +4,10 @@ import { ButtonLink } from "@/components/UI/CustomLink";
 import { Loader } from "@/components/UI/Loader";
 import { Pagination } from "@/components/UI/Pagination";
 import { NewsItem } from "@/components/news/NewsItem";
-import { useNews } from "@/context/newsContext";
 import React, { type FC, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useAuth } from "@/context/authContext";
+import { useAuth } from "@/hooks/useAuth";
+import { useNews } from "@/hooks/useNews";
 
 const newsPerPage = 5;
 
@@ -16,17 +16,18 @@ export const NewsPage: FC = () => {
    const currentPage = searchParams.get("page") !== null ? Number(searchParams.get("page")) : 1;
 
    const { isAdmin } = useAuth();
+
    const { news, isLoadingNews } = useNews();
 
    const changePageHandler = (page: number): void => {
       setSearchParams({ page: String(page) });
    };
 
+   const newsToShow = [...news].splice((currentPage - 1) * newsPerPage, newsPerPage);
+
    useEffect(() => {
       document.body.scrollIntoView({ behavior: "smooth" });
-   }, [currentPage]);
-
-   const newsToShow = [...news].splice((currentPage - 1) * newsPerPage, newsPerPage);
+   }, [newsToShow]);
 
    return (
       <section className="news-page additional__page">

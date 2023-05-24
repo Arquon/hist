@@ -2,10 +2,10 @@ import { NarrowContainer } from "@/components/UI/Common";
 import { Heading } from "@/components/UI/CommonHeadings";
 import { Loader } from "@/components/UI/Loader";
 import { getStringDateFromTimestamp } from "@/utils/functions";
-import { useNews } from "@/context/newsContext";
 import React, { type FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/context/authContext";
+import { useNews } from "@/hooks/useNews";
+import { useAuth } from "@/hooks/useAuth";
 
 interface Props {}
 
