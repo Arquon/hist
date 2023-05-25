@@ -5,10 +5,11 @@ import { authRoutes, newsRoutes, routes } from "@/router/router";
 import { MainLayout } from "../layout/main/MainLayout";
 import { EmptyLayout } from "../layout/empty/EmptyLayout";
 import { useAuth } from "@/hooks/useAuth";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 export const App: React.FC = () => {
    const { isLoadingUserData } = useAuth();
-
+   useScrollToTop();
    if (isLoadingUserData) return null;
 
    return (

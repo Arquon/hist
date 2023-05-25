@@ -5,10 +5,11 @@ import { nanoid } from "nanoid";
 const newsEndPoint = "news/";
 
 export const newsService = {
-   getNewsList: async () => {
+   getNewsList: async (limitToLast?: number) => {
       const { data } = await httpService.get<INews[]>(newsEndPoint, {
          params: {
             orderBy: '"createdAt"',
+            limitToLast,
             // equalTo: `${1683281341981}`,
          },
       });
