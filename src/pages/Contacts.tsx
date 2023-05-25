@@ -26,7 +26,7 @@ const firstBlock = {
       <p className="content-block__text_b">
          Наш мэйл:{" "}
          <a href="#" className="content-block__link content-block__link_e">
-            mail@logemoscou.org.
+            mail@mail.mail.
          </a>
       </p>,
    ],

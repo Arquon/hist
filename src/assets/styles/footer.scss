@@ -41,17 +41,16 @@ footer {
          font-weight: 600;
          color: $light-brown-color;
          font-size: calc(14 * var(--resolution-calc));
-         content: "© Достопочтенная Ложа “Москва” №6018, Великий Восток Франции";
+         content: "© Lorem ipsum dolor sit amet.";
 
          @media (max-width: ($t-res+px)) {
             color: $light-brown-color;
             font-size: customCalc($t-res, 600, 16, 12);
-            content: "© Достопочтенная Ложа “Москва” №6018, Великий Восток Франции";
          }
 
          @media (max-width: 600px) {
             font-size: customCalc(600, $m-res, 16, 11);
-            content: "© Д:.Л:. Москва №6018  ВВФ";
+            content: "© Lorem ipsum";
          }
       }
    }

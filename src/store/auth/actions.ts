@@ -33,7 +33,10 @@ const signUp = createAsyncThunk<IUserData, IRegistrationData, { rejectValue: str
       try {
          const data = await authService.registration(registrationData);
          localStorageService.setCredentials(data);
-         const userData = await authService.createUser(registrationData, data.localId);
+         const userData = await authService.createUser(
+            { email: registrationData.email, isAdmin: registrationData.isAdmin },
+            data.localId
+         );
          return userData;
       } catch (error: unknown) {
          const parsedError = signUpNetworkErrorsHandler(error);

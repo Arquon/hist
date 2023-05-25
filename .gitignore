@@ -6,3 +6,4 @@ config/config.json
 .env.development
 .env.production
 .firebaserc
+.firebase
