@@ -13,8 +13,12 @@ export const NewsAddPage: FC<NewsAddProps> = ({}) => {
    const navigate = useNavigate();
 
    const handleSubmit = async (data: INewsFormState): Promise<void> => {
-      const article = await addArticle(data);
-      navigate(`/news/${article.id}`);
+      try {
+         const article = await addArticle(data);
+         navigate(`/news/${article.id}`);
+      } catch (error) {
+         console.error(error);
+      }
    };
 
    return (

@@ -159,7 +159,7 @@ module.exports = {
             test: /\.[jt]s?/,
             loader: "ts-loader",
             options: {
-               transpileOnly: true,
+               transpileOnly: false,
                // transpileOnly: true,
             },
             exclude: [/node_modules/, /\.(json)/],

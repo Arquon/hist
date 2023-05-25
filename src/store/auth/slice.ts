@@ -1,29 +1,45 @@
 import { type IUserData } from "@/types/IUserData";
 import { type Nullable } from "@/types/default";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getCurrentUserData, signIn, signUp } from "./actions";
+import { isAuthAsyncThunkError } from "@/utils/isAsyncThunkError";
 
 interface AuthState {
    currentUser: Nullable<IUserData>;
    isLoading: boolean;
-   error: Nullable<string>;
 }
 
 const initialState: AuthState = {
    currentUser: null,
    isLoading: true,
-   error: null,
 };
 
 const authSlice = createSlice({
    name: "auth",
    initialState,
    reducers: {
-      setCurrentUser(state, action: PayloadAction<Nullable<IUserData>>) {
-         state.currentUser = action.payload;
+      signOut(state) {
+         state.currentUser = null;
       },
-      setLoading(state, action: PayloadAction<boolean>) {
-         state.isLoading = action.payload;
-      },
+   },
+   extraReducers(builder) {
+      builder
+         .addCase(signIn.fulfilled, (state, action) => {
+            state.currentUser = action.payload;
+         })
+         .addCase(signUp.fulfilled, (state, action) => {
+            state.currentUser = action.payload;
+         })
+         .addCase(getCurrentUserData.pending, (state) => {
+            state.isLoading = true;
+         })
+         .addCase(getCurrentUserData.fulfilled, (state, action) => {
+            state.currentUser = action.payload;
+            state.isLoading = false;
+         })
+         .addMatcher(isAuthAsyncThunkError, (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+         });
    },
 });
 

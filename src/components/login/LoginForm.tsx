@@ -11,10 +11,6 @@ import { useAuth } from "@/hooks/useAuth";
 interface LoginFormProps {
    setLoginPage: (page: ELoginPage) => void;
 }
-
-interface LocationState {
-   from?: Location;
-}
 interface LoginFormState {
    email: string;
    password: string;
@@ -60,7 +56,7 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
       if (isError) return;
       try {
          await signIn(data);
-         const { from } = location.state as LocationState;
+         const from = location.state?.from as Location | undefined;
          navigate({ pathname: from ? from.pathname : "/" });
       } catch (error: unknown) {
          networkErrorHandler(error);
@@ -95,7 +91,6 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
             <CustomButton type="submit" disabled={isError} className="empty-form__btn">
                Войти
             </CustomButton>
-            {networkErrors.global && <p>{networkErrors.global}</p>}
             <CustomButton onClick={goToRegistration} type="button" className="empty-form__btn">
                Регистрация
             </CustomButton>

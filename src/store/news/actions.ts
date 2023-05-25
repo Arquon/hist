@@ -1,84 +1,74 @@
 import { newsService } from "@/services/news.service";
-import { actions } from "./slice";
-import { type AppActionType } from "../store";
 import { type INews, type INewsFormState, type INewsWithoutId } from "@/types/INews";
-import axios from "axios";
+import { newsNetworkErrorsHandler } from "@/utils/errorHandlers";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const newsActions = {
-   fetchNews: (): AppActionType<Promise<INews[]>> => async (dispatch, getState) => {
+const fetchNews = createAsyncThunk<INews[], undefined, { rejectValue: string }>(
+   "news/fetchNews",
+   async function (_, { rejectWithValue }) {
       try {
          const data = await newsService.getNewsList();
-         dispatch(actions.setNews(data));
          return data;
-      } finally {
-         dispatch(actions.setLoading(false));
+      } catch (error) {
+         const stringError = newsNetworkErrorsHandler(error);
+         return rejectWithValue(stringError);
       }
-   },
-   addArticle:
-      (newsState: INewsFormState): AppActionType<Promise<INews>> =>
-      async (dispatch, getState) => {
-         try {
-            const article: INewsWithoutId = { ...newsState, createdAt: Date.now() };
-            const data = await newsService.createNews(article);
-            const { news } = getState().news;
-            dispatch(actions.setNews([...news, data]));
-            return data;
-         } catch (error) {
-            if (axios.isAxiosError(error)) {
-               if (!error.response) throw new Error("Axios Error");
-               const { statusText, status: code } = error.response;
-               if (code === 401) {
-                  switch (statusText) {
-                     case "Unauthorized":
-                        throw new Error("Для добавления новости нужны парава администратора");
-                     default:
-                        throw new Error("Непредвиденная ошибка");
-                  }
-               }
-               throw new Error("Unhandled Axios Error");
-            }
+   }
+);
 
-            throw new Error("Unhandled Error");
-         }
-      },
-   updateArticle:
-      (article: INews): AppActionType<Promise<INews>> =>
-      async (dispatch, getState) => {
-         try {
-            const data = await newsService.updateNews(article);
-            const { news: prevNews } = getState().news;
-            const updatedNews = prevNews.map((prevArticle) => {
-               if (prevArticle.id !== article.id) return prevArticle;
-               else return data;
-            });
-            dispatch(actions.setNews(updatedNews));
-            return data;
-         } catch (error) {
-            if (axios.isAxiosError(error)) {
-               if (!error.response) throw new Error("Axios Error");
-               const { statusText, status: code } = error.response;
-               if (code === 401) {
-                  switch (statusText) {
-                     case "Unauthorized":
-                        throw new Error("Для редактирования новости нужны парава администратора");
-                     default:
-                        throw new Error("Непредвиденная ошибка");
-                  }
-               }
-               throw new Error("Unhandled Axios Error");
-            }
+const addArticle = createAsyncThunk<INews, INewsFormState, { rejectValue: string }>(
+   "news/addArticle",
+   async function (articleState, { rejectWithValue }) {
+      try {
+         const article: INewsWithoutId = { ...articleState, createdAt: Date.now() };
+         const data = await newsService.createNews(article);
+         return data;
+      } catch (error) {
+         const stringError = newsNetworkErrorsHandler(error, {
+            _401: {
+               unauthorized: "Для добавления новости нужны парава администратора",
+            },
+         });
+         return rejectWithValue(stringError);
+      }
+   }
+);
 
-            throw new Error("Unhandled Error");
-         }
-      },
-   deleteArticle:
-      (id: string): AppActionType<Promise<void>> =>
-      async (dispatch, getState) => {
+const updateArticle = createAsyncThunk<INews, INews, { rejectValue: string }>(
+   "news/updateArticle",
+   async function (article, { rejectWithValue }) {
+      try {
+         const data = await newsService.updateNews(article);
+         return data;
+      } catch (error) {
+         const stringError = newsNetworkErrorsHandler(error, {
+            _401: {
+               unauthorized: "Для обновления новости нужны парава администратора",
+            },
+         });
+         return rejectWithValue(stringError);
+      }
+   }
+);
+
+const deleteArticle = createAsyncThunk<string, string, { rejectValue: string }>(
+   "news/deleteArticle",
+   async function (id, { rejectWithValue }) {
+      try {
          await newsService.deleteNews(id);
-         const { news: prevNews } = getState().news;
-         const updatedNews = prevNews.filter((article) => article.id !== id);
-         dispatch(actions.setNews(updatedNews));
-      },
-};
+         return id;
+      } catch (error) {
+         const stringError = newsNetworkErrorsHandler(error, {
+            _401: {
+               unauthorized: "Для удаления новости нужны парава администратора",
+            },
+         });
+         return rejectWithValue(stringError);
+      }
+   }
+);
 
-export default newsActions;
+const newsAsyncActions = { deleteArticle, addArticle, updateArticle, fetchNews };
+
+export { deleteArticle, addArticle, updateArticle, fetchNews };
+export default newsAsyncActions;

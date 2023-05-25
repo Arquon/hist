@@ -20,7 +20,7 @@ export const ArticlePage: FC<Props> = () => {
          await deleteArticle(currentArticle.id);
          navigate("/news");
       } catch (error) {
-         console.log(error);
+         console.error(error);
       }
    };
 

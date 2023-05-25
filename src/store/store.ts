@@ -1,16 +1,14 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import newsReducer from "./news/slice";
 import logger from "redux-logger";
 import { type TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import authReducer from "./auth/slice";
 
-const rootReducer = combineReducers({
-   news: newsReducer,
-   auth: authReducer,
-});
-
 const store = configureStore({
-   reducer: rootReducer,
+   reducer: {
+      news: newsReducer,
+      auth: authReducer,
+   },
    middleware: (getDefaultMiddleware) => {
       const middleware = getDefaultMiddleware();
       if (process.env.NODE_ENV !== "production") middleware.concat(logger);
@@ -19,7 +17,7 @@ const store = configureStore({
    devTools: process.env.NODE_ENV !== "production",
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type AppGetState = typeof store.getState;
 
