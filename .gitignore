@@ -2,3 +2,6 @@ dist
 node_modules
 todo
 config/config.json
+.env
+.env.development
+.env.production
