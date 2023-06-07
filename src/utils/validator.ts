@@ -1,4 +1,3 @@
-import { type PartialRecord } from "@/types/PartialRecord";
 import {
    isCapitalSymbolMethod,
    isDigitSymbolMethod,
@@ -12,6 +11,7 @@ import {
 import { isObjectWithLength, isString } from "./typeChecking";
 import { emailRegex, isCapitalSymbolRegex, isDigitSymbolRegex, latinaAndNumericRegex } from "./regex";
 import { type ValidationErrors } from "@/types/errorsTypes";
+import { type PartialRecord } from "@/types/default";
 
 export type TValidator<T> = PartialRecord<keyof T, Partial<IValidationMethod>>;
 

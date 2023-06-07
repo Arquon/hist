@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const postcssPresetEnv = require("postcss-preset-env");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -52,6 +53,11 @@ const plugins = [
       swDest: "/serviceWorker.js",
       clientsClaim: true,
       skipWaiting: true,
+   }),
+   new webpack.DefinePlugin({
+      "process.env": {
+         NODE_ENV: JSON.stringify("production"),
+      },
    }),
    // new InjectManifest({
    //    swSrc: "./src/sw/serviceWorker.js",

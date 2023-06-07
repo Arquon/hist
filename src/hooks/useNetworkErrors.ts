@@ -6,7 +6,7 @@ interface UseFormReturnType<T> {
    networkErrorHandler: (error: unknown) => void;
 }
 
-export function useErrors<T>(data: T): UseFormReturnType<T> {
+export function useNetworkErrors<T>(data: T): UseFormReturnType<T> {
    const [networkErrors, setNetworkErrors] = useState<ValidationErrors<T>>({});
 
    const networkErrorHandler = (error: unknown): void => {

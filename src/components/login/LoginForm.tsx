@@ -5,7 +5,7 @@ import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { type Location, useLocation, useNavigate } from "react-router-dom";
-import { useErrors } from "@/hooks/useErrors";
+import { useNetworkErrors } from "@/hooks/useNetworkErrors";
 import { useAuth } from "@/hooks/useAuth";
 
 interface LoginFormProps {
@@ -40,7 +40,7 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
    const location = useLocation();
 
    const { data, changeHandler, validate, errors } = useForm({ initialData, validatorConfig });
-   const { networkErrors, networkErrorHandler } = useErrors(data);
+   const { networkErrors, networkErrorHandler } = useNetworkErrors(data);
 
    const goToRegistration = (): void => {
       setLoginPage(ELoginPage.register);

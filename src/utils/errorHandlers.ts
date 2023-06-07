@@ -1,4 +1,5 @@
 import { type IAuthData } from "@/services/auth.service";
+import { type DeepPartial } from "@/types/default";
 import { type ValidationErrors } from "@/types/errorsTypes";
 import axios from "axios";
 
@@ -9,12 +10,6 @@ interface NetworkErrors {
    };
    unhandled: string;
 }
-
-type DeepPartial<T> = T extends object
-   ? {
-        [P in keyof T]?: DeepPartial<T[P]>;
-     }
-   : T;
 
 function networkErrorsHandler(
    error: unknown,
@@ -92,15 +87,12 @@ export function signUpNetworkErrorsHandler(error: unknown): ValidationErrors<IAu
          switch (message) {
             case "INVALID_EMAIL":
                errorObject.email = "Введен некорректный email";
-               return errorObject;
-            case "EMAIL_NOT_FOUND":
-               errorObject.email = "Пользователь с указанным email не зарегистрирован";
-               return errorObject;
-            case "INVALID_PASSWORD":
-               errorObject.password = "Введен неверный пароль";
-               return errorObject;
+               throw errorObject;
+            case "EMAIL_EXISTS":
+               errorObject.email = "Пользователь с указанным email уже зарегистрирован";
+               throw errorObject;
             default:
-               return "Непредвиденная ошибка";
+               throw new Error("Непредвиденная ошибка");
          }
       }
       return "Unhandled Axios Error";

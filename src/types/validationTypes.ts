@@ -57,8 +57,6 @@ export interface IValidationMethod
       IsDigitSymbolMethod,
       emailMethod {}
 
-export type TInterfaceValue<I> = I[keyof I];
-
 export type TValidationRule = keyof IValidationMethod;
 
 export function isRequiredMethod(method: Partial<IValidationMethod>): method is RequiredMethod {

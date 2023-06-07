@@ -5,7 +5,7 @@ import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { CheckBox } from "../UI/form/CheckBox";
-import { useErrors } from "@/hooks/useErrors";
+import { useNetworkErrors } from "@/hooks/useNetworkErrors";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -62,7 +62,7 @@ export const RegistrationForm: FC<RegistrationProps> = ({ setLoginPage }) => {
    const { signUp } = useAuth();
    const navigate = useNavigate();
    const { data, changeHandler, errors, validate } = useForm({ initialData, validatorConfig });
-   const { networkErrors, networkErrorHandler } = useErrors(data);
+   const { networkErrors, networkErrorHandler } = useNetworkErrors(data);
 
    const goToLogin = (): void => {
       setLoginPage(ELoginPage.login);

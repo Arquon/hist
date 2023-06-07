@@ -5,7 +5,7 @@ import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
 import { useForm } from "@/hooks/useForm";
 import { type INewsFormState } from "@/types/INews";
-import { useErrors } from "@/hooks/useErrors";
+import { useNetworkErrors } from "@/hooks/useNetworkErrors";
 
 interface NewsFormProps {
    onSubmit: (data: INewsFormState) => void | Promise<void>;
@@ -38,7 +38,7 @@ export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData
       validatorConfig,
    });
 
-   const { networkErrors, networkErrorHandler } = useErrors(data);
+   const { networkErrors, networkErrorHandler } = useNetworkErrors(data);
 
    const submitHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
       e.preventDefault();

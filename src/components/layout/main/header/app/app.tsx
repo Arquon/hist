@@ -15,7 +15,7 @@ export const HeaderLink: FC<IHeaderLinkProps> = ({ children, className, to, clos
 
    const classes = ["list-header__link"];
    if (className !== undefined && className !== "") classes.push(className);
-   if (match != null) classes.push("list-header__link_active");
+   if (match !== null) classes.push("list-header__link_active");
 
    return (
       <li>
