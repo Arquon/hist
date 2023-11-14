@@ -45,6 +45,7 @@ const plugins = [
    new CopyWebpackPlugin({
       patterns: [
          { from: "src/templates/manifest.json", to: "[name][ext]" },
+         { from: "src/templates/robots.txt", to: "[name][ext]" },
          { from: "src/assets/icons/*.png", to: "icons/[name][ext]" },
       ],
    }),
@@ -53,6 +54,7 @@ const plugins = [
       swDest: "/serviceWorker.js",
       clientsClaim: true,
       skipWaiting: true,
+      navigateFallback: "index.html",
    }),
    new webpack.DefinePlugin({
       "process.env": {
