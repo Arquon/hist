@@ -53,3 +53,5 @@ export const Moscow: FC = () => {
       </section>
    );
 };
+
+export default Moscow;

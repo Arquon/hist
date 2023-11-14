@@ -3,7 +3,7 @@ import { type ICommonProps } from "@/types/ICommonProps";
 import React, { type ReactElement, type FC, type ComponentType } from "react";
 import { Navigate } from "react-router-dom";
 
-export const TestRoute: FC<ICommonProps> = ({ children }) => {
+export const UnAuthRequired: FC<ICommonProps> = ({ children }) => {
    const { isAuth } = useAuth();
 
    if (!isAuth) return children as ReactElement;

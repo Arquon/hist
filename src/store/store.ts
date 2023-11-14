@@ -11,10 +11,10 @@ const store = configureStore({
    },
    middleware: (getDefaultMiddleware) => {
       const middleware = getDefaultMiddleware();
-      if (process.env.NODE_ENV !== "production") middleware.push(logger);
+      if (_NODE_ENV_ !== "production") middleware.push(logger);
       return middleware;
    },
-   devTools: process.env.NODE_ENV !== "production",
+   devTools: _NODE_ENV_ !== "production",
 });
 
 export type RootState = ReturnType<typeof store.getState>;

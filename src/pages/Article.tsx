@@ -6,10 +6,11 @@ import React, { type FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useNews } from "@/hooks/useNews";
 import { useAuth } from "@/hooks/useAuth";
+import { AdminRequire } from "@/hoc/withAdmin";
 
 interface Props {}
 
-export const ArticlePage: FC<Props> = () => {
+const ArticlePageComponent: FC<Props> = () => {
    const { currentArticle, isLoadingNews, deleteArticle } = useNews();
    const navigate = useNavigate();
    const { isAdmin } = useAuth();
@@ -52,5 +53,11 @@ export const ArticlePage: FC<Props> = () => {
       </section>
    );
 };
+
+export const ArticlePage: FC = () => (
+   <AdminRequire>
+      <ArticlePageComponent />
+   </AdminRequire>
+);
 
 export default ArticlePage;

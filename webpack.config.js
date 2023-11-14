@@ -49,17 +49,15 @@ const plugins = [
          { from: "src/assets/icons/*.png", to: "icons/[name][ext]" },
       ],
    }),
-   new GenerateSW({
-      maximumFileSizeToCacheInBytes: 1024 * 1024 * 5,
-      swDest: "/serviceWorker.js",
-      clientsClaim: true,
-      skipWaiting: true,
-      navigateFallback: "index.html",
-   }),
+   // new GenerateSW({
+   //    maximumFileSizeToCacheInBytes: 1024 * 1024 * 5,
+   //    swDest: "/serviceWorker.js",
+   //    clientsClaim: true,
+   //    skipWaiting: true,
+   //    navigateFallback: "index.html",
+   // }),
    new webpack.DefinePlugin({
-      "process.env": {
-         NODE_ENV: JSON.stringify("production"),
-      },
+      _NODE_ENV_: JSON.stringify("production"),
    }),
    // new InjectManifest({
    //    swSrc: "./src/sw/serviceWorker.js",
