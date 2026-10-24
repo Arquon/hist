@@ -12,11 +12,10 @@ import { Contacts } from "@/pages/Contacts";
 // import { ArticlePage } from "@/pages/Article";
 // import { NewsAddPage } from "@/pages/NewsAdd";
 // import { NewsEditPage } from "@/pages/NewsEdit";
-import { LoginPageComponent } from "@/pages/Login";
+import { LoginPage, LoginPageComponent } from "@/pages/Login";
 import { Navigate, type RouteObject } from "react-router-dom";
 import { MainLayout } from "@/components/layout/main/MainLayout";
 import { EmptyLayout } from "@/components/layout/empty/EmptyLayout";
-import { withoutAuth } from "@/hoc/withoutAuth";
 
 const NewsPage = lazy(async () => await import("@/pages/News"));
 const Moscow = lazy(async () => await import("@/pages/Moscow"));
@@ -63,7 +62,7 @@ export const appRoutes: RouteObject[] = [
    },
    {
       element: <EmptyLayout />,
-      children: [{ path: ERoutes.login, Component: withoutAuth(LoginPageComponent) }],
+      children: [{ path: ERoutes.login, element: <LoginPage /> }],
    },
    { path: "*", element: <Navigate to="/" /> },
 ];

@@ -2,7 +2,7 @@ import React, { type FC } from "react";
 import { CustomButton } from "@/components/UI/CustomButton";
 import { EPromiseStatuses, useMockData } from "@/hooks/useMockData";
 import { NarrowContainer } from "@/components/UI/Common";
-import { AdminRequire } from "@/hoc/withAdmin";
+import { AdminRequire } from "@/hoc/AdminRequire";
 
 function getStatus(status: EPromiseStatuses): string {
    switch (status) {

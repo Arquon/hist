@@ -1,7 +1,7 @@
 import React, { type FC, useState } from "react";
 import { LoginForm } from "@/components/login/LoginForm";
 import { RegistrationForm } from "@/components/login/RegistrationForm";
-import { UnAuthRequired } from "@/hoc/withoutAuth";
+import { WithoutAuthRequire } from "@/hoc/WithoutAuthRequire";
 
 interface LoginProps {}
 
@@ -27,8 +27,8 @@ export const LoginPageComponent: FC<LoginProps> = ({}) => {
    return <div className="empty__form empty-form">{Component}</div>;
 };
 
-export const LoginPage: FC = () => (
-   <UnAuthRequired>
+export const LoginPage = () => (
+   <WithoutAuthRequire>
       <LoginPageComponent />
-   </UnAuthRequired>
+   </WithoutAuthRequire>
 );
