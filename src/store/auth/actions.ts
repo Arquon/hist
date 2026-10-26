@@ -12,7 +12,7 @@ import { type AppActionType } from "../store";
 import { actions } from "./slice";
 import { type Nullable } from "@/types/default";
 
-const signIn = createAsyncThunk<IUserData, IAuthData, { rejectValue: string | ValidationErrors<IAuthData> }>(
+const signIn = createAsyncThunk<IUserData, IAuthData, { rejectValue: string | Partial<ValidationErrors<IAuthData>> }>(
    "auth/signIn",
    async function (authData, { rejectWithValue }) {
       try {
@@ -27,23 +27,24 @@ const signIn = createAsyncThunk<IUserData, IAuthData, { rejectValue: string | Va
    }
 );
 
-const signUp = createAsyncThunk<IUserData, IRegistrationData, { rejectValue: string | ValidationErrors<IAuthData> }>(
-   "auth/signUp",
-   async function (registrationData, { rejectWithValue }) {
-      try {
-         const data = await authService.registration(registrationData);
-         localStorageService.setCredentials(data);
-         const userData = await authService.createUser(
-            { email: registrationData.email, isAdmin: registrationData.isAdmin },
-            data.localId
-         );
-         return userData;
-      } catch (error: unknown) {
-         const parsedError = signUpNetworkErrorsHandler(error);
-         return rejectWithValue(parsedError);
-      }
+const signUp = createAsyncThunk<
+   IUserData,
+   IRegistrationData,
+   { rejectValue: string | Partial<ValidationErrors<IAuthData>> }
+>("auth/signUp", async function (registrationData, { rejectWithValue }) {
+   try {
+      const data = await authService.registration(registrationData);
+      localStorageService.setCredentials(data);
+      const userData = await authService.createUser(
+         { email: registrationData.email, isAdmin: registrationData.isAdmin },
+         data.localId
+      );
+      return userData;
+   } catch (error: unknown) {
+      const parsedError = signUpNetworkErrorsHandler(error);
+      return rejectWithValue(parsedError);
    }
-);
+});
 
 const getCurrentUserData = createAsyncThunk<Nullable<IUserData>, undefined, { rejectValue: string }>(
    "auth/getUserData",

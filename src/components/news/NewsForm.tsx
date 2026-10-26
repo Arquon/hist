@@ -1,11 +1,10 @@
-import React, { type FC, useEffect, type FormEvent, type ReactNode } from "react";
+import React, { type FC, type FormEvent, type ReactNode } from "react";
 import { TextField } from "../UI/form/TextField";
 import { AreaField } from "../UI/form/AreaField";
 import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
-import { useForm } from "@/hooks/useForm";
 import { type INewsFormState } from "@/types/INews";
-import { useNetworkErrors } from "@/hooks/useNetworkErrors";
+import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
 
 interface NewsFormProps {
    onSubmit: (data: INewsFormState) => void | Promise<void>;
@@ -33,16 +32,15 @@ const validatorConfig: TValidator<INewsFormState> = {
 };
 
 export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData, children }) => {
-   const { data, changeHandler, errors, validate } = useForm({
-      initialData: initialData ?? defaultData,
-      validatorConfig,
-   });
-
-   const { networkErrors, networkErrorHandler } = useNetworkErrors(data);
+   const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
+      useFormWithNetworkErrors({
+         initialData: initialData ?? defaultData,
+         validatorConfig,
+      });
 
    const submitHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
       e.preventDefault();
-      const isError = validate();
+      const isError = validateForm();
       if (isError) return;
       try {
          await onSubmit(data);
@@ -51,11 +49,7 @@ export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData
       }
    };
 
-   useEffect(() => {
-      validate();
-   }, [data]);
-
-   const isError = Object.keys(errors).length !== 0 || Object.keys(networkErrors).length !== 0;
+   const isError = hasError || Object.keys(networkErrors).length !== 0;
 
    return (
       <div className="news-form-page__form news-form">
@@ -66,21 +60,30 @@ export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData
                <TextField
                   label="Название новости"
                   value={data.title}
-                  error={errors.title ?? networkErrors.title}
+                  errorData={{
+                     error: errors.title ?? networkErrors.title,
+                     validate: () => validateFields({ title: data.title }),
+                  }}
                   onChange={(title) => changeHandler({ title })}
                   prefix="news-form"
                />
                <TextField
                   label="Описание новости"
                   value={data.description}
-                  error={errors.description ?? networkErrors.description}
+                  errorData={{
+                     error: errors.description ?? networkErrors.description,
+                     validate: () => validateFields({ description: data.description }),
+                  }}
                   onChange={(description) => changeHandler({ description })}
                   prefix="news-form"
                />
                <AreaField
                   label="Содержание новости"
                   value={data.content}
-                  error={errors.content ?? networkErrors.content}
+                  errorData={{
+                     error: errors.content ?? networkErrors.content,
+                     validate: () => validateFields({ content: data.content }),
+                  }}
                   onChange={(content) => changeHandler({ content })}
                   prefix="news-form"
                />

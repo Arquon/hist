@@ -51,11 +51,11 @@ export const newsNetworkErrorsHandler = netWorkErrorsHandlerGenerator();
 
 export const userNetworkErrorsHandler = netWorkErrorsHandlerGenerator();
 
-export function signInNetworkErrorsHandler(error: unknown): ValidationErrors<IAuthData> | string {
+export function signInNetworkErrorsHandler(error: unknown): Partial<ValidationErrors<IAuthData>> | string {
    if (axios.isAxiosError(error)) {
       if (!error.response) throw new Error("Axios Error");
       const { code, message }: { code: number; message: string } = error.response.data.error;
-      const errorObject: ValidationErrors<IAuthData> = {};
+      const errorObject: Partial<ValidationErrors<IAuthData>> = {};
       if (code === 400) {
          switch (message) {
             case "INVALID_EMAIL":
@@ -78,11 +78,11 @@ export function signInNetworkErrorsHandler(error: unknown): ValidationErrors<IAu
    return "Unhandled Error";
 }
 
-export function signUpNetworkErrorsHandler(error: unknown): ValidationErrors<IAuthData> | string {
+export function signUpNetworkErrorsHandler(error: unknown): Partial<ValidationErrors<IAuthData>> | string {
    if (axios.isAxiosError(error)) {
       if (!error.response) throw new Error("Axios Error");
       const { code, message }: { code: number; message: string } = error.response.data.error;
-      const errorObject: ValidationErrors<IAuthData> = {};
+      const errorObject: Partial<ValidationErrors<IAuthData>> = {};
       if (code === 400) {
          switch (message) {
             case "INVALID_EMAIL":

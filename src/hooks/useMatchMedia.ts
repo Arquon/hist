@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useSyncExternalStore } from "react";
 
 const QUERIES: string[] = [
    "(max-width: 1024px)",
@@ -13,31 +13,27 @@ interface UseMatchMediaReturnType {
    isDesktop: boolean;
    isWideScreen: boolean;
 }
+const matchMediaQueries = QUERIES.map((query) => matchMedia(query));
+
+const subscribe = (cb: () => void) => {
+   matchMediaQueries.forEach((mql) => mql.addEventListener("change", cb));
+
+   return () => {
+      matchMediaQueries.forEach((mql) => mql.removeEventListener("change", cb));
+   };
+};
+
+const getSnapshot = () => {
+   return matchMediaQueries.map((mql) => (mql.matches ? "1" : "0")).join("");
+};
 
 export function useMatchMedia(): UseMatchMediaReturnType {
-   const matchMediaQueries = QUERIES.map((query) => matchMedia(query));
+   const matches = useSyncExternalStore(subscribe, getSnapshot);
 
-   const getValues = (): boolean[] => matchMediaQueries.map((mql) => mql.matches);
-
-   const [values, setValues] = useState(getValues);
-
-   useLayoutEffect(() => {
-      const handler = (): void => setValues(getValues());
-
-      matchMediaQueries.forEach((mql) => mql.addEventListener("change", handler));
-
-      return () => {
-         matchMediaQueries.forEach((mql) => mql.removeEventListener("change", handler));
-      };
-   }, []);
-
-   return ["isMobile", "isTablet", "isDesktop", "isWideScreen"].reduce(
-      (acc, currentValue, index) => ({ ...acc, [currentValue]: values[index] }),
-      {
-         isMobile: false,
-         isTablet: false,
-         isDesktop: false,
-         isWideScreen: false,
-      }
-   );
+   return {
+      isMobile: matches[0] === "1",
+      isTablet: matches[1] === "1",
+      isDesktop: matches[2] === "1",
+      isWideScreen: matches[3] === "1",
+   };
 }

@@ -1,12 +1,11 @@
-import React, { type FormEvent, useEffect, type FC } from "react";
+import React, { type FormEvent, type FC } from "react";
 import { ELoginPage } from "@/pages/Login";
 import { CustomButton } from "../UI/CustomButton";
-import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
-import { type Location, useLocation, useNavigate } from "react-router-dom";
-import { useNetworkErrors } from "@/hooks/useNetworkErrors";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
 
 interface LoginFormProps {
    setLoginPage: (page: ELoginPage) => void;
@@ -39,31 +38,29 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
    const navigate = useNavigate();
    const location = useLocation();
 
-   const { data, changeHandler, validate, errors } = useForm({ initialData, validatorConfig });
-   const { networkErrors, networkErrorHandler } = useNetworkErrors(data);
+   const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
+      useFormWithNetworkErrors({
+         initialData,
+         validatorConfig,
+      });
 
    const goToRegistration = (): void => {
       setLoginPage(ELoginPage.register);
    };
 
-   useEffect(() => {
-      validate();
-   }, [data]);
-
    const submitHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
       e.preventDefault();
-      const isError = validate();
+      const isError = validateForm();
       if (isError) return;
+
       try {
          await signIn(data);
-         const from = location.state?.from as Location | undefined;
+         const from = location.state?.from;
          navigate({ pathname: from ? from.pathname : "/" });
       } catch (error: unknown) {
          networkErrorHandler(error);
       }
    };
-
-   const isError = Object.keys(errors).length !== 0 || Object.keys(networkErrors).length !== 0;
 
    return (
       <form onSubmit={submitHandler}>
@@ -74,21 +71,27 @@ export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
                label="Email"
                value={data.email}
                onChange={(login) => changeHandler({ email: login })}
-               error={errors.email ?? networkErrors.email}
+               errorData={{
+                  error: errors.email ?? networkErrors.email,
+                  validate: () => validateFields({ email: data.email }),
+               }}
                prefix="empty-form"
             />
             <TextField
                label="Пароль"
                value={data.password}
                onChange={(password) => changeHandler({ password })}
-               error={errors.password ?? networkErrors.password}
+               errorData={{
+                  error: errors.password ?? networkErrors.password,
+                  validate: () => validateFields({ password: data.password }),
+               }}
                type={"password"}
                prefix="empty-form"
             />
          </div>
 
          <div className="empty-form__buttons-wrap">
-            <CustomButton type="submit" disabled={isError} className="empty-form__btn">
+            <CustomButton type="submit" disabled={hasError} className="empty-form__btn">
                Войти
             </CustomButton>
             <CustomButton onClick={goToRegistration} type="button" className="empty-form__btn">

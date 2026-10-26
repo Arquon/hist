@@ -1,3 +1,1 @@
-import { type PartialRecord } from "./default";
-
-export type ValidationErrors<T> = PartialRecord<keyof T, string>;
+export type ValidationErrors<T> = Record<keyof T, string | false>;

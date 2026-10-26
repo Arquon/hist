@@ -7,3 +7,4 @@ export type DeepPartial<T> = T extends object
 export type PartialRecord<K extends keyof any, T> = {
    [P in K]?: T;
 };
+export type ObjectType = Record<PropertyKey, any>;

@@ -7,10 +7,11 @@ import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 export const App: React.FC = () => {
    const { isLoadingUserData } = useAuth();
-   useScrollToTop();
-   if (isLoadingUserData) return null;
 
+   useScrollToTop();
    const routes = useRoutes(appRoutes);
+
+   if (isLoadingUserData) return null;
 
    return (
       <>

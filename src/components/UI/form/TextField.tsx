@@ -6,10 +6,14 @@ interface TextFieldProps {
    label: string;
    value: string;
    onChange: (str: string) => void;
-   error?: string;
    type?: "text" | "password" | "email";
    autoComplete?: string;
    prefix?: string;
+   errorData?: {
+      validate?: () => void;
+      error?: string | false;
+   };
+
    // labelClassName?: string;
    // inputClassName?: string;
    // groupClassName?: string;
@@ -19,7 +23,7 @@ export const TextField: FC<TextFieldProps> = ({
    label,
    value,
    onChange,
-   error,
+   errorData,
    type = "text",
    autoComplete = "off",
    prefix,
@@ -27,6 +31,9 @@ export const TextField: FC<TextFieldProps> = ({
    // inputClassName,
    // groupClassName,
 }) => {
+   const error = errorData?.error;
+   const validate = errorData?.validate;
+
    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
       const { target } = e;
       onChange(target.value);
@@ -88,6 +95,7 @@ export const TextField: FC<TextFieldProps> = ({
             autoComplete={autoComplete}
             ref={input}
             className={computedInputClassName}
+            onBlur={validate}
          />
          {error && <p className={computedErrorClassName}>{error}</p>}
       </div>

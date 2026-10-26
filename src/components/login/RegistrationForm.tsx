@@ -1,13 +1,12 @@
-import React, { type FormEvent, useEffect, type FC } from "react";
+import React, { type FormEvent, type FC } from "react";
 import { ELoginPage } from "@/pages/Login";
 import { CustomButton } from "../UI/CustomButton";
-import { useForm } from "@/hooks/useForm";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { CheckBox } from "../UI/form/CheckBox";
-import { useNetworkErrors } from "@/hooks/useNetworkErrors";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
 
 interface RegistrationProps {
    setLoginPage: (page: ELoginPage) => void;
@@ -61,20 +60,19 @@ const validatorConfig: TValidator<IRegistrationState> = {
 export const RegistrationForm: FC<RegistrationProps> = ({ setLoginPage }) => {
    const { signUp } = useAuth();
    const navigate = useNavigate();
-   const { data, changeHandler, errors, validate } = useForm({ initialData, validatorConfig });
-   const { networkErrors, networkErrorHandler } = useNetworkErrors(data);
+   const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
+      useFormWithNetworkErrors({
+         initialData,
+         validatorConfig,
+      });
 
    const goToLogin = (): void => {
       setLoginPage(ELoginPage.login);
    };
 
-   useEffect(() => {
-      validate();
-   }, [data]);
-
    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
       e.preventDefault();
-      const isError = Object.keys(errors).length !== 0;
+      const isError = validateForm();
       if (isError) return;
       try {
          await signUp(data);
@@ -84,7 +82,7 @@ export const RegistrationForm: FC<RegistrationProps> = ({ setLoginPage }) => {
       }
    };
 
-   const isError = Object.keys(errors).length !== 0;
+   const isError = hasError || Object.keys(networkErrors).length !== 0;
 
    return (
       <form onSubmit={handleSubmit}>
@@ -95,14 +93,20 @@ export const RegistrationForm: FC<RegistrationProps> = ({ setLoginPage }) => {
                label={"Email"}
                value={data.email}
                onChange={(login) => changeHandler({ email: login })}
-               error={errors.email ?? networkErrors.email}
+               errorData={{
+                  error: errors.email ?? networkErrors.email,
+                  validate: () => validateFields({ email: data.email }),
+               }}
                prefix="empty-form"
             />
             <TextField
                label={"Пароль"}
                value={data.password}
                onChange={(password) => changeHandler({ password })}
-               error={errors.password ?? networkErrors.password}
+               errorData={{
+                  error: errors.password ?? networkErrors.password,
+                  validate: () => validateFields({ password: data.password }),
+               }}
                type={"password"}
                prefix="empty-form"
             />

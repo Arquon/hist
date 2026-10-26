@@ -22,7 +22,7 @@ export const newsService = {
       return data;
    },
    createNews: async (payload: INewsWithoutId) => {
-      const id = nanoid();
+      const id: string = nanoid();
       const { data } = await httpService.put<INews>(newsEndPoint + id + "/", {
          ...payload,
          id,

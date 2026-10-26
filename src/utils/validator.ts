@@ -11,14 +11,37 @@ import {
 import { isObjectWithLength, isString } from "./typeChecking";
 import { emailRegex, isCapitalSymbolRegex, isDigitSymbolRegex, latinaAndNumericRegex } from "./regex";
 import { type ValidationErrors } from "@/types/errorsTypes";
-import { type PartialRecord } from "@/types/default";
+import { type ObjectType, type PartialRecord } from "@/types/default";
 
 export type TValidator<T> = PartialRecord<keyof T, Partial<IValidationMethod>>;
 
-function validator<T extends object>(data: T, validatorConfig: TValidator<T>): ValidationErrors<T> {
-   const errors: ValidationErrors<T> = {};
+export function getInitialErrors<T extends ObjectType>(data: T): ValidationErrors<T> {
+   const errors: Partial<ValidationErrors<T>> = {};
 
-   for (const key of Object.keys(validatorConfig) as Array<keyof T>) {
+   for (const key of Object.keys(data) as Array<keyof T>) {
+      errors[key] = false;
+   }
+
+   return errors as ValidationErrors<T>;
+}
+
+export function resetErrorsForFields<T extends ObjectType>(fields: Partial<T>) {
+   const errors: Partial<ValidationErrors<T>> = {};
+
+   for (const key of Object.keys(fields) as Array<keyof T>) {
+      errors[key] = false;
+   }
+
+   return errors;
+}
+
+function validator<T extends ObjectType>(
+   data: Partial<T>,
+   validatorConfig: TValidator<T>
+): Partial<ValidationErrors<T>> {
+   const errors: Partial<ValidationErrors<T>> = {};
+
+   for (const key of Object.keys(data) as Array<keyof T>) {
       const validationField = validatorConfig[key];
       if (validationField === undefined) continue;
       const error = validate(data[key], validationField);
@@ -93,6 +116,14 @@ function validate(value: unknown, method: Partial<IValidationMethod>): string | 
    }
 
    return null;
+}
+
+export function calculateHasError<T extends ObjectType>(errors: Partial<ValidationErrors<T>>) {
+   for (const value of Object.values(errors)) {
+      if (value) return true;
+   }
+
+   return false;
 }
 
 export default validator;

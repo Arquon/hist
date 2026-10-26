@@ -12,6 +12,7 @@
    "rules": {
       "no-console": "warn",
       "indent": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/indent": "off",
       "@typescript-eslint/comma-dangle": "off",
       "@typescript-eslint/no-empty-interface": "off",

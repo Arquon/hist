@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { type ValidationErrors } from "@/types/errorsTypes";
+import { getInitialErrors, resetErrorsForFields } from "@/utils/validator";
+import { type ObjectType } from "@/types/default";
 
 interface UseFormReturnType<T> {
    networkErrors: ValidationErrors<T>;
    networkErrorHandler: (error: unknown) => void;
+   resetPartialNetworkErrors: (partialData: Partial<T>) => void;
 }
 
-export function useNetworkErrors<T>(data: T): UseFormReturnType<T> {
-   const [networkErrors, setNetworkErrors] = useState<ValidationErrors<T>>({});
+export function useNetworkErrors<T extends ObjectType>(data: T): UseFormReturnType<T> {
+   const [networkErrors, setNetworkErrors] = useState<ValidationErrors<T>>(() => getInitialErrors(data));
 
    const networkErrorHandler = (error: unknown): void => {
       if (typeof error === "object" && error !== null) {
-         const loginErrors: ValidationErrors<T> = error;
+         const loginErrors: Partial<ValidationErrors<T>> = error;
          setNetworkErrors((prevErrors) => ({
             ...prevErrors,
             ...loginErrors,
@@ -19,9 +22,14 @@ export function useNetworkErrors<T>(data: T): UseFormReturnType<T> {
       }
    };
 
-   useEffect(() => {
-      setNetworkErrors({});
-   }, [data]);
+   const resetPartialNetworkErrors = (partialData: Partial<T>) => {
+      const partialErrors = resetErrorsForFields(partialData);
 
-   return { networkErrors, networkErrorHandler };
+      setNetworkErrors((prevErrors) => ({
+         ...prevErrors,
+         ...partialErrors,
+      }));
+   };
+
+   return { networkErrors, networkErrorHandler, resetPartialNetworkErrors };
 }

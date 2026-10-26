@@ -5,11 +5,17 @@ interface AreaFieldProps {
    label: string;
    value: string;
    onChange: (str: string) => void;
-   error?: string;
    prefix?: string;
+   errorData?: {
+      validate?: () => void;
+      error?: string | false;
+   };
 }
 
-export const AreaField: FC<AreaFieldProps> = ({ label, value, onChange, error, prefix }) => {
+export const AreaField: FC<AreaFieldProps> = ({ label, value, onChange, errorData, prefix }) => {
+   const error = errorData?.error;
+   const validate = errorData?.validate;
+
    const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
       const { target } = e;
       onChange(target.value);
@@ -55,7 +61,12 @@ export const AreaField: FC<AreaFieldProps> = ({ label, value, onChange, error, p
    return (
       <div className={computedGroupClassName}>
          <label className={computedLabelClassName}>{label}</label>
-         <textarea value={value} onChange={changeHandler} className={computedAreaClassName}></textarea>
+         <textarea
+            value={value}
+            onChange={changeHandler}
+            className={computedAreaClassName}
+            onBlur={validate}
+         ></textarea>
          {error && <p className={computedErrorClassName}>{error}</p>}
       </div>
    );
