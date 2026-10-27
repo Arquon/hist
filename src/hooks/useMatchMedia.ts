@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 
 const QUERIES: string[] = [
    "(max-width: 1024px)",
