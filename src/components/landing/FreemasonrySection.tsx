@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React from "react";
 import { Container } from "../UI/Common";
 
 import freemasonryBanner from "@/assets/images/freemasonry_banner.png";
@@ -6,7 +6,7 @@ import { ButtonLink } from "../UI/CustomLink";
 
 interface Props {}
 
-export const FreemasonrySection: FC<Props> = ({}) => {
+export const FreemasonrySection = ({}: Props) => {
    return (
       <section className="freemasonry">
          <div className="freemasonry__banner">
@@ -15,7 +15,8 @@ export const FreemasonrySection: FC<Props> = ({}) => {
                   <div>
                      <h3 className="freemasonry__heading">Вступление в масонство</h3>
                      <p className="freemasonry__text">
-                        Вступить в масонство, с одной стороны, весьма просто, а с другой - фактически невозможно. Больше подробностей вы узнаете из нашей статьи для кандидатов.
+                        Вступить в масонство, с одной стороны, весьма просто, а с другой - фактически невозможно. Больше
+                        подробностей вы узнаете из нашей статьи для кандидатов.
                      </p>
                      <ButtonLink to="/freemasonry">Подробнее</ButtonLink>
                   </div>

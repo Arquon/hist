@@ -1,5 +1,5 @@
 import { ContentBlock } from "@/components/UI/content/ContentBlock";
-import React, { type FC } from "react";
+import React from "react";
 import stone from "@/assets/images/stone.png";
 import { AdditionalContainer } from "@/components/UI/Common";
 import { ContentItem } from "@/components/UI/content/ContentItem";
@@ -137,7 +137,7 @@ const thirdBlock = {
    ],
 };
 
-export const France: FC = () => {
+export const France = () => {
    return (
       <section className="france-page additional__page">
          <AdditionalContainer className="france-page__container">

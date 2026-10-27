@@ -1,18 +1,18 @@
 import { getClassName } from "@/utils/functions";
-import React, { type FC } from "react";
+import React from "react";
 
-interface IContentImage {
+interface ContentImage {
    src: string;
    sign: string;
 }
 
 interface ContentItemProps {
    heading?: string;
-   img?: IContentImage;
+   img?: ContentImage;
    children: JSX.Element[] | JSX.Element;
 }
 
-export const ContentItem: FC<ContentItemProps> = ({ img, children }) => {
+export const ContentItem = ({ img, children }: ContentItemProps) => {
    const clonedChildren = React.Children.map(children, (child) => {
       const type = typeof child.type;
       if (type === "string") {

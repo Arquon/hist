@@ -1,15 +1,15 @@
-import React, { type FC } from "react";
-import { type ICommonProps } from "@/types/ICommonProps";
+import React from "react";
 import { getClassName } from "@/utils/functions";
+import { type CommonProps } from "@/types/common";
 
-interface CheckBoxProps extends ICommonProps {
+interface CheckBoxProps extends CommonProps {
    onClick: () => void;
    label: string;
    id: string;
    error?: string;
 }
 
-export const CheckBox: FC<CheckBoxProps> = ({ className, label, id, error, onClick }) => {
+export const CheckBox = ({ className, label, id, error, onClick }: CheckBoxProps) => {
    const computedClassName = getClassName({ initialClassName: "checkbox", className });
 
    return (

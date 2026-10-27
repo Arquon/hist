@@ -3,17 +3,17 @@ import { Heading } from "@/components/UI/CommonHeadings";
 import { NewsForm } from "@/components/news/NewsForm";
 import { AdminRequire } from "@/hoc/AdminRequire";
 import { useNews } from "@/hooks/useNews";
-import { type INewsFormState } from "@/types/INews";
-import React, { type FC } from "react";
+import { type NewsItemFormState } from "@/types/news";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface NewsAddProps {}
 
-const NewsAddPageComponent: FC<NewsAddProps> = ({}) => {
+const NewsAddPageComponent = ({}: NewsAddProps) => {
    const { addArticle } = useNews();
    const navigate = useNavigate();
 
-   const handleSubmit = async (data: INewsFormState): Promise<void> => {
+   const handleSubmit = async (data: NewsItemFormState): Promise<void> => {
       try {
          const article = await addArticle(data);
          navigate(`/news/${article.id}`);
@@ -33,7 +33,7 @@ const NewsAddPageComponent: FC<NewsAddProps> = ({}) => {
    );
 };
 
-export const NewsAddPage: FC = () => (
+export const NewsAddPage = () => (
    <AdminRequire redirectPath="/news">
       <NewsAddPageComponent />
    </AdminRequire>

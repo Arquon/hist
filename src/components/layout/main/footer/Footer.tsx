@@ -1,24 +1,24 @@
-import React, { type FC } from "react";
+import React from "react";
 
 import logo from "@/assets/images/logo.png";
 import coin from "@/assets/images/coin.png";
 import { Container } from "@/components/UI/Common";
 import { CustomLink } from "@/components/UI/CustomLink";
-import { type ICustomLinkProps } from "@/types/ICommonProps";
+import { type CustomLinkProps } from "@/types/common";
 
-const FooterLogo: FC = () => (
+const FooterLogo = () => (
    <div className="footer__logo">
       <img src={logo} alt="" />
    </div>
 );
 
-const FooterCoin: FC = () => (
+const FooterCoin = () => (
    <div className="footer__coin">
       <img src={coin} alt="" />
    </div>
 );
 
-const FooterNav: FC = () => (
+const FooterNav = () => (
    <div className="footer__nav">
       <ul className="footer__list list-footer">
          <FooterLink to="/news">Новости</FooterLink>
@@ -33,7 +33,7 @@ const FooterNav: FC = () => (
    </div>
 );
 
-export const FooterLink: FC<ICustomLinkProps> = ({ children, className, to }) => {
+export const FooterLink = ({ children, className, to }: CustomLinkProps) => {
    const classes = ["list-footer__link"];
    if (className !== undefined && className !== "") classes.push(className);
 

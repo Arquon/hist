@@ -1,4 +1,4 @@
-import { ELocalStorageKeys } from "@/types/localStorage";
+import { LocalStorageKeys } from "@/types/localStorage";
 
 export const localStorageService = {
    setCredentials: ({
@@ -13,21 +13,21 @@ export const localStorageService = {
       localId: string;
    }) => {
       const expiresInTimestamp = String(Date.now() + expiresIn * 1000);
-      localStorage.setItem(ELocalStorageKeys.ID_TOKEN, idToken);
-      localStorage.setItem(ELocalStorageKeys.REFRESH_TOKEN, refreshToken);
-      localStorage.setItem(ELocalStorageKeys.EXPIRES_IN, expiresInTimestamp);
-      localStorage.setItem(ELocalStorageKeys.LOCAL_ID, localId);
+      localStorage.setItem(LocalStorageKeys.ID_TOKEN, idToken);
+      localStorage.setItem(LocalStorageKeys.REFRESH_TOKEN, refreshToken);
+      localStorage.setItem(LocalStorageKeys.EXPIRES_IN, expiresInTimestamp);
+      localStorage.setItem(LocalStorageKeys.LOCAL_ID, localId);
    },
    getCredentials: () => ({
-      idToken: localStorage.getItem(ELocalStorageKeys.ID_TOKEN),
-      refreshToken: localStorage.getItem(ELocalStorageKeys.REFRESH_TOKEN),
-      expiresIn: localStorage.getItem(ELocalStorageKeys.EXPIRES_IN),
-      localId: localStorage.getItem(ELocalStorageKeys.LOCAL_ID),
+      idToken: localStorage.getItem(LocalStorageKeys.ID_TOKEN),
+      refreshToken: localStorage.getItem(LocalStorageKeys.REFRESH_TOKEN),
+      expiresIn: localStorage.getItem(LocalStorageKeys.EXPIRES_IN),
+      localId: localStorage.getItem(LocalStorageKeys.LOCAL_ID),
    }),
    removeCredentials: () => {
-      localStorage.removeItem(ELocalStorageKeys.ID_TOKEN);
-      localStorage.removeItem(ELocalStorageKeys.REFRESH_TOKEN);
-      localStorage.removeItem(ELocalStorageKeys.EXPIRES_IN);
-      localStorage.removeItem(ELocalStorageKeys.LOCAL_ID);
+      localStorage.removeItem(LocalStorageKeys.ID_TOKEN);
+      localStorage.removeItem(LocalStorageKeys.REFRESH_TOKEN);
+      localStorage.removeItem(LocalStorageKeys.EXPIRES_IN);
+      localStorage.removeItem(LocalStorageKeys.LOCAL_ID);
    },
 };

@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React from "react";
 
 import { Container } from "../UI/Common";
 import { Appeal } from "./Appeal";
@@ -6,7 +6,7 @@ import { NewsSection } from "./News";
 import { Gallery } from "./Gallery";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
 
-export const InfoSection: FC = ({}) => {
+export const InfoSection = ({}) => {
    const { isMobile } = useMatchMedia();
 
    return (

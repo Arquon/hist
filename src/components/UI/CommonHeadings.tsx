@@ -1,8 +1,8 @@
-import React, { type FC } from "react";
-import { type ICommonProps } from "@/types/ICommonProps";
+import React from "react";
 import { getClassName } from "@/utils/functions";
+import { type CommonProps } from "@/types/common";
 
-export const Heading: FC<ICommonProps> = ({ className, children }) => {
+export const Heading = ({ className, children }: CommonProps) => {
    const computedClassName = getClassName({ className });
    return <h3 className={computedClassName}>{children}</h3>;
 };

@@ -1,8 +1,8 @@
-import React, { type FC } from "react";
-import { type ICommonProps } from "@/types/ICommonProps";
+import React from "react";
 import { classesFromArray } from "@/utils/functions";
+import { type CommonProps } from "@/types/common";
 
-interface SampleButtonProps extends ICommonProps {
+interface SampleButtonProps extends CommonProps {
    type?: "button" | "submit";
    onClick?: () => void | Promise<void>;
    disabled?: boolean;
@@ -20,7 +20,7 @@ interface SampleButton extends SampleButtonProps {
 
 type ButtonProps = SubmitButton | SampleButton;
 
-export const CustomButton: FC<ButtonProps> = ({ children, className, type = "button", disabled, onClick }) => {
+export const CustomButton = ({ children, className, type = "button", disabled, onClick }: ButtonProps) => {
    const classes = ["btn"];
 
    if (className !== undefined) classes.push(className);

@@ -1,4 +1,4 @@
-import React, { type FormEvent, type FC } from "react";
+import React, { type FormEvent } from "react";
 import { ELoginPage } from "@/pages/Login";
 import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
@@ -22,6 +22,9 @@ const initialData: LoginFormState = {
 
 const validatorConfig: TValidator<LoginFormState> = {
    email: {
+      email: {
+         message: "Введите корректный email",
+      },
       isRequired: {
          message: "Введите email",
       },
@@ -33,7 +36,7 @@ const validatorConfig: TValidator<LoginFormState> = {
    },
 };
 
-export const LoginForm: FC<LoginFormProps> = ({ setLoginPage }) => {
+export const LoginForm = ({ setLoginPage }: LoginFormProps) => {
    const { signIn } = useAuth();
    const navigate = useNavigate();
    const location = useLocation();

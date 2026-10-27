@@ -1,7 +1,7 @@
 import newsAsyncActions from "@/store/news/actions";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { type INewsFormState, type INews } from "@/types/INews";
-import { type Nullable } from "@/types/default";
+import { type Nullable } from "@/types/common";
+import { type NewsItemFormState, type NewsItemView } from "@/types/news";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
@@ -10,11 +10,11 @@ import { toast } from "react-toastify";
 type TArticleRouteParams = Record<"newsId", string>;
 
 interface UseNews {
-   news: INews[];
+   news: NewsItemView[];
    isLoadingNews: boolean;
-   currentArticle: Nullable<INews>;
-   addArticle: (data: INewsFormState) => Promise<INews>;
-   updateArticle: (data: INews) => Promise<INews>;
+   currentArticle: Nullable<NewsItemView>;
+   addArticle: (data: NewsItemFormState) => Promise<NewsItemView>;
+   updateArticle: (data: NewsItemView) => Promise<NewsItemView>;
    deleteArticle: (id: string) => Promise<void>;
 }
 
@@ -40,7 +40,7 @@ export function useNews(): UseNews {
       }
    }
 
-   async function addArticle(data: INewsFormState): Promise<INews> {
+   async function addArticle(data: NewsItemFormState) {
       try {
          const result = await dispatch(newsAsyncActions.addArticle(data));
          return unwrapResult(result);
@@ -50,7 +50,7 @@ export function useNews(): UseNews {
       }
    }
 
-   async function updateArticle(article: INews): Promise<INews> {
+   async function updateArticle(article: NewsItemView) {
       try {
          const result = await dispatch(newsAsyncActions.updateArticle(article));
          return unwrapResult(result);
@@ -69,7 +69,7 @@ export function useNews(): UseNews {
       }
    }
 
-   const currentArticle = useMemo<Nullable<INews>>(() => {
+   const currentArticle = useMemo<Nullable<NewsItemView>>(() => {
       if (!newsId) return null;
       return news.find((newsItem) => newsItem.id === newsId) ?? null;
    }, [news, newsId]);

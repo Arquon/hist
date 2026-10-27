@@ -1,4 +1,4 @@
-import { authService, type IRegistrationData, type IAuthData } from "@/services/auth.service";
+import { authService, type RegistrationData, type AuthData } from "@/services/auth.service";
 import { localStorageService } from "@/services/localStorage.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
@@ -6,13 +6,13 @@ import {
    signUpNetworkErrorsHandler,
    userNetworkErrorsHandler,
 } from "@/utils/errorHandlers";
-import { type ValidationErrors } from "@/types/errorsTypes";
-import { type IUserData } from "@/types/IUserData";
+
 import { type AppActionType } from "../store";
 import { actions } from "./slice";
-import { type Nullable } from "@/types/default";
+import { type ValidationErrors, type Nullable } from "@/types/common";
+import { type UserData } from "@/types/user";
 
-const signIn = createAsyncThunk<IUserData, IAuthData, { rejectValue: string | Partial<ValidationErrors<IAuthData>> }>(
+const signIn = createAsyncThunk<UserData, AuthData, { rejectValue: string | Partial<ValidationErrors<AuthData>> }>(
    "auth/signIn",
    async function (authData, { rejectWithValue }) {
       try {
@@ -28,9 +28,9 @@ const signIn = createAsyncThunk<IUserData, IAuthData, { rejectValue: string | Pa
 );
 
 const signUp = createAsyncThunk<
-   IUserData,
-   IRegistrationData,
-   { rejectValue: string | Partial<ValidationErrors<IAuthData>> }
+   UserData,
+   RegistrationData,
+   { rejectValue: string | Partial<ValidationErrors<AuthData>> }
 >("auth/signUp", async function (registrationData, { rejectWithValue }) {
    try {
       const data = await authService.registration(registrationData);
@@ -46,7 +46,7 @@ const signUp = createAsyncThunk<
    }
 });
 
-const getCurrentUserData = createAsyncThunk<Nullable<IUserData>, undefined, { rejectValue: string }>(
+const getCurrentUserData = createAsyncThunk<Nullable<UserData>, undefined, { rejectValue: string }>(
    "auth/getUserData",
    async function (_, { rejectWithValue }) {
       try {

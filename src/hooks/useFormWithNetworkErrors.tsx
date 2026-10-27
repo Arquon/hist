@@ -1,4 +1,4 @@
-import { type ObjectType } from "@/types/default";
+import { type ObjectType } from "@/types/common";
 import { calculateHasError, type TValidator } from "@/utils/validator";
 import { useForm } from "./useForm";
 import { useNetworkErrors } from "./useNetworkErrors";

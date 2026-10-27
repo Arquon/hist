@@ -1,12 +1,12 @@
-import { type ICommonProps } from "@/types/ICommonProps";
-import React, { type FC } from "react";
+import React from "react";
 import { Container } from "../UI/Common";
 import { GalleryItem } from "./GalleryItem";
 import freemasonryImg from "@/assets/images/freemasonry.png";
 import marianneImg from "@/assets/images/marianne.png";
 import moscowMedalImg from "@/assets/images/moscou_medaille.png";
+import { type CommonProps } from "@/types/common";
 
-export const GalleryContainer: FC<ICommonProps> = ({ children, className }) => {
+export const GalleryContainer = ({ children, className }: CommonProps) => {
    const classes = ["gallery"];
 
    if (className !== undefined) classes.push(className);
@@ -23,7 +23,7 @@ export const GalleryContainer: FC<ICommonProps> = ({ children, className }) => {
    );
 };
 
-export const Gallery: FC<ICommonProps> = ({ children, className }) => {
+export const Gallery = ({ children, className }: CommonProps) => {
    const classes = ["gallery"];
 
    if (className !== undefined) classes.push(className);

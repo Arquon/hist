@@ -1,11 +1,11 @@
 import { getStringDateFromTimestamp } from "@/utils/functions";
-import { type INews } from "@/types/INews";
-import React, { type FC } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { type NewsItemView } from "@/types/news";
 
-interface INewsItemProps extends Omit<INews, "content"> {}
+interface NewsItemProps extends Omit<NewsItemView, "content"> {}
 
-export const LandingNewsItem: FC<INewsItemProps> = ({ createdAt, title, description, id }) => (
+export const LandingNewsItem = ({ createdAt, title, description, id }: NewsItemProps) => (
    <div className="news__item item-news">
       <h4 className="item-news__title">
          <span className="item-news__date">{getStringDateFromTimestamp(createdAt)}</span>

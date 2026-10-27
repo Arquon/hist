@@ -1,5 +1,5 @@
 import { getClassName } from "@/utils/functions";
-import React, { type FC } from "react";
+import React from "react";
 import { CircleLoader } from "react-spinners";
 
 interface LoaderProps {
@@ -7,10 +7,8 @@ interface LoaderProps {
    className?: string;
 }
 
-export const Loader: FC<LoaderProps> = ({ size = 120, className }) => {
+export const Loader = ({ size = 120, className }: LoaderProps) => {
    const computedClassName = getClassName({ initialClassName: "loader", className });
-
-   console.log("Loader");
 
    return (
       <div className={computedClassName}>

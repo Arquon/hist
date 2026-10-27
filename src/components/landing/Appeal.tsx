@@ -1,17 +1,17 @@
-import React, { type FC } from "react";
+import React from "react";
 
-import { type ICommonProps } from "@/types/ICommonProps";
 import { ButtonLink } from "../UI/CustomLink";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
+import { type CommonProps } from "@/types/common";
 
-export const Appeal: FC<ICommonProps> = ({ className }) => {
+export const Appeal = ({ className: propsClassname }: CommonProps) => {
    const { isMobile } = useMatchMedia();
 
-   const classes = ["appeal"];
-   if (className !== undefined) classes.push(className);
+   const className = ["appeal"];
+   if (propsClassname !== undefined) className.push(propsClassname);
 
    return (
-      <div className={classes.join(" ")}>
+      <div className={className.join(" ")}>
          <h3 className="appeal__heading">
             Обращение <br />
             досточтимого Мастера
@@ -29,7 +29,7 @@ export const Appeal: FC<ICommonProps> = ({ className }) => {
             personal, and therefore rejects all dogmatic affirmations. It&nbsp;is&nbsp;committed to&nbsp;the fundamental
             importance of&nbsp;the secularism. [...]&quot;
          </p>
-         {isMobile && <ButtonLink to="/freemasonry">Побробнее</ButtonLink>}
+         {isMobile && <ButtonLink to="/freemasonry">Подробнее</ButtonLink>}
          <p className="appeal__text">С уважением, Брат А.Б.</p>
       </div>
    );

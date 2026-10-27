@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React from "react";
 import { Container } from "../UI/Common";
 import { VideoItem } from "../UI/VideoItem";
 import firstVideoPreview from "@/assets/images/first_video.png";
@@ -6,7 +6,7 @@ import secondVideoPreview from "@/assets/images/second_video.png";
 
 interface Props {}
 
-export const FranceSection: FC<Props> = ({}) => (
+export const FranceSection = ({}: Props) => (
    <section className="france">
       <Container className="france__container">
          <div className="france__content">

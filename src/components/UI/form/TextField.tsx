@@ -1,6 +1,6 @@
 import { classesFromArray, getClassName } from "@/utils/functions";
 
-import React, { useRef, type FC } from "react";
+import React, { useRef } from "react";
 
 interface TextFieldProps {
    label: string;
@@ -19,7 +19,7 @@ interface TextFieldProps {
    // groupClassName?: string;
 }
 
-export const TextField: FC<TextFieldProps> = ({
+export const TextField = ({
    label,
    value,
    onChange,
@@ -27,10 +27,10 @@ export const TextField: FC<TextFieldProps> = ({
    type = "text",
    autoComplete = "off",
    prefix,
-   // labelClassName,
-   // inputClassName,
-   // groupClassName,
-}) => {
+}: // labelClassName,
+// inputClassName,
+// groupClassName,
+TextFieldProps) => {
    const error = errorData?.error;
    const validate = errorData?.validate;
 

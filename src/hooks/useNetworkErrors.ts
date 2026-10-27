@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { type ValidationErrors } from "@/types/errorsTypes";
 import { getInitialErrors, resetErrorsForFields } from "@/utils/validator";
-import { type ObjectType } from "@/types/default";
+import { type ValidationErrors, type ObjectType } from "@/types/common";
 
 interface UseFormReturnType<T> {
    networkErrors: ValidationErrors<T>;

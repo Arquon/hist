@@ -5,8 +5,7 @@ import validator, {
    resetErrorsForFields,
    type TValidator,
 } from "@/utils/validator";
-import { type ValidationErrors } from "@/types/errorsTypes";
-import { type ObjectType } from "@/types/default";
+import { type ValidationErrors, type ObjectType } from "@/types/common";
 
 interface UseFormParams<T> {
    initialData: T;

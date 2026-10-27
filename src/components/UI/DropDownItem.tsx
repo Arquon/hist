@@ -1,12 +1,12 @@
 import { classesFromArray } from "@/utils/functions";
-import React, { useState, type FC } from "react";
+import React, { useState } from "react";
 
 interface DropDownItemProps {
    question: string;
    answer: string;
 }
 
-export const DropDownItem: FC<DropDownItemProps> = ({ question, answer }) => {
+export const DropDownItem = ({ question, answer }: DropDownItemProps) => {
    const [isOpenAnswer, setIsOpenAnswer] = useState(false);
 
    const toggleAnswerHandler = (): void => setIsOpenAnswer((prevShow) => !prevShow);

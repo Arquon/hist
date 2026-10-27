@@ -1,14 +1,14 @@
-import { type ICustomLinkProps } from "@/types/ICommonProps";
-import React, { type FC } from "react";
+import { type CustomLinkProps } from "@/types/common";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export const CustomLink: FC<ICustomLinkProps> = ({ children, to, className, onClick }) => (
+export const CustomLink = ({ children, to, className, onClick }: CustomLinkProps) => (
    <Link to={to} className={className} onClick={onClick}>
       {children}
    </Link>
 );
 
-export const ButtonLink: FC<ICustomLinkProps> = ({ children, to, className, onClick }) => {
+export const ButtonLink = ({ children, to, className, onClick }: CustomLinkProps) => {
    const classes = ["btn"];
    if (className !== undefined) classes.push(className);
    return (

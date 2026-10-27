@@ -1,6 +1,5 @@
-import { type IAuthData } from "@/services/auth.service";
-import { type DeepPartial } from "@/types/default";
-import { type ValidationErrors } from "@/types/errorsTypes";
+import { type AuthData } from "@/services/auth.service";
+import { type ValidationErrors, type DeepPartial } from "@/types/common";
 import axios from "axios";
 
 interface NetworkErrors {
@@ -51,11 +50,11 @@ export const newsNetworkErrorsHandler = netWorkErrorsHandlerGenerator();
 
 export const userNetworkErrorsHandler = netWorkErrorsHandlerGenerator();
 
-export function signInNetworkErrorsHandler(error: unknown): Partial<ValidationErrors<IAuthData>> | string {
+export function signInNetworkErrorsHandler(error: unknown): Partial<ValidationErrors<AuthData>> | string {
    if (axios.isAxiosError(error)) {
       if (!error.response) throw new Error("Axios Error");
       const { code, message }: { code: number; message: string } = error.response.data.error;
-      const errorObject: Partial<ValidationErrors<IAuthData>> = {};
+      const errorObject: Partial<ValidationErrors<AuthData>> = {};
       if (code === 400) {
          switch (message) {
             case "INVALID_EMAIL":
@@ -78,11 +77,11 @@ export function signInNetworkErrorsHandler(error: unknown): Partial<ValidationEr
    return "Unhandled Error";
 }
 
-export function signUpNetworkErrorsHandler(error: unknown): Partial<ValidationErrors<IAuthData>> | string {
+export function signUpNetworkErrorsHandler(error: unknown): Partial<ValidationErrors<AuthData>> | string {
    if (axios.isAxiosError(error)) {
       if (!error.response) throw new Error("Axios Error");
       const { code, message }: { code: number; message: string } = error.response.data.error;
-      const errorObject: Partial<ValidationErrors<IAuthData>> = {};
+      const errorObject: Partial<ValidationErrors<AuthData>> = {};
       if (code === 400) {
          switch (message) {
             case "INVALID_EMAIL":

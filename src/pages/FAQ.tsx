@@ -1,7 +1,7 @@
 import { AdditionalContainer } from "@/components/UI/Common";
 import { DropDownItem } from "@/components/UI/DropDownItem";
 import { ContentBlock } from "@/components/UI/content/ContentBlock";
-import React, { type FC } from "react";
+import React from "react";
 
 const faqItems = [
    {
@@ -86,7 +86,7 @@ const faqItems = [
    },
 ];
 
-export const FAQ: FC = () => {
+export const FAQ = () => {
    return (
       <section className="faq-page additional__page">
          <AdditionalContainer>

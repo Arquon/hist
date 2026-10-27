@@ -1,9 +1,9 @@
 import { newsService } from "@/services/news.service";
-import { type INews, type INewsFormState, type INewsWithoutId } from "@/types/INews";
+import { type NewsItemFormState, type NewsItemView, type NewsItemWithoutId } from "@/types/news";
 import { newsNetworkErrorsHandler } from "@/utils/errorHandlers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const fetchNews = createAsyncThunk<INews[], undefined, { rejectValue: string }>(
+const fetchNews = createAsyncThunk<NewsItemView[], undefined, { rejectValue: string }>(
    "news/fetchNews",
    async function (_, { rejectWithValue }) {
       try {
@@ -16,11 +16,11 @@ const fetchNews = createAsyncThunk<INews[], undefined, { rejectValue: string }>(
    }
 );
 
-const addArticle = createAsyncThunk<INews, INewsFormState, { rejectValue: string }>(
+const addArticle = createAsyncThunk<NewsItemView, NewsItemFormState, { rejectValue: string }>(
    "news/addArticle",
    async function (articleState, { rejectWithValue }) {
       try {
-         const article: INewsWithoutId = { ...articleState, createdAt: Date.now() };
+         const article: NewsItemWithoutId = { ...articleState, createdAt: Date.now() };
          const data = await newsService.createNews(article);
          return data;
       } catch (error) {
@@ -34,7 +34,7 @@ const addArticle = createAsyncThunk<INews, INewsFormState, { rejectValue: string
    }
 );
 
-const updateArticle = createAsyncThunk<INews, INews, { rejectValue: string }>(
+const updateArticle = createAsyncThunk<NewsItemView, NewsItemView, { rejectValue: string }>(
    "news/updateArticle",
    async function (article, { rejectWithValue }) {
       try {

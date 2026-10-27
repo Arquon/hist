@@ -1,11 +1,11 @@
-import React, { type FC } from "react";
+import React from "react";
 
 import { Container } from "../UI/Common";
 import bannerImg from "@/assets/images/banner.png";
 import { GalleryContainer } from "./Gallery";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
 
-export const StartScreenSection: FC = ({}) => {
+export const StartScreenSection = ({}) => {
    const { isMobile } = useMatchMedia();
 
    return (

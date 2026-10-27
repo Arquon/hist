@@ -1,4 +1,4 @@
-import { type INewsWithoutId, type INews } from "@/types/INews";
+import { type NewsItemWithoutId, type NewsItemView } from "@/types/news";
 import httpService from "./http.service";
 import { nanoid } from "nanoid";
 
@@ -6,7 +6,7 @@ const newsEndPoint = "news/";
 
 export const newsService = {
    getNewsList: async (limitToLast?: number) => {
-      const { data } = await httpService.get<INews[]>(newsEndPoint, {
+      const { data } = await httpService.get<NewsItemView[]>(newsEndPoint, {
          params: {
             orderBy: '"createdAt"',
             limitToLast,
@@ -18,19 +18,19 @@ export const newsService = {
       return data;
    },
    getArticle: async (id: string) => {
-      const { data } = await httpService.get<INews>(newsEndPoint + id + "/");
+      const { data } = await httpService.get<NewsItemView>(newsEndPoint + id + "/");
       return data;
    },
-   createNews: async (payload: INewsWithoutId) => {
+   createNews: async (payload: NewsItemWithoutId) => {
       const id: string = nanoid();
-      const { data } = await httpService.put<INews>(newsEndPoint + id + "/", {
+      const { data } = await httpService.put<NewsItemView>(newsEndPoint + id + "/", {
          ...payload,
          id,
       });
       return data;
    },
-   updateNews: async (payload: INews) => {
-      const { data } = await httpService.put<INews>(newsEndPoint + payload.id + "/", payload);
+   updateNews: async (payload: NewsItemView) => {
+      const { data } = await httpService.put<NewsItemView>(newsEndPoint + payload.id + "/", payload);
       return data;
    },
    deleteNews: async (id: string) => {

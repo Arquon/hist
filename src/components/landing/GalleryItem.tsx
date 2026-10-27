@@ -1,11 +1,11 @@
-import React, { type FC } from "react";
+import React, { type ReactNode } from "react";
 
-interface IGalleryItemProps {
+interface GalleryItemProps {
    img: string;
-   text: JSX.Element | string;
+   text: ReactNode;
 }
 
-export const GalleryItem: FC<IGalleryItemProps> = ({ img, text }) => (
+export const GalleryItem = ({ img, text }: GalleryItemProps) => (
    <div className="gallery__item gallery-item">
       <div className="gallery-item__img">
          <img src={img} alt="" />

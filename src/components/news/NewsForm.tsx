@@ -1,25 +1,25 @@
-import React, { type FC, type FormEvent, type ReactNode } from "react";
+import React, { type FormEvent, type ReactNode } from "react";
 import { TextField } from "../UI/form/TextField";
 import { AreaField } from "../UI/form/AreaField";
 import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
-import { type INewsFormState } from "@/types/INews";
 import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
+import { type NewsItemFormState } from "@/types/news";
 
 interface NewsFormProps {
-   onSubmit: (data: INewsFormState) => void | Promise<void>;
+   onSubmit: (data: NewsItemFormState) => void | Promise<void>;
    submitLabel: string;
-   initialData?: INewsFormState;
+   initialData?: NewsItemFormState;
    children?: ReactNode;
 }
 
-const defaultData: INewsFormState = {
+const defaultData: NewsItemFormState = {
    title: "",
    description: "",
    content: "",
 };
 
-const validatorConfig: TValidator<INewsFormState> = {
+const validatorConfig: TValidator<NewsItemFormState> = {
    title: {
       isRequired: { message: "Заголовок обязателен к заполнению" },
    },
@@ -31,7 +31,7 @@ const validatorConfig: TValidator<INewsFormState> = {
    },
 };
 
-export const NewsForm: FC<NewsFormProps> = ({ onSubmit, submitLabel, initialData, children }) => {
+export const NewsForm = ({ onSubmit, submitLabel, initialData, children }: NewsFormProps) => {
    const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
       useFormWithNetworkErrors({
          initialData: initialData ?? defaultData,

@@ -10,8 +10,7 @@ import {
 } from "@/types/validationTypes";
 import { isObjectWithLength, isString } from "./typeChecking";
 import { emailRegex, isCapitalSymbolRegex, isDigitSymbolRegex, latinaAndNumericRegex } from "./regex";
-import { type ValidationErrors } from "@/types/errorsTypes";
-import { type ObjectType, type PartialRecord } from "@/types/default";
+import { type ValidationErrors, type ObjectType, type PartialRecord } from "@/types/common";
 
 export type TValidator<T> = PartialRecord<keyof T, Partial<IValidationMethod>>;
 

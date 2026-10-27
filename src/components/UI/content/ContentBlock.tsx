@@ -1,13 +1,13 @@
-import { type ICommonProps } from "@/types/ICommonProps";
-import React, { type FC } from "react";
+import React, { type ReactNode } from "react";
 import { Heading } from "../CommonHeadings";
 import { getClassName } from "@/utils/functions";
+import { type CommonProps } from "@/types/common";
 
-interface ContentBlockProps extends ICommonProps {
-   heading?: string | JSX.Element;
+interface ContentBlockProps extends CommonProps {
+   heading?: ReactNode;
 }
 
-export const ContentBlock: FC<ContentBlockProps> = ({ heading, className, children }) => {
+export const ContentBlock = ({ heading, className, children }: ContentBlockProps) => {
    const contentBlockClassName = getClassName({ initialClassName: "content-block", className });
 
    return (

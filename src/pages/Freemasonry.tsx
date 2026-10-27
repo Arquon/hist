@@ -1,6 +1,6 @@
 import { AdditionalContainer } from "@/components/UI/Common";
 import { ContentBlock } from "@/components/UI/content/ContentBlock";
-import React, { type FC } from "react";
+import React from "react";
 import stone from "@/assets/images/stone.png";
 import { ContentItem } from "@/components/UI/content/ContentItem";
 
@@ -49,7 +49,7 @@ const firstBlock = {
 
 const secondBlock = firstBlock;
 
-export const Freemasonry: FC = () => {
+export const Freemasonry = () => {
    return (
       <section className="freemasonry-page additional__page">
          <AdditionalContainer className="freemasonry-page__container">

@@ -1,7 +1,7 @@
 import { AdditionalContainer } from "@/components/UI/Common";
 import { ContentBlock } from "@/components/UI/content/ContentBlock";
 import { ContentItem } from "@/components/UI/content/ContentItem";
-import React, { type FC } from "react";
+import React from "react";
 
 const firstBlock = {
    text: [
@@ -38,7 +38,7 @@ const firstBlock = {
    ],
 };
 
-export const Moscow: FC = () => {
+export const Moscow = () => {
    return (
       <section className="moscow-page additional__page">
          <AdditionalContainer className="moscow-page__container">

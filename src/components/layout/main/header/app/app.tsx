@@ -1,16 +1,16 @@
-import React, { type FC } from "react";
+import React from "react";
 import { useMatch, Link } from "react-router-dom";
 
 import { CustomLink } from "@/components/UI/CustomLink";
-import { type ICustomLinkProps } from "@/types/ICommonProps";
 
 import logo from "@/assets/images/logo.png";
 import coin from "@/assets/images/coin.png";
+import { type CustomLinkProps } from "@/types/common";
 
-interface IHeaderLinkProps extends ICustomLinkProps {
+interface HeaderLinkProps extends CustomLinkProps {
    closeMenu: () => void;
 }
-export const HeaderLink: FC<IHeaderLinkProps> = ({ children, className, to, closeMenu }) => {
+export const HeaderLink = ({ children, className, to, closeMenu }: HeaderLinkProps) => {
    const match = useMatch({ path: to });
 
    const classes = ["list-header__link"];
@@ -26,19 +26,19 @@ export const HeaderLink: FC<IHeaderLinkProps> = ({ children, className, to, clos
    );
 };
 
-export const HeaderLogo: FC = () => (
+export const HeaderLogo = () => (
    <Link className="header__logo" to="/">
       <img src={logo} alt="" />
       Главная
    </Link>
 );
 
-interface IHeaderNavProps {
+interface HeaderNavProps {
    isActive: boolean;
    closeMenu: () => void;
 }
 
-export const HeaderNav: FC<IHeaderNavProps> = ({ isActive, closeMenu }) => {
+export const HeaderNav = ({ isActive, closeMenu }: HeaderNavProps) => {
    const classes = ["header__nav"];
 
    if (isActive) classes.push("header__nav_active");
@@ -72,12 +72,12 @@ export const HeaderNav: FC<IHeaderNavProps> = ({ isActive, closeMenu }) => {
    );
 };
 
-interface IHeaderMenuProps {
+interface HeaderMenuProps {
    isActive: boolean;
    toggleActive: () => void;
 }
 
-export const HeaderMenu: FC<IHeaderMenuProps> = ({ isActive, toggleActive }) => {
+export const HeaderMenu = ({ isActive, toggleActive }: HeaderMenuProps) => {
    const classes = ["header__menu"];
    if (isActive) classes.push("header__menu_active");
 
@@ -90,7 +90,7 @@ export const HeaderMenu: FC<IHeaderMenuProps> = ({ isActive, toggleActive }) => 
    );
 };
 
-export const HeaderCoin: FC = () => (
+export const HeaderCoin = () => (
    <div className="header__wrap">
       <Link className="header__coin" to="/login">
          <img src={coin} alt="" />

@@ -1,4 +1,4 @@
-import { type IAuthData, type IRegistrationData } from "@/services/auth.service";
+import { type AuthData, type RegistrationData } from "@/services/auth.service";
 import authActions from "@/store/auth/actions";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { unwrapResult } from "@reduxjs/toolkit";
@@ -9,8 +9,8 @@ interface UseAuth {
    isAuth: boolean;
    isAdmin: boolean;
    isLoadingUserData: boolean;
-   signIn: (authData: IAuthData) => Promise<void>;
-   signUp: (registrationData: IRegistrationData) => Promise<void>;
+   signIn: (authData: AuthData) => Promise<void>;
+   signUp: (registrationData: RegistrationData) => Promise<void>;
    signOut: () => void;
 }
 
@@ -23,7 +23,7 @@ export function useAuth(): UseAuth {
       throw error;
    };
 
-   async function signIn(authData: IAuthData): Promise<void> {
+   async function signIn(authData: AuthData): Promise<void> {
       try {
          unwrapResult(await dispatch(authActions.signIn(authData)));
       } catch (error: unknown) {
@@ -31,7 +31,7 @@ export function useAuth(): UseAuth {
       }
    }
 
-   async function signUp(registrationData: IRegistrationData): Promise<void> {
+   async function signUp(registrationData: RegistrationData): Promise<void> {
       try {
          unwrapResult(await dispatch(authActions.signUp(registrationData)));
       } catch (error: unknown) {

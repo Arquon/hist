@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React from "react";
 import { CustomButton } from "@/components/UI/CustomButton";
 import { EPromiseStatuses, useMockData } from "@/hooks/useMockData";
 import { NarrowContainer } from "@/components/UI/Common";
@@ -19,7 +19,7 @@ function getStatus(status: EPromiseStatuses): string {
 
 interface InitializeProps {}
 
-const InitializeComponent: FC<InitializeProps> = ({}) => {
+const InitializeComponent = ({}: InitializeProps) => {
    const { count, percentage, status, initializeMockData } = useMockData();
 
    return (
@@ -36,7 +36,7 @@ const InitializeComponent: FC<InitializeProps> = ({}) => {
    );
 };
 
-export const Initialize: FC = () => (
+export const Initialize = () => (
    <AdminRequire>
       <InitializeComponent />
    </AdminRequire>

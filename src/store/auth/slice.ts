@@ -1,11 +1,11 @@
-import { type IUserData } from "@/types/IUserData";
-import { type Nullable } from "@/types/default";
+import { type Nullable } from "@/types/common";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getCurrentUserData, signIn, signUp } from "./actions";
 import { isAuthAsyncThunkError } from "@/utils/isAsyncThunkError";
+import { type UserData } from "@/types/user";
 
 interface AuthState {
-   currentUser: Nullable<IUserData>;
+   currentUser: Nullable<UserData>;
    isLoading: boolean;
 }
 

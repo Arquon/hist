@@ -1,11 +1,11 @@
 import { getStringDateFromTimestamp } from "@/utils/functions";
-import { type INews } from "@/types/INews";
-import React, { type FC } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { type NewsItemView } from "@/types/news";
 
-interface Props extends INews {}
+interface Props extends NewsItemView {}
 
-export const NewsItem: FC<Props> = ({ createdAt, description, title, id }) => {
+export const NewsItem = ({ createdAt, description, title, id }: Props) => {
    const articlePath = `${id}`;
 
    return (

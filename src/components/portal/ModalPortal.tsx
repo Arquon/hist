@@ -1,9 +1,9 @@
-import React, { type FC } from "react";
-import { type ICommonProps } from "@/types/ICommonProps";
+import { type CommonProps } from "@/types/common";
+import React from "react";
 import { createPortal } from "react-dom";
 
-interface ModalPortalProps extends ICommonProps {}
+interface ModalPortalProps extends CommonProps {}
 
-export const ModalPortal: FC<ModalPortalProps> = ({ children }) => {
+export const ModalPortal = ({ children }: ModalPortalProps) => {
    return <>{createPortal(children, document.body)}</>;
 };

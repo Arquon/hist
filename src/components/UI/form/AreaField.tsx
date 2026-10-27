@@ -1,5 +1,5 @@
 import { classesFromArray, getClassName } from "@/utils/functions";
-import React, { type FC } from "react";
+import React from "react";
 
 interface AreaFieldProps {
    label: string;
@@ -12,7 +12,7 @@ interface AreaFieldProps {
    };
 }
 
-export const AreaField: FC<AreaFieldProps> = ({ label, value, onChange, errorData, prefix }) => {
+export const AreaField = ({ label, value, onChange, errorData, prefix }: AreaFieldProps) => {
    const error = errorData?.error;
    const validate = errorData?.validate;
 

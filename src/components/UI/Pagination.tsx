@@ -1,5 +1,5 @@
 import { getClassName } from "@/utils/functions";
-import React, { type FC } from "react";
+import React from "react";
 
 interface PaginationProps {
    allCount: number;
@@ -9,7 +9,7 @@ interface PaginationProps {
    onPageChange: (page: number) => void;
 }
 
-export const Pagination: FC<PaginationProps> = ({ allCount, perPageCount, className, currentPage, onPageChange }) => {
+export const Pagination = ({ allCount, perPageCount, className, currentPage, onPageChange }: PaginationProps) => {
    const length = Math.floor((allCount - 1) / perPageCount) + 1;
    const tempArray = Array(length).fill(0);
 

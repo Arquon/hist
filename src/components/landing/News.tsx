@@ -1,15 +1,15 @@
-import React, { useEffect, type FC, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { type ICommonProps } from "@/types/ICommonProps";
 import { ButtonLink } from "../UI/CustomLink";
 import { LandingNewsItem } from "./LandingNewsItem";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
 import { newsService } from "@/services/news.service";
-import { type INews } from "@/types/INews";
+import { type NewsItemView } from "@/types/news";
+import { type CommonProps } from "@/types/common";
 
-export const NewsSection: FC<ICommonProps> = ({ className }) => {
+export const NewsSection = ({ className }: CommonProps) => {
    const { isMobile } = useMatchMedia();
-   const [newsPreview, setNewsPreview] = useState<INews[]>([]);
+   const [newsPreview, setNewsPreview] = useState<NewsItemView[]>([]);
 
    const classes = ["news"];
    if (className !== undefined) classes.push(className);

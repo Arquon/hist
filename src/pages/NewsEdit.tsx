@@ -4,17 +4,17 @@ import { Loader } from "@/components/UI/Loader";
 import { NewsForm } from "@/components/news/NewsForm";
 import { AdminRequire } from "@/hoc/AdminRequire";
 import { useNews } from "@/hooks/useNews";
-import { type INewsFormState } from "@/types/INews";
-import React, { type FC } from "react";
+import { type NewsItemFormState } from "@/types/news";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface NewsEditProps {}
 
-const NewsEditPageComponent: FC<NewsEditProps> = ({}) => {
+const NewsEditPageComponent = ({}: NewsEditProps) => {
    const navigate = useNavigate();
    const { currentArticle, isLoadingNews, updateArticle } = useNews();
 
-   const handleSubmit = async (data: INewsFormState): Promise<void> => {
+   const handleSubmit = async (data: NewsItemFormState): Promise<void> => {
       if (!currentArticle) return;
       await updateArticle({ ...currentArticle, ...data });
       navigate(`/news/${currentArticle.id}`);
@@ -33,7 +33,7 @@ const NewsEditPageComponent: FC<NewsEditProps> = ({}) => {
    );
 };
 
-export const NewsEditPage: FC = ({}) => (
+export const NewsEditPage = ({}) => (
    <AdminRequire redirectPath="/news">
       <NewsEditPageComponent />
    </AdminRequire>

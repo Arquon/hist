@@ -1,14 +1,14 @@
-import { type INews } from "@/types/INews";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchNews, addArticle, updateArticle, deleteArticle } from "./actions";
 import { isNewsAsyncThunkError } from "@/utils/isAsyncThunkError";
+import { type NewsItemView } from "@/types/news";
 
-interface INewsState {
-   news: INews[];
+interface NewsState {
+   news: NewsItemView[];
    isLoading: boolean;
 }
 
-const initialState: INewsState = {
+const initialState: NewsState = {
    news: [],
    isLoading: true,
 };

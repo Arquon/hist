@@ -1,12 +1,12 @@
-import React, { useState, type FC, useRef } from "react";
+import React, { useState, useRef } from "react";
 
-interface IVideoItemProps {
+interface VideoItemProps {
    preview: string;
    source: string;
    className?: string;
 }
 
-export const VideoItem: FC<IVideoItemProps> = ({ preview, source, className }) => {
+export const VideoItem = ({ preview, source, className }: VideoItemProps) => {
    const [isActive, setIsActive] = useState(false);
    const iframeRef = useRef<HTMLIFrameElement>(null);
    const previewRef = useRef<HTMLDivElement>(null);

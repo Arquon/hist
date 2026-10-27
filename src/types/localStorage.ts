@@ -1,4 +1,4 @@
-export enum ELocalStorageKeys {
+export enum LocalStorageKeys {
    ID_TOKEN = "idToken",
    REFRESH_TOKEN = "refreshToken",
    EXPIRES_IN = "expiresIn",

@@ -1,4 +1,4 @@
-import React, { type FormEvent, type FC } from "react";
+import React, { type FormEvent } from "react";
 import { ELoginPage } from "@/pages/Login";
 import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
@@ -57,7 +57,7 @@ const validatorConfig: TValidator<IRegistrationState> = {
    },
 };
 
-export const RegistrationForm: FC<RegistrationProps> = ({ setLoginPage }) => {
+export const RegistrationForm = ({ setLoginPage }: RegistrationProps) => {
    const { signUp } = useAuth();
    const navigate = useNavigate();
    const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
