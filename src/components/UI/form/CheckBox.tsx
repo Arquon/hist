@@ -1,20 +1,23 @@
 import React from "react";
 import { getClassName } from "@/utils/functions";
-import { type CommonProps } from "@/types/common";
+import { type CustomComponentProps } from "@/types/common";
 
-interface CheckBoxProps extends CommonProps {
+interface CheckBoxOwnProps {
    onClick: () => void;
    label: string;
    id: string;
+   checked: boolean;
    error?: string;
 }
 
-export const CheckBox = ({ className, label, id, error, onClick }: CheckBoxProps) => {
+type CheckBoxProps = CustomComponentProps<"input", CheckBoxOwnProps>;
+
+export const CheckBox = ({ className, label, id, error, onClick, checked, ...restProps }: CheckBoxProps) => {
    const computedClassName = getClassName({ initialClassName: "checkbox", className });
 
    return (
       <div className={computedClassName}>
-         <input id={id} type="checkbox" onClick={onClick} hidden />
+         <input id={id} type="checkbox" onClick={onClick} hidden checked={checked} {...restProps} />
          <label htmlFor={id}>{label}</label>
          {error && <p>error</p>}
       </div>

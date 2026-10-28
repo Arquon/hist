@@ -90,6 +90,7 @@ export const RegistrationForm = ({ setLoginPage }: RegistrationProps) => {
 
          <div className="empty-form__fields">
             <TextField
+               type="email"
                label={"Email"}
                value={data.email}
                onChange={(login) => changeHandler({ email: login })}
@@ -111,6 +112,7 @@ export const RegistrationForm = ({ setLoginPage }: RegistrationProps) => {
                prefix="empty-form"
             />
             <CheckBox
+               checked={data.isAdmin}
                id="registration-admin"
                label="Администратор"
                onClick={() => changeHandler({ isAdmin: !data.isAdmin })}

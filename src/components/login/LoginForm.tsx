@@ -71,6 +71,7 @@ export const LoginForm = ({ setLoginPage }: LoginFormProps) => {
 
          <div className="empty-form__fields">
             <TextField
+               type="email"
                label="Email"
                value={data.email}
                onChange={(login) => changeHandler({ email: login })}
@@ -88,7 +89,7 @@ export const LoginForm = ({ setLoginPage }: LoginFormProps) => {
                   error: errors.password ?? networkErrors.password,
                   validate: () => validateFields({ password: data.password }),
                }}
-               type={"password"}
+               type="password"
                prefix="empty-form"
             />
          </div>

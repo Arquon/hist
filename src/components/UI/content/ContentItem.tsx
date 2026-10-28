@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 
 interface ContentImage {
    src: string;
@@ -8,7 +8,7 @@ interface ContentImage {
 interface ContentItemProps {
    heading?: string;
    img?: ContentImage;
-   children: JSX.Element[] | JSX.Element;
+   children: ReactNode;
 }
 
 export const ContentItem = ({ img, children }: ContentItemProps) => {

@@ -1,23 +1,22 @@
+import { type CustomComponentProps } from "@/types/common";
 import { classesFromArray, getClassName } from "@/utils/functions";
 
 import React, { useRef } from "react";
 
-interface TextFieldProps {
+interface TextFieldOwnProps {
    label: string;
    value: string;
    onChange: (str: string) => void;
-   type?: "text" | "password" | "email";
+   type: "text" | "password" | "email";
    autoComplete?: string;
    prefix?: string;
    errorData?: {
       validate?: () => void;
       error?: string | false;
    };
-
-   // labelClassName?: string;
-   // inputClassName?: string;
-   // groupClassName?: string;
 }
+
+type TextFieldProps = CustomComponentProps<"input", TextFieldOwnProps>;
 
 export const TextField = ({
    label,
@@ -27,10 +26,8 @@ export const TextField = ({
    type = "text",
    autoComplete = "off",
    prefix,
-}: // labelClassName,
-// inputClassName,
-// groupClassName,
-TextFieldProps) => {
+   ...restProps
+}: TextFieldProps) => {
    const error = errorData?.error;
    const validate = errorData?.validate;
 
@@ -96,6 +93,7 @@ TextFieldProps) => {
             ref={input}
             className={computedInputClassName}
             onBlur={validate}
+            {...restProps}
          />
          {error && <p className={computedErrorClassName}>{error}</p>}
       </div>

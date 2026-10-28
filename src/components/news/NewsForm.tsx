@@ -58,6 +58,7 @@ export const NewsForm = ({ onSubmit, submitLabel, initialData, children }: NewsF
 
             <div className="news-form__fields">
                <TextField
+                  type="text"
                   label="Название новости"
                   value={data.title}
                   errorData={{
@@ -68,6 +69,7 @@ export const NewsForm = ({ onSubmit, submitLabel, initialData, children }: NewsF
                   prefix="news-form"
                />
                <TextField
+                  type="text"
                   label="Описание новости"
                   value={data.description}
                   errorData={{

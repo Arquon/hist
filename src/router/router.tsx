@@ -2,7 +2,7 @@ import React, { lazy } from "react";
 
 import { LandingPage } from "@/pages/Landing";
 import { Initialize } from "@/pages/Initialize";
-// import { NewsPage } from "@/pages/News";
+import { NewsPage } from "@/pages/News";
 import { Freemasonry } from "@/pages/Freemasonry";
 import { France } from "@/pages/France";
 // import { Moscow } from "@/pages/Moscow";
@@ -12,12 +12,11 @@ import { Contacts } from "@/pages/Contacts";
 // import { ArticlePage } from "@/pages/Article";
 // import { NewsAddPage } from "@/pages/NewsAdd";
 // import { NewsEditPage } from "@/pages/NewsEdit";
-import { LoginPage, LoginPageComponent } from "@/pages/Login";
+import { LoginPage } from "@/pages/Login";
 import { Navigate, type RouteObject } from "react-router-dom";
 import { MainLayout } from "@/components/layout/main/MainLayout";
 import { EmptyLayout } from "@/components/layout/empty/EmptyLayout";
 
-const NewsPage = lazy(async () => await import("@/pages/News"));
 const Moscow = lazy(async () => await import("@/pages/Moscow"));
 const ArticlePage = lazy(async () => await import("@/pages/Article"));
 const NewsAddPage = lazy(async () => await import("@/pages/NewsAdd"));

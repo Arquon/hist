@@ -1,7 +1,8 @@
+import { type CustomComponentProps } from "@/types/common";
 import { classesFromArray, getClassName } from "@/utils/functions";
 import React from "react";
 
-interface AreaFieldProps {
+interface AreaFieldOwnProps {
    label: string;
    value: string;
    onChange: (str: string) => void;
@@ -12,7 +13,9 @@ interface AreaFieldProps {
    };
 }
 
-export const AreaField = ({ label, value, onChange, errorData, prefix }: AreaFieldProps) => {
+type AreaFieldProps = CustomComponentProps<"textarea", AreaFieldOwnProps>;
+
+export const AreaField = ({ label, value, onChange, errorData, prefix, ...restProps }: AreaFieldProps) => {
    const error = errorData?.error;
    const validate = errorData?.validate;
 
@@ -66,6 +69,7 @@ export const AreaField = ({ label, value, onChange, errorData, prefix }: AreaFie
             onChange={changeHandler}
             className={computedAreaClassName}
             onBlur={validate}
+            {...restProps}
          ></textarea>
          {error && <p className={computedErrorClassName}>{error}</p>}
       </div>
