@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useNews } from "@/hooks/useNews";
 import { AdminRequire } from "@/hoc/AdminRequire";
 import { useIsAuth } from "@/hooks/auth/useIsAuth";
+import { newsNetworkErrorsHandler } from "@/services/errors/default";
+import { toast } from "react-toastify";
 
 interface ArticlePageComponentProps {}
 
@@ -21,7 +23,12 @@ const ArticlePageComponent = ({}: ArticlePageComponentProps) => {
          await deleteArticle(currentArticle.id);
          navigate("/news");
       } catch (error) {
-         console.error(error);
+         const parsedError = newsNetworkErrorsHandler(error, {
+            _401: {
+               unauthorized: "Для удаления новости нужны права администратора",
+            },
+         });
+         toast.error(parsedError);
       }
    };
 

@@ -1,14 +1,17 @@
-import { type ServerErrorPayload, type ValidationErrors } from "@/types/common";
+import { type BackendErrorBody, type ValidationErrors } from "@/types/common";
 import { type AuthData } from "../http/auth.service";
+import { type AxiosResponse } from "axios";
 
 export function signInNetworkErrorsHandler(serverErrorPayload: unknown): Partial<ValidationErrors<AuthData>> | string {
    if (typeof serverErrorPayload === "string") {
       return serverErrorPayload;
    }
 
-   const payload = serverErrorPayload as ServerErrorPayload;
+   const payload = serverErrorPayload as AxiosResponse<BackendErrorBody>;
 
-   const { code, message } = payload;
+   if (!payload.data.error) return "Непредвиденная ошибка сервера";
+
+   const { code, message } = payload.data.error;
    const errorObject: Partial<ValidationErrors<AuthData>> = {};
    if (code === 400) {
       switch (message) {
@@ -35,11 +38,13 @@ export function signUpNetworkErrorsHandler(serverErrorPayload: unknown): Partial
       return serverErrorPayload;
    }
 
-   const payload = serverErrorPayload as ServerErrorPayload;
+   const payload = serverErrorPayload as AxiosResponse<BackendErrorBody>;
 
-   const { code, message } = payload;
+   if (!payload.data.error) return "Непредвиденная ошибка сервера";
+   const { code, message } = payload.data.error;
+
    const errorObject: Partial<ValidationErrors<AuthData>> = {};
-   if (code === 400) {
+   if (code === 400 && message) {
       switch (message) {
          case "INVALID_EMAIL":
             errorObject.email = "Введен некорректный email";

@@ -28,7 +28,9 @@ export interface CustomLinkProps extends CommonProps {
 
 export type CustomComponentProps<E extends ElementType, P extends ObjectType> = Omit<ComponentProps<E>, keyof P> & P;
 
-export interface ServerErrorPayload {
-   code: number;
-   message: string;
+export interface BackendErrorBody {
+   error?: {
+      code: number;
+      message: string;
+   };
 }

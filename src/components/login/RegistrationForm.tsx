@@ -6,8 +6,8 @@ import { TextField } from "../UI/form/TextField";
 import { CheckBox } from "../UI/form/CheckBox";
 import { useNavigate } from "react-router-dom";
 import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
-import { signUpNetworkErrorsHandler } from "@/utils/errorHandlers";
 import { useAuthActions } from "@/hooks/auth/useAuthActions";
+import { signUpNetworkErrorsHandler } from "@/services/errors/auth";
 
 interface RegistrationProps {
    setLoginPage: (page: ELoginPage) => void;

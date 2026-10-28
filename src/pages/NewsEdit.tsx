@@ -25,7 +25,16 @@ const NewsEditPageComponent = ({}: NewsEditProps) => {
    return (
       <section className="news-form-page additional__page">
          <AdditionalContainer className="news-form-page__container">
-            <NewsForm onSubmit={handleSubmit} submitLabel="Изменить новость" initialData={currentArticle}>
+            <NewsForm
+               onSubmit={handleSubmit}
+               submitLabel="Изменить новость"
+               initialData={currentArticle}
+               networkErrorsMessages={{
+                  _401: {
+                     unauthorized: "Для обновления новости нужны права администратора",
+                  },
+               }}
+            >
                <Heading className="news-form-page__heading additional__heading">Изменить новость</Heading>
             </NewsForm>
          </AdditionalContainer>

@@ -1,22 +1,21 @@
+import { thunkErrorHandler } from "@/services/errors/thunk";
 import { newsService } from "@/services/http/news.service";
 import { type NewsItemFormState, type NewsItemView, type NewsItemWithoutId } from "@/types/news";
-import { newsNetworkErrorsHandler } from "@/utils/errorHandlers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const fetchNews = createAsyncThunk<NewsItemView[], undefined, { rejectValue: string }>(
+const fetchNews = createAsyncThunk<NewsItemView[], undefined, { rejectValue: unknown }>(
    "news/fetchNews",
    async function (_, { rejectWithValue }) {
       try {
          const data = await newsService.getNewsList();
          return data;
       } catch (error) {
-         const stringError = newsNetworkErrorsHandler(error);
-         return rejectWithValue(stringError);
+         return rejectWithValue(thunkErrorHandler(error));
       }
    }
 );
 
-const addArticle = createAsyncThunk<NewsItemView, NewsItemFormState, { rejectValue: string }>(
+const addArticle = createAsyncThunk<NewsItemView, NewsItemFormState, { rejectValue: unknown }>(
    "news/addArticle",
    async function (articleState, { rejectWithValue }) {
       try {
@@ -24,46 +23,31 @@ const addArticle = createAsyncThunk<NewsItemView, NewsItemFormState, { rejectVal
          const data = await newsService.createNews(article);
          return data;
       } catch (error) {
-         const stringError = newsNetworkErrorsHandler(error, {
-            _401: {
-               unauthorized: "Для добавления новости нужны парава администратора",
-            },
-         });
-         return rejectWithValue(stringError);
+         return rejectWithValue(thunkErrorHandler(error));
       }
    }
 );
 
-const updateArticle = createAsyncThunk<NewsItemView, NewsItemView, { rejectValue: string }>(
+const updateArticle = createAsyncThunk<NewsItemView, NewsItemView, { rejectValue: unknown }>(
    "news/updateArticle",
    async function (article, { rejectWithValue }) {
       try {
          const data = await newsService.updateNews(article);
          return data;
       } catch (error) {
-         const stringError = newsNetworkErrorsHandler(error, {
-            _401: {
-               unauthorized: "Для обновления новости нужны парава администратора",
-            },
-         });
-         return rejectWithValue(stringError);
+         return rejectWithValue(thunkErrorHandler(error));
       }
    }
 );
 
-const deleteArticle = createAsyncThunk<string, string, { rejectValue: string }>(
+const deleteArticle = createAsyncThunk<string, string, { rejectValue: unknown }>(
    "news/deleteArticle",
    async function (id, { rejectWithValue }) {
       try {
          await newsService.deleteNews(id);
          return id;
       } catch (error) {
-         const stringError = newsNetworkErrorsHandler(error, {
-            _401: {
-               unauthorized: "Для удаления новости нужны парава администратора",
-            },
-         });
-         return rejectWithValue(stringError);
+         return rejectWithValue(thunkErrorHandler(error));
       }
    }
 );

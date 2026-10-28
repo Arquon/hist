@@ -1,7 +1,7 @@
 import { type DeepPartial } from "@/types/common";
-import axios from "axios";
+import { type AxiosResponse } from "axios";
 
-interface NetworkErrors {
+export interface NetworkErrors {
    _401: {
       unauthorized: string;
       default: string;
@@ -14,21 +14,23 @@ function networkErrorsHandler(
    defaultErrorMessages: NetworkErrors,
    customErrorMessages?: DeepPartial<NetworkErrors>
 ): string {
-   if (axios.isAxiosError(error)) {
-      if (!error.response) return "Axios Error";
-      const { statusText, status: code } = error.response;
-      if (code === 401) {
-         switch (statusText) {
-            case "Unauthorized":
-               return customErrorMessages?._401?.unauthorized ?? defaultErrorMessages._401.unauthorized;
-            default:
-               return customErrorMessages?._401?.default ?? defaultErrorMessages._401.default;
-         }
-      }
-      return customErrorMessages?.unhandled ?? defaultErrorMessages.unhandled;
+   if (typeof error === "string") {
+      return error;
    }
 
-   return "Unhandled Error";
+   const typedError = error as AxiosResponse;
+
+   const { statusText, status: code } = typedError;
+
+   if (code === 401) {
+      switch (statusText) {
+         case "Unauthorized":
+            return customErrorMessages?._401?.unauthorized ?? defaultErrorMessages._401.unauthorized;
+         default:
+            return customErrorMessages?._401?.default ?? defaultErrorMessages._401.default;
+      }
+   }
+   return customErrorMessages?.unhandled ?? defaultErrorMessages.unhandled;
 }
 
 const defaultNetworkErrorsMessages: NetworkErrors = {

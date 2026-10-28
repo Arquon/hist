@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 
-export function thunkErrorHandler(error: unknown): unknown {
+export function thunkErrorHandler(error: unknown): string | AxiosResponse {
    if (axios.isAxiosError(error)) {
-      if (!error.response?.data) return "Ошибка сети или сервер недоступен";
+      if (!error.response) return "Ошибка сети или сервер недоступен";
 
-      return error.response.data;
+      return error.response;
    }
 
    if (error instanceof Error) {

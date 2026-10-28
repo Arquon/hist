@@ -6,7 +6,7 @@ import { TextField } from "../UI/form/TextField";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
 import { useAuthActions } from "@/hooks/auth/useAuthActions";
-import { signInNetworkErrorsHandler } from "@/utils/errorHandlers";
+import { signInNetworkErrorsHandler } from "@/services/errors/auth";
 
 interface LoginFormProps {
    setLoginPage: (page: ELoginPage) => void;

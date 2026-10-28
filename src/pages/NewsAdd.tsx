@@ -25,7 +25,15 @@ const NewsAddPageComponent = ({}: NewsAddProps) => {
    return (
       <section className="news-form-page additional__page">
          <NarrowContainer className="news-form-page__container">
-            <NewsForm onSubmit={handleSubmit} submitLabel="Добавить новость">
+            <NewsForm
+               onSubmit={handleSubmit}
+               submitLabel="Добавить новость"
+               networkErrorsMessages={{
+                  _401: {
+                     unauthorized: "Для добавления новости нужны права администратора",
+                  },
+               }}
+            >
                <Heading className="news-form-page__heading">Добавление новости</Heading>
             </NewsForm>
          </NarrowContainer>

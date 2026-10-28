@@ -5,9 +5,12 @@ import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
 import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
 import { type NewsItemFormState } from "@/types/news";
+import { type NetworkErrors, newsNetworkErrorsHandler } from "@/services/errors/default";
+import { type DeepPartial } from "@/types/common";
 
 interface NewsFormProps {
    onSubmit: (data: NewsItemFormState) => void | Promise<void>;
+   networkErrorsMessages?: DeepPartial<NetworkErrors>;
    submitLabel: string;
    initialData?: NewsItemFormState;
    children?: ReactNode;
@@ -31,7 +34,7 @@ const validatorConfig: TValidator<NewsItemFormState> = {
    },
 };
 
-export const NewsForm = ({ onSubmit, submitLabel, initialData, children }: NewsFormProps) => {
+export const NewsForm = ({ onSubmit, submitLabel, initialData, children, networkErrorsMessages }: NewsFormProps) => {
    const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
       useFormWithNetworkErrors({
          initialData: initialData ?? defaultData,
@@ -44,8 +47,9 @@ export const NewsForm = ({ onSubmit, submitLabel, initialData, children }: NewsF
       if (isError) return;
       try {
          await onSubmit(data);
-      } catch (e) {
-         networkErrorHandler(e);
+      } catch (error) {
+         const parsedError = newsNetworkErrorsHandler(error, networkErrorsMessages);
+         networkErrorHandler(parsedError);
       }
    };
 
