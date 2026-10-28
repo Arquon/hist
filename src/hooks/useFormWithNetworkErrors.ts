@@ -14,9 +14,9 @@ export function useFormWithNetworkErrors<T extends ObjectType>({
 }: useFormWithNetworkErrorsQueryParams<T>) {
    const formHookData = useForm({ initialData, validatorConfig });
 
-   const { changeHandler, data, hasError: hasLocalError } = formHookData;
+   const { changeHandler, hasError: hasLocalError } = formHookData;
 
-   const networkErrorsHookData = useNetworkErrors<T>(data);
+   const networkErrorsHookData = useNetworkErrors<T>(initialData);
 
    const { resetPartialNetworkErrors, networkErrors } = networkErrorsHookData;
 

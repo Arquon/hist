@@ -1,18 +1,14 @@
-import { authService, type RegistrationData, type AuthData } from "@/services/auth.service";
+import { authService, type RegistrationData, type AuthData } from "@/services/http/auth.service";
 import { localStorageService } from "@/services/localStorage.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-   signInNetworkErrorsHandler,
-   signUpNetworkErrorsHandler,
-   userNetworkErrorsHandler,
-} from "@/utils/errorHandlers";
 
 import { type AppActionType } from "../store";
 import { actions } from "./slice";
-import { type ValidationErrors, type Nullable } from "@/types/common";
+import { type Nullable } from "@/types/common";
 import { type UserData } from "@/types/user";
+import { thunkErrorHandler } from "@/services/errors/thunk";
 
-const signIn = createAsyncThunk<UserData, AuthData, { rejectValue: string | Partial<ValidationErrors<AuthData>> }>(
+const signIn = createAsyncThunk<UserData, AuthData, { rejectValue: unknown }>(
    "auth/signIn",
    async function (authData, { rejectWithValue }) {
       try {
@@ -21,32 +17,29 @@ const signIn = createAsyncThunk<UserData, AuthData, { rejectValue: string | Part
          const userData = await authService.getUserData(data.localId);
          return userData;
       } catch (error: unknown) {
-         const parsedError = signInNetworkErrorsHandler(error);
-         return rejectWithValue(parsedError);
+         return rejectWithValue(thunkErrorHandler(error));
       }
    }
 );
 
-const signUp = createAsyncThunk<
-   UserData,
-   RegistrationData,
-   { rejectValue: string | Partial<ValidationErrors<AuthData>> }
->("auth/signUp", async function (registrationData, { rejectWithValue }) {
-   try {
-      const data = await authService.registration(registrationData);
-      localStorageService.setCredentials(data);
-      const userData = await authService.createUser(
-         { email: registrationData.email, isAdmin: registrationData.isAdmin },
-         data.localId
-      );
-      return userData;
-   } catch (error: unknown) {
-      const parsedError = signUpNetworkErrorsHandler(error);
-      return rejectWithValue(parsedError);
+const signUp = createAsyncThunk<UserData, RegistrationData, { rejectValue: unknown }>(
+   "auth/signUp",
+   async function (registrationData, { rejectWithValue }) {
+      try {
+         const data = await authService.registration(registrationData);
+         localStorageService.setCredentials(data);
+         const userData = await authService.createUser(
+            { email: registrationData.email, isAdmin: registrationData.isAdmin },
+            data.localId
+         );
+         return userData;
+      } catch (error: unknown) {
+         return rejectWithValue(thunkErrorHandler(error));
+      }
    }
-});
+);
 
-const getCurrentUserData = createAsyncThunk<Nullable<UserData>, undefined, { rejectValue: string }>(
+const getCurrentUserData = createAsyncThunk<Nullable<UserData>, undefined, { rejectValue: unknown }>(
    "auth/getUserData",
    async function (_, { rejectWithValue }) {
       try {
@@ -55,8 +48,7 @@ const getCurrentUserData = createAsyncThunk<Nullable<UserData>, undefined, { rej
          const userData = await authService.getUserData(localId);
          return userData;
       } catch (error: unknown) {
-         const stringError = userNetworkErrorsHandler(error);
-         return rejectWithValue(stringError);
+         return rejectWithValue(thunkErrorHandler(error));
       }
    }
 );

@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
 import configFile from "@@/config/config.json";
-import { localStorageService } from "./localStorage.service";
+import { localStorageService } from "../localStorage.service";
 import { authService } from "./auth.service";
 
 function fireBaseDataParse(response: AxiosResponse<any, any>): any {

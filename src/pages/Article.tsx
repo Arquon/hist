@@ -5,15 +5,15 @@ import { getStringDateFromTimestamp } from "@/utils/functions";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useNews } from "@/hooks/useNews";
-import { useAuth } from "@/hooks/useAuth";
 import { AdminRequire } from "@/hoc/AdminRequire";
+import { useIsAuth } from "@/hooks/auth/useIsAuth";
 
 interface ArticlePageComponentProps {}
 
 const ArticlePageComponent = ({}: ArticlePageComponentProps) => {
    const { currentArticle, isLoadingNews, deleteArticle } = useNews();
    const navigate = useNavigate();
-   const { isAdmin } = useAuth();
+   const { isAdmin } = useIsAuth();
 
    const deleteHandler = async (): Promise<void> => {
       if (!currentArticle) return;

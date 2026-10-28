@@ -4,8 +4,9 @@ import { CustomButton } from "../UI/CustomButton";
 import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
+import { useAuthActions } from "@/hooks/auth/useAuthActions";
+import { signInNetworkErrorsHandler } from "@/utils/errorHandlers";
 
 interface LoginFormProps {
    setLoginPage: (page: ELoginPage) => void;
@@ -37,7 +38,7 @@ const validatorConfig: TValidator<LoginFormState> = {
 };
 
 export const LoginForm = ({ setLoginPage }: LoginFormProps) => {
-   const { signIn } = useAuth();
+   const { signIn } = useAuthActions();
    const navigate = useNavigate();
    const location = useLocation();
 
@@ -61,7 +62,8 @@ export const LoginForm = ({ setLoginPage }: LoginFormProps) => {
          const from = location.state?.from;
          navigate({ pathname: from ? from.pathname : "/" });
       } catch (error: unknown) {
-         networkErrorHandler(error);
+         const parsedError = signInNetworkErrorsHandler(error);
+         networkErrorHandler(parsedError);
       }
    };
 

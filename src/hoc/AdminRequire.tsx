@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/useAuth";
+import { useIsAuth } from "@/hooks/auth/useIsAuth";
 import React, { type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ interface AdminRequireProps {
 }
 
 export const AdminRequire = ({ children, redirectPath = "/" }: AdminRequireProps) => {
-   const { isAdmin } = useAuth();
+   const { isAdmin } = useIsAuth();
 
    if (isAdmin) {
       return children;

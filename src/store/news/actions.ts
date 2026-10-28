@@ -1,4 +1,4 @@
-import { newsService } from "@/services/news.service";
+import { newsService } from "@/services/http/news.service";
 import { type NewsItemFormState, type NewsItemView, type NewsItemWithoutId } from "@/types/news";
 import { newsNetworkErrorsHandler } from "@/utils/errorHandlers";
 import { createAsyncThunk } from "@reduxjs/toolkit";

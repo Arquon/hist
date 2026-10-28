@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getInitialErrors, resetErrorsForFields } from "@/utils/validator";
 import { type ValidationErrors, type ObjectType } from "@/types/common";
+import { toast } from "react-toastify";
 
 interface UseFormReturnType<T> {
    networkErrors: ValidationErrors<T>;
@@ -12,6 +13,11 @@ export function useNetworkErrors<T extends ObjectType>(data: T): UseFormReturnTy
    const [networkErrors, setNetworkErrors] = useState<ValidationErrors<T>>(() => getInitialErrors(data));
 
    const networkErrorHandler = (error: unknown): void => {
+      if (typeof error === "string") {
+         toast.error(error);
+         return;
+      }
+
       if (typeof error === "object" && error !== null) {
          const loginErrors: Partial<ValidationErrors<T>> = error;
          setNetworkErrors((prevErrors) => ({

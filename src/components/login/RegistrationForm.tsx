@@ -5,8 +5,9 @@ import { type TValidator } from "@/utils/validator";
 import { TextField } from "../UI/form/TextField";
 import { CheckBox } from "../UI/form/CheckBox";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 import { useFormWithNetworkErrors } from "@/hooks/useFormWithNetworkErrors";
+import { signUpNetworkErrorsHandler } from "@/utils/errorHandlers";
+import { useAuthActions } from "@/hooks/auth/useAuthActions";
 
 interface RegistrationProps {
    setLoginPage: (page: ELoginPage) => void;
@@ -58,7 +59,8 @@ const validatorConfig: TValidator<IRegistrationState> = {
 };
 
 export const RegistrationForm = ({ setLoginPage }: RegistrationProps) => {
-   const { signUp } = useAuth();
+   const { signUp } = useAuthActions();
+
    const navigate = useNavigate();
    const { data, changeHandler, hasError, errors, validateFields, validateForm, networkErrors, networkErrorHandler } =
       useFormWithNetworkErrors({
@@ -78,7 +80,8 @@ export const RegistrationForm = ({ setLoginPage }: RegistrationProps) => {
          await signUp(data);
          navigate(-1);
       } catch (error: unknown) {
-         networkErrorHandler(error);
+         const parsedError = signUpNetworkErrorsHandler(error);
+         networkErrorHandler(parsedError);
       }
    };
 

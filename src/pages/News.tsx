@@ -5,9 +5,9 @@ import { Loader } from "@/components/UI/Loader";
 import { Pagination } from "@/components/UI/Pagination";
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 import { useNews } from "@/hooks/useNews";
 import { NewsItem } from "@/components/news/NewsItem";
+import { useIsAuth } from "@/hooks/auth/useIsAuth";
 
 const newsPerPage = 5;
 
@@ -15,7 +15,7 @@ export const NewsPage = () => {
    const [searchParams, setSearchParams] = useSearchParams();
    const currentPage = searchParams.get("page") !== null ? Number(searchParams.get("page")) : 1;
 
-   const { isAdmin } = useAuth();
+   const { isAdmin } = useIsAuth();
 
    const { news, isLoadingNews } = useNews();
 

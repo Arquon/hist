@@ -22,7 +22,7 @@ interface AuthResponse extends UserCredentials {
    isRegistered: boolean;
 }
 
-interface IRefreshResponse {
+interface RefreshResponse {
    expires_in: string;
    refresh_token: string;
    id_token: string;
@@ -47,10 +47,11 @@ export const authService = {
       return data;
    },
    refreshToken: async (refreshToken: string): Promise<UserCredentials> => {
-      const { data } = await authHttpService.post<IRefreshResponse>("token", {
+      const { data } = await authHttpService.post<RefreshResponse>("token", {
          grant_type: "refresh_token",
          refresh_token: refreshToken,
       });
+
       return {
          expiresIn: Number(data.expires_in),
          idToken: data.id_token,

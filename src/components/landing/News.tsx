@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ButtonLink } from "../UI/CustomLink";
 import { LandingNewsItem } from "./LandingNewsItem";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
-import { newsService } from "@/services/news.service";
+import { newsService } from "@/services/http/news.service";
 import { type NewsItemView } from "@/types/news";
 import { type CommonProps } from "@/types/common";
 

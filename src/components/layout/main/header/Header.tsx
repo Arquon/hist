@@ -4,11 +4,14 @@ import { Container } from "@/components/UI/Common";
 import { HeaderLogo, HeaderNav, HeaderMenu, HeaderCoin } from "./app/app";
 import { useNavigate } from "react-router-dom";
 import { useMatchMedia } from "@/hooks/useMatchMedia";
-import { useAuth } from "@/hooks/useAuth";
+import { useIsAuth } from "@/hooks/auth/useIsAuth";
+import { useAuthActions } from "@/hooks/auth/useAuthActions";
 
 const Header: React.FC = ({}) => {
    const { isMobile } = useMatchMedia();
-   const { isAuth, signOut } = useAuth();
+   const { isAuth } = useIsAuth();
+   const { signOut } = useAuthActions();
+
    const navigate = useNavigate();
    const [isActive, setIsActive] = useState(false);
 

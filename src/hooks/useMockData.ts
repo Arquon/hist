@@ -1,5 +1,5 @@
 import newsList from "@/mock/news.json";
-import { newsService } from "@/services/news.service";
+import { newsService } from "@/services/http/news.service";
 import { useState } from "react";
 
 interface MockDataReturnType {
