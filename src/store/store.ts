@@ -1,19 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createSelector } from "@reduxjs/toolkit";
 import newsReducer from "./news/slice";
-import logger from "redux-logger";
-import { type TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authReducer from "./auth/slice";
 
 const store = configureStore({
    reducer: {
-      news: newsReducer,
-      auth: authReducer,
+      newsReducer,
+      authReducer,
    },
-   middleware: (getDefaultMiddleware) => {
-      const middleware = getDefaultMiddleware();
-      if (_NODE_ENV_ !== "production") middleware.push(logger);
-      return middleware;
-   },
+   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
    devTools: _NODE_ENV_ !== "production",
 });
 
@@ -21,9 +16,9 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type AppGetState = typeof store.getState;
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
+export const createAppSelector = createSelector.withTypes<RootState>();
 
 export type AppActionType<T = void> = (dispatch: AppDispatch, getState: AppGetState) => T;
 

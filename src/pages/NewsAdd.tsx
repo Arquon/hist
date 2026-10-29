@@ -2,7 +2,7 @@ import { NarrowContainer } from "@/components/UI/Common";
 import { Heading } from "@/components/UI/CommonHeadings";
 import { NewsForm } from "@/components/news/NewsForm";
 import { AdminRequire } from "@/hoc/AdminRequire";
-import { useNews } from "@/hooks/useNews";
+import { useNewsActions } from "@/hooks/news/useNewsActions";
 import { type NewsItemFormState } from "@/types/news";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 interface NewsAddProps {}
 
 const NewsAddPageComponent = ({}: NewsAddProps) => {
-   const { addArticle } = useNews();
+   const { addArticle } = useNewsActions();
    const navigate = useNavigate();
 
-   const handleSubmit = async (data: NewsItemFormState): Promise<void> => {
+   const handleSubmit = async (data: NewsItemFormState) => {
       try {
          const article = await addArticle(data);
          navigate(`/news/${article.id}`);

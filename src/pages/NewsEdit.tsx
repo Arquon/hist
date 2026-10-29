@@ -3,16 +3,20 @@ import { Heading } from "@/components/UI/CommonHeadings";
 import { Loader } from "@/components/UI/Loader";
 import { NewsForm } from "@/components/news/NewsForm";
 import { AdminRequire } from "@/hoc/AdminRequire";
-import { useNews } from "@/hooks/useNews";
+import { useFetchNews } from "@/hooks/news/useFetchNews";
+import { useNewsActions } from "@/hooks/news/useNewsActions";
 import { type NewsItemFormState } from "@/types/news";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface NewsEditProps {}
 
 const NewsEditPageComponent = ({}: NewsEditProps) => {
    const navigate = useNavigate();
-   const { currentArticle, isLoadingNews, updateArticle } = useNews();
+   const { newsId } = useParams<{ newsId: string }>();
+
+   const { currentArticle, isLoadingNews } = useFetchNews({ newsId });
+   const { updateArticle } = useNewsActions();
 
    const handleSubmit = async (data: NewsItemFormState): Promise<void> => {
       if (!currentArticle) return;

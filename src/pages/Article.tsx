@@ -3,17 +3,22 @@ import { Heading } from "@/components/UI/CommonHeadings";
 import { Loader } from "@/components/UI/Loader";
 import { getStringDateFromTimestamp } from "@/utils/functions";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useNews } from "@/hooks/useNews";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AdminRequire } from "@/hoc/AdminRequire";
 import { useIsAuth } from "@/hooks/auth/useIsAuth";
 import { newsNetworkErrorsHandler } from "@/services/errors/default";
 import { toast } from "react-toastify";
+import { useFetchNews } from "@/hooks/news/useFetchNews";
+import { useNewsActions } from "@/hooks/news/useNewsActions";
 
 interface ArticlePageComponentProps {}
 
 const ArticlePageComponent = ({}: ArticlePageComponentProps) => {
-   const { currentArticle, isLoadingNews, deleteArticle } = useNews();
+   const { newsId } = useParams<{ newsId: string }>();
+
+   const { currentArticle, isLoadingNews } = useFetchNews({ newsId });
+   const { deleteArticle } = useNewsActions();
+
    const navigate = useNavigate();
    const { isAdmin } = useIsAuth();
 

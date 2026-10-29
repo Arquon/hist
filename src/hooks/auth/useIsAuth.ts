@@ -7,7 +7,7 @@ interface UseAuth {
 }
 
 export function useIsAuth(): UseAuth {
-   const { currentUser, isLoading } = useAppSelector((state) => state.auth);
+   const { currentUser, isLoading } = useAppSelector((state) => state.authReducer);
 
    return {
       isAuth: !!currentUser,
